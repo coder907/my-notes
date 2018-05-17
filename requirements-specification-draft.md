@@ -61,7 +61,7 @@ Application facilitates personal note management.
 
 
 ## Supported browsers
- - Modern web and mobile browsers
+ - Modern desktop and mobile web browsers
 
 
 
