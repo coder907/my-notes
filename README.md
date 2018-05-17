@@ -11,6 +11,7 @@ See [Technical Specification](https://github.com/coder907/my-notes/blob/master/t
  - @angular/animations
  - hammerjs
  - rxjs
+- rxjs-compat
  - @ngrx/core
  - @ngrx/store
  - @ngrx/store-devtools
