@@ -1,0 +1,45 @@
+<mat-toolbar class="toolbar mat-elevation-z4" color="primary">
+
+  <button mat-icon-button>
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <span class="toolbar-spacer"></span>
+
+  <button
+    mat-icon-button
+    *ngIf="itemService.getEditedItem() | async"
+    (click)="itemService.removeEditedItem()"
+  >
+    <mat-icon>delete</mat-icon>
+  </button>
+
+  <span class="toolbar-spacer"></span>
+  
+  <span class="toolbar-flex"></span>
+
+  <button mat-icon-button>
+    <mat-icon>search</mat-icon>
+  </button>
+
+  <span class="toolbar-spacer"></span>
+  
+  <button mat-icon-button>
+    <mat-icon>more_vert</mat-icon>
+  </button>
+
+</mat-toolbar>
+
+<app-post
+  [item]="itemService.getEditedItem()"
+  (post)="itemService.addOrUpdateItem($event)"
+  (clear)="itemService.stopEditing()"
+>
+</app-post>
+
+<app-list
+  class="list"
+  [items]="itemService.getItems()"
+  (rowClick)="itemService.startEditing($event)"
+>
+</app-list>

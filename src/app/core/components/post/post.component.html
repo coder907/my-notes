@@ -1,0 +1,29 @@
+<div class="container">
+  <textarea
+    #textarea
+    matInput
+    placeholder="Enter a new note"
+    value="{{ (item | async)?.text }}"
+    class="mat-elevation-z8"
+    (keyup.esc)="onTextAreaKeyUpEsc();"
+  >
+  </textarea>
+
+  <button
+    mat-raised-button
+    color="primary"
+    class="mat-elevation-z8"
+    (click)="onPostClick()"
+  >
+    Post
+  </button>
+
+  <button
+    mat-raised-button
+    color="accent"
+    class="mat-elevation-z8"
+    (click)="onClearClick()"
+  >
+    Clear
+  </button>
+</div>

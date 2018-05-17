@@ -1,0 +1,171 @@
+// @import '~@angular/material/theming';
+// // Plus imports for other components in your app.
+
+// // Include the common styles for Angular Material. We include this here so that you only
+// // have to load a single css file for Angular Material in your app.
+// // Be sure that you only ever include this mixin once!
+// @include mat-core();
+
+// // Define the palettes for your theme using the Material Design palettes available in palette.scss
+// // (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// // hue. Available color palettes: https://material.io/design/color/
+// $candy-app-primary: mat-palette($mat-indigo);
+// $candy-app-accent:  mat-palette($mat-pink, A200, A100, A400);
+
+// // The warn palette is optional (defaults to red).
+// $candy-app-warn:    mat-palette($mat-red);
+
+// // Create the theme object (a Sass map containing all of the palettes).
+// $candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-app-warn);
+
+// // Include theme styles for core and each component used in your app.
+// // Alternatively, you can import and @include the theme mixins for each component
+// // that you are using.
+// @include angular-material-theme($candy-app-theme);
+
+
+
+@import '~@angular/material/theming';
+
+// **Be sure that you only ever include this mixin once!**
+@include mat-core();
+
+$day-palette-olive: (
+    50 : #edf1e5,
+    100 : #d3ddbd,
+    200 : #b5c791,
+    300 : #97b065,
+    400 : #819f44,
+    500 : #6b8e23,
+    600 : #63861f,
+    700 : #587b1a,
+    800 : #4e7115,
+    900 : #3c5f0c,
+    A100 : #cdff93,
+    A200 : #b5ff60,
+    A400 : #9dff2d,
+    A700 : #91ff14,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+/*$day-palette-gold: (
+    50 : #fffae0,
+    100 : #fff3b3,
+    200 : #ffeb80,
+    300 : #ffe34d,
+    400 : #ffdd26,
+    500 : #ffd700,
+    600 : #ffd300,
+    700 : #ffcd00,
+    800 : #ffc700,
+    900 : #ffbe00,
+    A100 : #ffffff,
+    A200 : #fffbf2,
+    A400 : #ffecbf,
+    A700 : #ffe5a6,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #000000,
+        800 : #000000,
+        900 : #000000,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);*/
+
+$day-palette-wheat: (
+    50 : #fefbf6,
+    100 : #fcf5e8,
+    200 : #faefd9,
+    300 : #f8e8ca,
+    400 : #f7e3be,
+    500 : #f5deb3,
+    600 : #f4daac,
+    700 : #f2d5a3,
+    800 : #f0d19a,
+    900 : #eec88b,
+    A100 : #ffffff,
+    A200 : #ffffff,
+    A400 : #ffffff,
+    A700 : #ffffff,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #000000,
+        800 : #000000,
+        900 : #000000,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$day-palette-orange-red: (
+    50 : #ffe9e0,
+    100 : #ffc7b3,
+    200 : #ffa280,
+    300 : #ff7d4d,
+    400 : #ff6126,
+    500 : #ff4500,
+    600 : #ff3e00,
+    700 : #ff3600,
+    800 : #ff2e00,
+    900 : #ff1f00,
+    A100 : #ffffff,
+    A200 : #fff3f2,
+    A400 : #ffc4bf,
+    A700 : #ffaca6,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$day-primary: mat-palette($day-palette-olive);
+$day-accent:  mat-palette($day-palette-wheat);
+$day-warn:    mat-palette($day-palette-orange-red);
+
+$day-theme: mat-light-theme($day-primary, $day-accent, $day-warn);
+
+@include angular-material-theme($day-theme);
