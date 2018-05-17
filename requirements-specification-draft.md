@@ -1,67 +1,70 @@
-# Definitions
+# Requirements Specification Draft
+
+
+## Definitions
  - Application: My Notes
  - User: A user of Application
 
 
 
-# Purpose
+## Purpose
 
 Application facilitates personal note management.
 
 
 
-# Features
+## Features
 
-## Notes management
+### Notes management
  - Add a note
  - Edit a note
  - Remove a note
  - Tag a note (with one or more tags)
  - Untag a note
 
-## Notes list
+### Notes list
  - Search notes
  - Sort notes
 
-## Tags management
+### Tags management
  - Add a tag
  - Edit a tag
 
-## Styles
+### Styles
  - Material
  - Day theme
  - Night theme
 
-## Languages
+### Languages
  - English
  - Slovenian
 
-## Storage
+### Storage
  - Memory
  - Local
  - Cloud
 
-## Navigation
+### Navigation
  - Notes management
  - Tags management
  - Settings
  - Log out
 
-## Settings
+### Settings
  - Theme (Day/Night)
  - Language (English/Slovenian)
  - Storage (Memory/Local/Cloud)
 
-## Login
+### Login
   - Hardcoded credentials
 
 
 
-# Supported browsers
+## Supported browsers
  - Modern web and mobile browsers
 
 
 
-# Supported resolutions
+## Supported resolutions
  - Mobile
  - Desktop
