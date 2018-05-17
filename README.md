@@ -5,6 +5,18 @@
 See [Requirements Specification Draft](https://github.com/coder907/my-notes/blob/master/requirements-specification-draft.md) for a short overview.
 See [Technical Specification](https://github.com/coder907/my-notes/blob/master/technical-specification.md) for details.
 
+## Dependencies
+ - @angular/material
+ - @angular/cdk
+ - @angular/animations
+ - hammerjs
+ - rxjs
+ - @ngrx/core
+ - @ngrx/store
+ - @ngrx/store-devtools
+ - @ngrx/entity
+ - ngrx-store-freeze
+
 ## Angular CLI version
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.0.
