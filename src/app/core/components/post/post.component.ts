@@ -35,6 +35,10 @@ export class PostComponent implements OnInit {
   textarea;
 
   ngOnInit() {
+    // BehaviorSubject will return upon subscription the last value of the stream, or an initial state if no value was emitted yet
+    // BehaviorSubject can at any time retrieve the current value of the stream using getValue()
+    // Don't expose subjects directly, use asObservable() instead
+
     // TODO: check for item == null?
     // TODO: unsubscribe?
     this.item.subscribe(item => this.textarea.nativeElement.focus());
