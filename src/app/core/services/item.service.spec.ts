@@ -1,6 +1,7 @@
 import { TestBed, inject } from '@angular/core/testing';
 import { StoreModule, Store } from '@ngrx/store';
 
+import { TestUtil } from '../../../shared/test-util';
 import * as fromCoreStore from '../store';
 
 import {
@@ -12,21 +13,10 @@ import {
 
 import { ItemService } from './item.service';
 
-
-
 describe(`${ItemService.name}`, () => {
-  const ItemServiceMethods = new ItemService(null); // Using this instance solely to access refactor friendly method names
-
-  // TODO: ItemServiceMethods.addOrUpdateItem.name
-  // 'name' returns empty string - find solution
-
-  // const names = {};
-
-  // for (const name in ItemServiceMethods) {
-  //   if (ItemServiceMethods.hasOwnProperty(name)) {
-  //     names[ItemServiceMethods[name]] = name;
-  //   }
-  // }
+  // An attempt to create refactor-friendly test descriptions. Will see how it works in practice.
+  const _service: ItemService = TestUtil.init(new ItemService(null)); // Dummy service for use solely in test descriptions
+  const _ = TestUtil.getName; // Shorthand to minimize bloat in test descriptions
 
   let service: ItemService;
   let store: Store<fromCoreStore.State>;
@@ -46,11 +36,11 @@ describe(`${ItemService.name}`, () => {
     service = TestBed.get(ItemService);
   });
 
-  it(`${ItemService.name} is created`, () => {
+  it(_(ItemService) + ' is created', () => {
     expect(service).toBeTruthy();
   });
 
-  it(`${ItemServiceMethods.addOrUpdateItem.name} dispatches ${AddOrUpdateAction.name}`, () => {
+  it(_(_service.addOrUpdateItem) + ' dispatches ' + _(AddOrUpdateAction), () => {
     const text = 'test';
     const action = new AddOrUpdateAction(text);
 
@@ -59,7 +49,7 @@ describe(`${ItemService.name}`, () => {
     expect(store.dispatch).toHaveBeenCalledWith(action);
   });
 
-  it(`${ItemServiceMethods.removeEditedItem.name} dispatches ${RemoveEditedAction.name}`, () => {
+  it(_(_service.removeEditedItem) + ' dispatches ' + _(RemoveEditedAction), () => {
     const action = new RemoveEditedAction();
 
     service.removeEditedItem();
@@ -67,7 +57,7 @@ describe(`${ItemService.name}`, () => {
     expect(store.dispatch).toHaveBeenCalledWith(action);
   });
 
-  it(`${ItemServiceMethods.startEditing.name} dispatches ${StartEditingAction.name}`, () => {
+  it(_(_service.startEditing) + ' dispatches ' + _(StartEditingAction), () => {
     const id = 1;
     const action = new StartEditingAction(id);
 
@@ -76,7 +66,7 @@ describe(`${ItemService.name}`, () => {
     expect(store.dispatch).toHaveBeenCalledWith(action);
   });
 
-  it(`${ItemServiceMethods.stopEditing.name} dispatches ${StopEditingAction.name}`, () => {
+  it(_(_service.stopEditing) + ' dispatches ' + _(StopEditingAction), () => {
     const action = new StopEditingAction();
 
     service.stopEditing();
