@@ -1,7 +1,9 @@
 import { TestBed, inject } from '@angular/core/testing';
 import { StoreModule, Store } from '@ngrx/store';
 
-import { TestUtil } from '../../../shared/test-util';
+import { of } from 'rxjs';
+
+import { TestUtil, _ } from '../../../shared/test-util';
 import * as fromCoreStore from '../store';
 
 import {
@@ -11,12 +13,14 @@ import {
   StopEditingAction
 } from '../store/item';
 
+import { Item } from '../models/item';
 import { ItemService } from './item.service';
 
-describe(`${ItemService.name}`, () => {
+
+
+describe(_(ItemService) + ' tests', () => {
   // An attempt to create refactor-friendly test descriptions. Will see how it works in practice.
-  const _service: ItemService = TestUtil.init(new ItemService(null)); // Dummy service for use solely in test descriptions
-  const _ = TestUtil.getName; // Shorthand to minimize bloat in test descriptions
+  const s: ItemService = TestUtil.init(new ItemService(null)); // Dummy service for use solely in test descriptions
 
   let service: ItemService;
   let store: Store<fromCoreStore.State>;
@@ -30,17 +34,42 @@ describe(`${ItemService.name}`, () => {
     });
 
     store = TestBed.get(Store);
+    service = TestBed.get(ItemService);
 
     spyOn(store, 'dispatch').and.callThrough();
-
-    service = TestBed.get(ItemService);
   });
 
   it(_(ItemService) + ' is created', () => {
     expect(service).toBeTruthy();
   });
 
-  it(_(_service.addOrUpdateItem) + ' dispatches ' + _(AddOrUpdateAction), () => {
+  it(_(s.getItems) + ' functions properly', () => {
+    const items = of([] as Item[]);
+    spyOn(store, 'pipe').and.returnValue(items);
+
+    let ret = service.getItems();
+    expect(ret).toEqual(items);
+
+    ret = service.getItems();
+    expect(ret).toEqual(items);
+
+    expect(store.pipe).toHaveBeenCalledTimes(1);
+  });
+
+  it(_(s.getEditedItem) + ' functions properly', () => {
+    const item = of({} as Item);
+    spyOn(store, 'pipe').and.returnValue(item);
+
+    let ret = service.getEditedItem();
+    expect(ret).toEqual(item);
+
+    ret = service.getEditedItem();
+    expect(ret).toEqual(item);
+
+    expect(store.pipe).toHaveBeenCalledTimes(1);
+  });
+
+  it(_(s.addOrUpdateItem) + ' dispatches ' + _(AddOrUpdateAction), () => {
     const text = 'test';
     const action = new AddOrUpdateAction(text);
 
@@ -49,7 +78,7 @@ describe(`${ItemService.name}`, () => {
     expect(store.dispatch).toHaveBeenCalledWith(action);
   });
 
-  it(_(_service.removeEditedItem) + ' dispatches ' + _(RemoveEditedAction), () => {
+  it(_(s.removeEditedItem) + ' dispatches ' + _(RemoveEditedAction), () => {
     const action = new RemoveEditedAction();
 
     service.removeEditedItem();
@@ -57,7 +86,7 @@ describe(`${ItemService.name}`, () => {
     expect(store.dispatch).toHaveBeenCalledWith(action);
   });
 
-  it(_(_service.startEditing) + ' dispatches ' + _(StartEditingAction), () => {
+  it(_(s.startEditing) + ' dispatches ' + _(StartEditingAction), () => {
     const id = 1;
     const action = new StartEditingAction(id);
 
@@ -66,7 +95,7 @@ describe(`${ItemService.name}`, () => {
     expect(store.dispatch).toHaveBeenCalledWith(action);
   });
 
-  it(_(_service.stopEditing) + ' dispatches ' + _(StopEditingAction), () => {
+  it(_(s.stopEditing) + ' dispatches ' + _(StopEditingAction), () => {
     const action = new StopEditingAction();
 
     service.stopEditing();
