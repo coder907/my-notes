@@ -5,10 +5,11 @@ import {
   Input,
   Output,
   ViewChild,
-  OnInit
+  OnInit,
+  OnDestroy
 } from '@angular/core';
 
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 import { Item } from '../../models/item';
 
@@ -20,7 +21,7 @@ import { Item } from '../../models/item';
   styleUrls: ['./post.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PostComponent implements OnInit {
+export class PostComponent implements OnInit, OnDestroy  {
 
   @Input()
   item: Observable<Item>;
@@ -34,18 +35,20 @@ export class PostComponent implements OnInit {
   @ViewChild('textarea')
   textarea;
 
-  ngOnInit() {
-    // BehaviorSubject will return upon subscription the last value of the stream, or an initial state if no value was emitted yet
-    // BehaviorSubject can at any time retrieve the current value of the stream using getValue()
-    // Don't expose subjects directly, use asObservable() instead
+  private subscription: Subscription;
 
-    // TODO: check for item == null?
-    // TODO: unsubscribe?
-    this.item.subscribe(item => this.textarea.nativeElement.focus());
+  ngOnInit() {
+    this.subscription = this.item.subscribe(item => this.textareaFocus());
+  }
+
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 
   onPostClick() {
-    this.post.emit(this.textarea.nativeElement.value);
+    this.post.emit(this.textareaValue());
     this.onClear();
   }
 
@@ -59,10 +62,19 @@ export class PostComponent implements OnInit {
 
   onClear() {
     this.clear.emit();
+    this.textareaClear();
+    this.textareaFocus();
+  }
 
-    // TODO: find solution without accessing native element
-    const textarea = this.textarea.nativeElement;
-    textarea.value = '';
-    textarea.focus();
+  textareaValue() {
+    return this.textarea.nativeElement.value;
+  }
+
+  textareaClear() {
+    this.textarea.nativeElement.value = '';
+  }
+
+  textareaFocus() {
+    this.textarea.nativeElement.focus();
   }
 }
