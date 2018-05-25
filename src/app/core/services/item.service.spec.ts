@@ -18,7 +18,7 @@ import { ItemService } from './item.service';
 
 
 
-describe(name(ItemService) + ' tests', () => {
+describe(name(ItemService) + ' tests.', () => {
   // An attempt to create refactor-friendly test descriptions. Will see how it works in practice.
   const s: ItemService = TestUtil.nameAllProperties(new ItemService(null)); // Dummy service for use solely in test descriptions
 
@@ -39,11 +39,11 @@ describe(name(ItemService) + ' tests', () => {
     spyOn(store, 'dispatch').and.callThrough();
   });
 
-  it(name(ItemService) + ' is created', () => {
+  it(name(ItemService) + ' is created.', () => {
     expect(service).toBeTruthy();
   });
 
-  it(name(s.getItems) + ' functions properly', () => {
+  it(name(s.getItems) + ' functions properly.', () => {
     const items = of([] as Item[]);
     spyOn(store, 'pipe').and.returnValue(items);
 
@@ -56,7 +56,7 @@ describe(name(ItemService) + ' tests', () => {
     expect(store.pipe).toHaveBeenCalledTimes(1);
   });
 
-  it(name(s.getEditedItem) + ' functions properly', () => {
+  it(name(s.getEditedItem) + ' functions properly.', () => {
     const item = of({} as Item);
     spyOn(store, 'pipe').and.returnValue(item);
 
@@ -69,7 +69,7 @@ describe(name(ItemService) + ' tests', () => {
     expect(store.pipe).toHaveBeenCalledTimes(1);
   });
 
-  it(name(s.addOrUpdateItem) + ' dispatches ' + name(AddOrUpdateAction), () => {
+  it(name(s.addOrUpdateItem) + ' dispatches ' + name(AddOrUpdateAction) + '.', () => {
     const text = 'test';
     const action = new AddOrUpdateAction(text);
 
@@ -78,7 +78,7 @@ describe(name(ItemService) + ' tests', () => {
     expect(store.dispatch).toHaveBeenCalledWith(action);
   });
 
-  it(name(s.removeEditedItem) + ' dispatches ' + name(RemoveEditedAction), () => {
+  it(name(s.removeEditedItem) + ' dispatches ' + name(RemoveEditedAction) + '.', () => {
     const action = new RemoveEditedAction();
 
     service.removeEditedItem();
@@ -86,7 +86,7 @@ describe(name(ItemService) + ' tests', () => {
     expect(store.dispatch).toHaveBeenCalledWith(action);
   });
 
-  it(name(s.startEditing) + ' dispatches ' + name(StartEditingAction), () => {
+  it(name(s.startEditing) + ' dispatches ' + name(StartEditingAction) + '.', () => {
     const id = 1;
     const action = new StartEditingAction(id);
 
@@ -95,7 +95,7 @@ describe(name(ItemService) + ' tests', () => {
     expect(store.dispatch).toHaveBeenCalledWith(action);
   });
 
-  it(name(s.stopEditing) + ' dispatches ' + name(StopEditingAction), () => {
+  it(name(s.stopEditing) + ' dispatches ' + name(StopEditingAction) + '.', () => {
     const action = new StopEditingAction();
 
     service.stopEditing();

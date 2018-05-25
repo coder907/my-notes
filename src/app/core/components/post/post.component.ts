@@ -32,8 +32,8 @@ export class PostComponent implements OnInit, OnDestroy  {
   @Output()
   clear = new EventEmitter();
 
-  @ViewChild('textarea')
-  textarea;
+  @ViewChild('textArea')
+  private textArea;
 
   private subscription: Subscription;
 
@@ -47,34 +47,34 @@ export class PostComponent implements OnInit, OnDestroy  {
     }
   }
 
-  onPostClick() {
+  private onPostClick() {
     this.post.emit(this.textareaValue());
     this.onClear();
   }
 
-  onClearClick() {
+  private onClearClick() {
     this.onClear();
   }
 
-  onTextAreaKeyUpEsc() {
+  private onTextAreaKeyUpEsc() {
     this.onClear();
   }
 
-  onClear() {
-    this.clear.emit();
+  private onClear() {
     this.textareaClear();
+    this.clear.emit();
     this.textareaFocus();
   }
 
-  textareaValue() {
-    return this.textarea.nativeElement.value;
+  private textareaValue() {
+    return this.textArea.nativeElement.value;
   }
 
-  textareaClear() {
-    this.textarea.nativeElement.value = '';
+  private textareaClear() {
+    this.textArea.nativeElement.value = '';
   }
 
-  textareaFocus() {
-    this.textarea.nativeElement.focus();
+  private textareaFocus() {
+    this.textArea.nativeElement.focus();
   }
 }
