@@ -20,7 +20,7 @@ import { ItemService } from './item.service';
 
 describe(name(ItemService) + ' tests.', () => {
   // An attempt to create refactor-friendly test descriptions. Will see how it works in practice.
-  const s: ItemService = TestUtil.nameAllProperties(new ItemService(null)); // Dummy service for use solely in test descriptions
+  const s: ItemService = TestUtil.nameAllFunctions(new ItemService(null)); // Dummy service for use solely in test descriptions
 
   let service: ItemService;
   let store: Store<fromCoreStore.State>;

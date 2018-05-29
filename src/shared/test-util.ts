@@ -2,10 +2,10 @@ const TestUtilPrefix = '__TestUtil_';
 
 export const TestUtil = {
   /**
-   * Stores name of each property for later retrieval.
+   * Stores name of each function for later retrieval.
    * @param {any} obj Any object.
    **/
-  nameAllProperties: (obj: any): any => {
+  nameAllFunctions: (obj: any): any => {
     for (const prop in obj) {
       if (typeof obj[prop] === 'function') {
         obj[prop][TestUtilPrefix + 'name'] = prop;
