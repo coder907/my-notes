@@ -1,6 +1,8 @@
 import { TestUtil, name } from './test-util';
 
-describe('TestUtil', () => {
+
+
+describe('TestUtil tests.', () => {
   it('Naming works correctly.', () => {
     const obj = {
       function1: () => {},

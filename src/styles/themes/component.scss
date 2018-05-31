@@ -1,0 +1,5 @@
+@import '../../app/core/components/list/list.component.scss';
+
+@mixin component-themes($theme) {
+  @include list-theme($theme);
+}

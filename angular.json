@@ -27,9 +27,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles/styles.scss",
-              "src/styles/themes/day-theme.scss",
-              "src/styles/themes/night-theme.scss"
+              "src/styles/styles.scss"
             ],
             "scripts": []
           },

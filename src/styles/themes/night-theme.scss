@@ -1,4 +1,5 @@
 @import '~@angular/material/theming';
+@import './component';
 
 $night-palette-olive-dark: (
     50 : #e5e5e0,
@@ -107,4 +108,5 @@ $night-theme: mat-light-theme($night-primary, $night-accent, $night-warn);
 
 .night-theme {
     @include angular-material-theme($night-theme);
+    @include component-themes($night-theme);
 }
