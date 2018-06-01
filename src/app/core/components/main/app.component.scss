@@ -1,11 +1,12 @@
-.toolbar-spacer {
+.app-toolbar-spacer {
   width: 10px;
 }
 
-.toolbar-flex {
+.app-toolbar-flex {
   flex: auto;
 }
 
-.list {
+.app-list {
   display: block;
+  overflow: hidden;
 }

@@ -1,19 +1,19 @@
-<div class="container">
+<div class="post-container">
   <textarea
     #textArea
     matInput
     placeholder="Enter a new note"
     value="{{ (item | async)?.text }}"
-    class="mat-elevation-z8"
+    class="post-textarea mat-elevation-z8"
     (keyup.esc)="onTextAreaKeyUpEsc();"
   >
   </textarea>
 
-  <div class="button-container">
+  <div class="post-button-container">
     <button
       mat-raised-button
       color="primary"
-      class="button-post mat-elevation-z8"
+      class="post-button post-button-post mat-elevation-z8"
       (click)="onPostClick()"
     >
       Post
@@ -22,7 +22,7 @@
     <button
       mat-raised-button
       color="accent"
-      class="mat-elevation-z8"
+      class="post-button mat-elevation-z8"
       (click)="onClearClick()"
     >
       Clear

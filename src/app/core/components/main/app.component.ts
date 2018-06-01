@@ -33,7 +33,14 @@ export class AppComponent implements AfterViewChecked {
 
   resizeList() {
     const list: any = window.document.getElementsByTagName('app-list')[0];
-    list.style.height = (window.screen.height - list.offsetTop - 8) + 'px';
+
+    let marginBottom = 4;
+
+    if (document.body.offsetHeight >= 768) {
+      marginBottom = 8;
+    }
+
+    list.style.height = (document.body.offsetHeight - list.offsetTop - marginBottom) + 'px';
   }
   // *****
 }
