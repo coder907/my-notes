@@ -40,6 +40,7 @@
 <app-list
   class="app-list"
   [items]="itemService.getItems()"
+  [editedItem]="itemService.getEditedItem()"
   (rowClick)="itemService.startEditing($event)"
 >
 </app-list>

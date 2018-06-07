@@ -3,6 +3,7 @@
 @mixin list-theme($theme) {
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
 
   tr:nth-child(odd) {
     background-color: mat-color($primary, 200);
@@ -11,6 +12,18 @@
   tr:nth-child(even) {
     background-color: mat-color($accent, 200);
   }
+
+  tr:hover {
+    background-color: mat-color($warn, 200);
+  }
+
+  tr.selected {
+    background-color: mat-color($warn, 300);
+  }
+}
+
+:host {
+  padding-bottom: 4px;
 }
 
 .list-container {
@@ -24,6 +37,10 @@
 }
 
 @media screen and (min-width: 768px) {
+  :host {
+    padding-bottom: 8px;
+  }
+
   .list-container {
     margin: 0px 8px;
   }

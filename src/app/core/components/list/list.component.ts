@@ -25,6 +25,9 @@ export class ListComponent {
   @Input()
   items: Observable<Item[]>;
 
+  @Input()
+  editedItem: Observable<Item>;
+
   @Output()
   rowClick = new EventEmitter();
 }
