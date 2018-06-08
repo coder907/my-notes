@@ -1,28 +1,55 @@
-/*
 import { Injectable } from '@angular/core';
 import { Action } from '@ngrx/store';
 import { Effect, Actions, ofType } from '@ngrx/effects';
-import { Database } from '@ngrx/db';
-import { Observable } from 'rxjs/Observable';
-import { defer } from 'rxjs/observable/defer';
-import { of } from 'rxjs/observable/of';
+import { map, mergeMap } from 'rxjs/operators';
+import { AngularFirestore } from 'angularfire2/firestore';
+
+import { FirestoreAction } from './firestore-action';
+import { Item } from '../models/item';
 
 import {
   ItemAction,
-  LoadFailAction,
-  LoadSuccessAction,
-  AddOrUpdateAction,
-  AddOrUpdateSuccessAction,
-  AddOrUpdateFailAction,
-  // RemoveSuccess
-  // RemoveFail
+  AddAction
 } from '../store/item';
 
-import { Item } from '../models/item';
-import { switchMap, toArray, map, catchError, mergeMap } from 'rxjs/operators';
 
 
+@Injectable()
+export class ItemEffects {
 
+  private actionTypeMap: { [key: string]: string; } = {};
+
+  constructor(private firestore: AngularFirestore) {
+    this.actionTypeMap[FirestoreAction.Added] = ItemAction.Add;
+    this.actionTypeMap[FirestoreAction.Modified] = ItemAction.Update;
+    this.actionTypeMap[FirestoreAction.Removed] = ItemAction.Remove;
+  }
+
+  @Effect()
+  items$ = this.firestore.collection<Item>('items').stateChanges().pipe(
+    mergeMap(actions => actions),
+    map(action => {
+      switch (action.type) {
+        case FirestoreAction.Added:
+        case FirestoreAction.Modified:
+          return {
+            type: this.actionTypeMap[action.type],
+            item: {
+              id: action.payload.doc.id,
+              ...action.payload.doc.data()
+            }
+          };
+        case FirestoreAction.Removed:
+          return {
+            type: this.actionTypeMap[action.type],
+            id: action.payload.doc.id
+          };
+      }
+    })
+  );
+}
+
+/*
 @Injectable()
 export class ItemEffects {
 
@@ -74,6 +101,5 @@ export class ItemEffects {
         )
     )
   );
-
 }
 */

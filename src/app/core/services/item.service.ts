@@ -4,12 +4,12 @@ import { Observable } from 'rxjs';
 
 import { Item } from '../models/item';
 
-import {
-  AddOrUpdateAction,
-  StartEditingAction,
-  StopEditingAction,
-  RemoveEditedAction
-} from '../store/item';
+// import {
+//   AddOrUpdateAction,
+//   StartEditingAction,
+//   StopEditingAction,
+//   RemoveEditedAction
+// } from '../store/item';
 
 import * as fromCoreStore from '../store';
 
@@ -43,18 +43,18 @@ export class ItemService {
   }
 
   addOrUpdateItem(text: string): void {
-    this.store.dispatch(new AddOrUpdateAction(text));
+    // this.store.dispatch(new AddOrUpdateAction(text));
   }
 
   removeEditedItem(): void {
-    this.store.dispatch(new RemoveEditedAction());
+    // this.store.dispatch(new RemoveEditedAction());
   }
 
   startEditing(id: number) {
-    this.store.dispatch(new StartEditingAction(id));
+    // this.store.dispatch(new StartEditingAction(id));
   }
 
   stopEditing(): void {
-    this.store.dispatch(new StopEditingAction());
+    // this.store.dispatch(new StopEditingAction());
   }
 }
