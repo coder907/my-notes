@@ -18,6 +18,10 @@ See [Technical Specification](https://github.com/coder907/my-notes/blob/master/t
  - @ngrx/entity
  - @ngrx/effects
  - ngrx-store-freeze
+ - firebase
+ - angularfire2
+
+ See [package.json](https://github.com/coder907/my-notes/blob/master/package.json) for a complete list of dependencies
 
 ## Angular CLI version
 
