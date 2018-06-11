@@ -8,8 +8,8 @@
 
   <button
     mat-icon-button
-    *ngIf="itemService.getEditedItem() | async"
-    (click)="itemService.removeEditedItem()"
+    *ngIf="editedItemId"
+    (click)="removeEditedItem()"
   >
     <mat-icon>delete</mat-icon>
   </button>
@@ -31,17 +31,17 @@
 </mat-toolbar>
 
 <app-post
-  [item]="itemService.getEditedItem()"
-  (post)="itemService.addOrUpdateItem($event)"
-  (clear)="itemService.stopEditing()"
+  [item]="itemService.getItem(editedItemId)"
+  (post)="post($event)"
+  (clear)="stopEditing()"
 >
 </app-post>
 
 <app-list
   class="app-list"
   [items]="itemService.getItems()"
-  [editedItem]="itemService.getEditedItem()"
-  (rowClick)="itemService.startEditing($event)"
+  [editedItem]="itemService.getItem(editedItemId)"
+  (rowClick)="startEditing($event)"
 >
 </app-list>
 

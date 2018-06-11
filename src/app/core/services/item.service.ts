@@ -4,12 +4,11 @@ import { Observable } from 'rxjs';
 
 import { Item } from '../models/item';
 
-// import {
-//   AddOrUpdateAction,
-//   StartEditingAction,
-//   StopEditingAction,
-//   RemoveEditedAction
-// } from '../store/item';
+import {
+  AddRequestAction,
+  UpdateRequestAction,
+  RemoveRequestAction,
+} from '../store/item';
 
 import * as fromCoreStore from '../store';
 
@@ -21,11 +20,8 @@ import * as fromCoreStore from '../store';
 export class ItemService {
 
   private items: Observable<Item[]>;
-  private editedItem: Observable<Item>;
 
-  constructor(
-    private store: Store<fromCoreStore.State>
-  ) {}
+  constructor(private store: Store<fromCoreStore.State>) {}
 
   getItems(): Observable<Item[]> {
     if (!this.items) {
@@ -34,27 +30,20 @@ export class ItemService {
     return this.items;
   }
 
-  getEditedItem(): Observable<Item> {
-    if (!this.editedItem) {
-      this.editedItem = this.store.pipe(select(fromCoreStore.getEditedItem));
-    }
-
-    return this.editedItem;
+  getItem(id: string): Observable<Item> {
+    return this.store.pipe(select(fromCoreStore.getItem(id)));
   }
 
-  addOrUpdateItem(text: string): void {
-    // this.store.dispatch(new AddOrUpdateAction(text));
+  addItem(text: string): void {
+    this.store.dispatch(new AddRequestAction(text));
   }
 
-  removeEditedItem(): void {
-    // this.store.dispatch(new RemoveEditedAction());
+  updateItem(id: string, text: string): void {
+    this.store.dispatch(new UpdateRequestAction(id, text));
   }
 
-  startEditing(id: number) {
-    // this.store.dispatch(new StartEditingAction(id));
+  removeItem(id: string): void {
+    this.store.dispatch(new RemoveRequestAction(id));
   }
 
-  stopEditing(): void {
-    // this.store.dispatch(new StopEditingAction());
-  }
 }

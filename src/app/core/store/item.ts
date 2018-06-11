@@ -6,157 +6,139 @@ import { Item } from '../models/item';
 
 
 // #region Actions
-export enum ItemAction {
-  Add = '[Item] Add',
-  Update = '[Item] Update',
-  Remove = '[Item] Remove',
-
-  // AddOrUpdate = '[Item] AddOrUpdate',
-  // StartEditing = '[Item] StartEditing',
-  // StopEditing = '[Item] StopEditing',
-  // RemoveEdited = '[Item] RemoveEdited',
+export enum ItemActionTypes {
+  SyncAdd         = '[Item] Add',
+  SyncUpdate      = '[Item] Update',
+  SyncRemove      = '[Item] Remove',
+  // LoadRequest     = '[Item] LoadRequest',
+  AddRequest      = '[Item] AddRequest',
+  AddSuccess      = '[Item] AddSuccess',
+  AddFail         = '[Item] AddFail',
+  UpdateRequest   = '[Item] UpdateRequest',
+  UpdateSuccess   = '[Item] UpdateSuccess',
+  UpdateFail      = '[Item] UpdateFail',
+  RemoveRequest   = '[Item] RemoveRequest',
+  RemoveSuccess   = '[Item] RemoveSuccess',
+  RemoveFail      = '[Item] RemoveFail',
 }
 
-export class AddAction implements Action {
-  readonly type = ItemAction.Add;
+export class SyncAddAction implements Action {
+  readonly type = ItemActionTypes.SyncAdd;
 
   constructor(public item: Item) { }
 }
 
-export class UpdateAction implements Action {
-  readonly type = ItemAction.Update;
+export class SyncUpdateAction implements Action {
+  readonly type = ItemActionTypes.SyncUpdate;
 
   constructor(public item: Partial<Item>) { }
 }
 
-export class RemoveAction implements Action {
-  readonly type = ItemAction.Remove;
+export class SyncRemoveAction implements Action {
+  readonly type = ItemActionTypes.SyncRemove;
 
-  constructor(public id: number) { }
+  constructor(public id: string) { }
 }
 
-// export class AddOrUpdateAction implements Action {
-//   readonly type = ItemAction.AddOrUpdate;
-
-//   constructor(public text: string) { }
+// export class LoadRequestAction implements Action {
+//   readonly type = ItemActionTypes.LoadRequest;
 // }
 
-// export class RemoveEditedAction implements Action {
-//   readonly type = ItemAction.RemoveEdited;
-// }
+export class AddRequestAction implements Action {
+  readonly type = ItemActionTypes.AddRequest;
 
-// export class StartEditingAction implements Action {
-//   readonly type = ItemAction.StartEditing;
+  constructor(public text: string) { }
+}
 
-//   constructor(public id: number) { }
-// }
+export class AddSuccessAction implements Action {
+  readonly type = ItemActionTypes.AddSuccess;
+}
 
-// export class StopEditingAction implements Action {
-//   readonly type = ItemAction.StopEditing;
-// }
+export class AddFailAction implements Action {
+  readonly type = ItemActionTypes.AddFail;
 
-export type ItemActionAlias =
-AddAction |
-UpdateAction |
-RemoveAction
+  constructor(public error: any) { }
+}
 
-// AddOrUpdateAction |
-// StartEditingAction |
-// StopEditingAction |
-// RemoveEditedAction |
+export class UpdateRequestAction implements Action {
+  readonly type = ItemActionTypes.UpdateRequest;
+
+  constructor(public id: string, public text: string) { }
+}
+
+export class UpdateSuccessAction implements Action {
+  readonly type = ItemActionTypes.UpdateSuccess;
+}
+
+export class UpdateFailAction implements Action {
+  readonly type = ItemActionTypes.UpdateFail;
+
+  constructor(public error: any) { }
+}
+
+export class RemoveRequestAction implements Action {
+  readonly type = ItemActionTypes.RemoveRequest;
+
+  constructor(public id: string) { }
+}
+
+export class RemoveSuccessAction implements Action {
+  readonly type = ItemActionTypes.RemoveSuccess;
+}
+
+export class RemoveFailAction implements Action {
+  readonly type = ItemActionTypes.RemoveFail;
+
+  constructor(public error: any) { }
+}
+
+export type ItemAction =
+  SyncAddAction |
+  SyncUpdateAction |
+  SyncRemoveAction |
+// LoadRequestAction |
+  AddRequestAction |
+  AddSuccessAction |
+  AddFailAction |
+  UpdateRequestAction |
+  UpdateSuccessAction |
+  UpdateFailAction |
+  RemoveRequestAction |
+  RemoveSuccessAction |
+  RemoveFailAction
 ;
 // #endregion Actions
 
 
 
 // #region State
-export interface State extends EntityState<Item> {
-  // nextId: number;
-  editedId: number | null;
-}
+export interface State extends EntityState<Item> {}
 
 export const adapter = createEntityAdapter<Item>();
 
-const initialState: State = adapter.getInitialState({
-  // nextId: 1, // Must start with 1, not 0
-  editedId: null
-});
+const initialState: State = adapter.getInitialState({});
 // #endregion State
 
 
 
 // #region Reducer
-export function reducer(state: State = initialState, action: ItemActionAlias): State {
+export function reducer(state: State = initialState, action: ItemAction): State {
   switch (action.type) {
-    case ItemAction.Add:
+  case ItemActionTypes.SyncAdd:
       return adapter.addOne(action.item, state);
 
-    case ItemAction.Update:
-      return adapter.updateOne({
-          id: action.item.id,
-          changes: {
-            ...action.item
-          }
-        },
-        state
-      );
+  case ItemActionTypes.SyncUpdate:
+    return adapter.updateOne({
+        id: action.item.id,
+        changes: {
+          ...action.item
+        }
+      },
+      state
+    );
 
-    case ItemAction.Remove:
-      return adapter.removeOne(action.id, state);
-
-    // case ItemAction.RemoveEdited:
-    //   if (!state.editedId) {
-    //     return state;
-    //   }
-
-    //   return adapter.removeOne(state.editedId, {
-    //     ...state,
-    //     editedId: null
-    //   });
-
-    // case ItemAction.AddOrUpdate:
-    //   if (state.editedId) {
-    //     return adapter.updateOne({
-    //         id: state.editedId,
-    //         changes: {
-    //           text: action.text || ''
-    //         }
-    //       },
-    //       state
-    //     );
-    //   } else {
-    //     const item: Item = {
-    //       id: state.nextId,
-    //       text: action.text || '',
-    //     };
-
-    //     return adapter.addOne(item, {
-    //       ...state,
-    //       nextId: state.nextId + 1,
-    //     });
-    //   }
-
-    // case ItemAction.StartEditing:
-    //   return {
-    //     ...state,
-    //     editedId: action.id,
-    //   };
-
-    // case ItemAction.StopEditing:
-    //   return {
-    //     ...state,
-    //     editedId: null,
-    //   };
-
-    // case ItemAction.RemoveEdited:
-    //   if (!state.editedId) {
-    //     return state;
-    //   }
-
-    //   return adapter.removeOne(state.editedId, {
-    //     ...state,
-    //     editedId: null
-    //   });
+  case ItemActionTypes.SyncRemove:
+    return adapter.removeOne(action.id, state);
 
     default:
       return state;
@@ -167,14 +149,7 @@ export function reducer(state: State = initialState, action: ItemActionAlias): S
 
 
 // #region Selectors
-export const getEditedId = (state: State) => state.editedId;
-
 export const getItemState = createFeatureSelector<State>('items');
-
-export const getEditedItemId = createSelector(
-  getItemState,
-  getEditedId
-);
 
 export const {
   selectIds: getItemIds,
@@ -183,11 +158,10 @@ export const {
   selectTotal: getTotalItems,
 } = adapter.getSelectors(getItemState);
 
-export const getEditedItem = createSelector(
+export const getItem = (id: string) => createSelector(
   getItemEntities,
-  getEditedItemId,
-  (entities, editedId) => {
-    return editedId && entities[editedId];
+  (entities) => {
+    return id && entities[id];
   }
 );
 // #endregion Selectors

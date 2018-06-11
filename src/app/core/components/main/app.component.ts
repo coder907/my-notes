@@ -5,11 +5,6 @@ import {
   HostListener
 } from '@angular/core';
 
-import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
-import { Item } from '../../models/item';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-
 import { ItemService } from '../../services/item.service';
 
 
@@ -23,35 +18,31 @@ import { ItemService } from '../../services/item.service';
 
 export class AppComponent implements AfterViewChecked {
 
-  afsItemCollection: AngularFirestoreCollection<Item>;
-  afsItems: Observable<Item[]>;
+  private editedItemId: string = null;
 
-  constructor(
-    private itemService: ItemService,
-    private afs: AngularFirestore
-  ) {
-    this.afsItemCollection = this.afs.collection<Item>('items');
-    // this.afsItems = this.afsItemCollection.valueChanges();
+  constructor(private itemService: ItemService) { }
 
-    this.afsItems = this.afsItemCollection.snapshotChanges().pipe(
-      map(actions => {
-        return actions.map(a => {
-          const data = a.payload.doc.data() as Item;
-          data.id = a.payload.doc.id;
-          return data;
-        });
-      })
-    );
+  post(text: string) {
+    if (this.editedItemId) {
+      this.itemService.updateItem(this.editedItemId, text);
 
-    /*this.afsItems = this.afsItemCollection.stateChanges().pipe(
-      map(actions => {
-        return actions.map(a => {
-          const data = a.payload.doc.data() as Item;
-          data.id = a.payload.doc.id;
-          return data;
-        });
-      })
-    );*/
+    } else {
+      this.itemService.addItem(text);
+    }
+  }
+
+  startEditing(id: string) {
+    this.editedItemId = id;
+  }
+
+  stopEditing() {
+    this.editedItemId = null;
+  }
+
+  removeEditedItem() {
+    if (this.editedItemId) {
+      this.itemService.removeItem(this.editedItemId);
+    }
   }
 
   // ***** TODO: find CSS solution

@@ -1,15 +1,25 @@
 import { Injectable } from '@angular/core';
 import { Action } from '@ngrx/store';
 import { Effect, Actions, ofType } from '@ngrx/effects';
-import { map, mergeMap } from 'rxjs/operators';
-import { AngularFirestore } from 'angularfire2/firestore';
-
+import { Observable, of } from 'rxjs';
+import { map, mergeMap, switchMap, catchError } from 'rxjs/operators';
+import { AngularFirestore, DocumentChangeAction } from 'angularfire2/firestore';
 import { FirestoreAction } from './firestore-action';
+
 import { Item } from '../models/item';
 
 import {
-  ItemAction,
-  AddAction
+  ItemActionTypes,
+  // LoadRequestAction,
+  AddRequestAction,
+  AddSuccessAction,
+  AddFailAction,
+  UpdateRequestAction,
+  UpdateSuccessAction,
+  UpdateFailAction,
+  RemoveRequestAction,
+  RemoveSuccessAction,
+  RemoveFailAction
 } from '../store/item';
 
 
@@ -19,14 +29,14 @@ export class ItemEffects {
 
   private actionTypeMap: { [key: string]: string; } = {};
 
-  constructor(private firestore: AngularFirestore) {
-    this.actionTypeMap[FirestoreAction.Added] = ItemAction.Add;
-    this.actionTypeMap[FirestoreAction.Modified] = ItemAction.Update;
-    this.actionTypeMap[FirestoreAction.Removed] = ItemAction.Remove;
+  constructor(private actions: Actions, private firestore: AngularFirestore) {
+    this.actionTypeMap[FirestoreAction.Added] = ItemActionTypes.SyncAdd;
+    this.actionTypeMap[FirestoreAction.Modified] = ItemActionTypes.SyncUpdate;
+    this.actionTypeMap[FirestoreAction.Removed] = ItemActionTypes.SyncRemove;
   }
 
   @Effect()
-  items$ = this.firestore.collection<Item>('items').stateChanges().pipe(
+  items = this.firestore.collection<Item>('items').stateChanges().pipe(
     mergeMap(actions => actions),
     map(action => {
       switch (action.type) {
@@ -45,61 +55,41 @@ export class ItemEffects {
             id: action.payload.doc.id
           };
       }
-    })
+    }),
+    // catchError(error => of(new SyncError(err)))
   );
+
+  /*
+  @Effect()
+  loadItems: Observable<Action> = this.actions.ofType(ItemActionTypes.LoadRequest).pipe(
+    switchMap(action => fromPromise(this.firestore.collection<Item>('items').ref.limit(20).get())),
+    map(query => query.forEach(doc => doc.data())),
+    catchError(error => of(new RemoveFailAction(error)))
+  );
+  */
+
+  @Effect()
+  removeItem: Observable<Action> = this.actions.ofType(ItemActionTypes.RemoveRequest).pipe(
+    map((action: RemoveRequestAction) => action.id),
+    mergeMap(id => of(this.firestore.collection<Item>('items').doc(id).delete())),
+    map((request) => new RemoveSuccessAction()),
+    catchError(error => of(new RemoveFailAction(error)))
+  );
+
+  @Effect()
+  addItem: Observable<Action> = this.actions.ofType(ItemActionTypes.AddRequest).pipe(
+    map((action: AddRequestAction) => action.text),
+    mergeMap(text => of(this.firestore.collection<Item>('items').add({text} as Item))),
+    map((request) => new AddSuccessAction()),
+    catchError(error => of(new AddFailAction(error)))
+  );
+
+  @Effect()
+  updateItem: Observable<Action> = this.actions.ofType(ItemActionTypes.UpdateRequest).pipe(
+    map((action: UpdateRequestAction) => action),
+    mergeMap(action => of(this.firestore.collection<Item>('items').doc(action.id).set({text: action.text}))),
+    map((request) => new UpdateSuccessAction()),
+    catchError(error => of(new UpdateFailAction(error)))
+  );
+
 }
-
-/*
-@Injectable()
-export class ItemEffects {
-
-  constructor(private actions$: Actions, private db: Database) {}
-
-  @Effect({ dispatch: false })
-  openDB$: Observable<any> = defer(() => {
-    return this.db.open('my_notes');
-  });
-
-  @Effect()
-  load$: Observable<Action> = this.actions$.pipe(
-    ofType(ItemAction.Load),
-    switchMap(() =>
-      this.db
-        .query('items')
-        .pipe(
-          toArray(),
-          map((items: Item[]) => new LoadSuccessAction(items)),
-          catchError(error => of(new LoadFailAction(error)))
-        )
-    )
-  );
-
-  @Effect()
-  addOrUpdate$: Observable<Action> = this.actions$.pipe(
-    ofType(ItemAction.AddOrUpdate),
-    map((action: AddOrUpdateAction) => action.text),
-    mergeMap(text =>
-      this.db
-        .insert('items', [{text}], true)
-        .pipe(
-          map((item) => new AddOrUpdateSuccessAction(item)),
-          catchError((error) => of(new AddOrUpdateFailAction(error)))
-        )
-    )
-  );
-
-  @Effect()
-  remove$: Observable<Action> = this.actions$.pipe(
-    ofType(ItemActionAlias.Remove),
-    map((action: Remove) => action.payload),
-    mergeMap(item =>
-      this.db
-        .executeWrite('items', 'delete', [item.id])
-        .pipe(
-          map(() => new RemoveSuccess(item)),
-          catchError(() => of(new RemoveFail(item)))
-        )
-    )
-  );
-}
-*/

@@ -39,4 +39,4 @@ export const metaReducers: MetaReducer<State>[] =
     : [];
 
 export const getAllItems = fromItem.getAllItems;
-export const getEditedItem = fromItem.getEditedItem;
+export const getItem = fromItem.getItem;
