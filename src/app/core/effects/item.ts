@@ -19,7 +19,10 @@ import {
   UpdateFailAction,
   RemoveRequestAction,
   RemoveSuccessAction,
-  RemoveFailAction
+  RemoveFailAction,
+  SyncAddAction,
+  SyncUpdateAction,
+  SyncRemoveAction,
 } from '../store/item';
 
 
@@ -27,12 +30,9 @@ import {
 @Injectable()
 export class ItemEffects {
 
-  private actionTypeMap: { [key: string]: string; } = {};
-
-  constructor(private actions: Actions, private firestore: AngularFirestore) {
-    this.actionTypeMap[FirestoreAction.Added] = ItemActionTypes.SyncAdd;
-    this.actionTypeMap[FirestoreAction.Modified] = ItemActionTypes.SyncUpdate;
-    this.actionTypeMap[FirestoreAction.Removed] = ItemActionTypes.SyncRemove;
+  constructor(
+    private actions: Actions,
+    private firestore: AngularFirestore) {
   }
 
   @Effect()
@@ -41,19 +41,19 @@ export class ItemEffects {
     map(action => {
       switch (action.type) {
         case FirestoreAction.Added:
+          return new SyncAddAction({
+            id: action.payload.doc.id,
+            ...action.payload.doc.data()
+          } as Item);
+
         case FirestoreAction.Modified:
-          return {
-            type: this.actionTypeMap[action.type],
-            item: {
-              id: action.payload.doc.id,
-              ...action.payload.doc.data()
-            }
-          };
+          return new SyncUpdateAction({
+            id: action.payload.doc.id,
+            ...action.payload.doc.data()
+          } as Partial<Item>);
+
         case FirestoreAction.Removed:
-          return {
-            type: this.actionTypeMap[action.type],
-            id: action.payload.doc.id
-          };
+          return new SyncRemoveAction(action.payload.doc.id);
       }
     }),
     // catchError(error => of(new SyncError(err)))
@@ -91,5 +91,4 @@ export class ItemEffects {
     map((request) => new UpdateSuccessAction()),
     catchError(error => of(new UpdateFailAction(error)))
   );
-
 }
