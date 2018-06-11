@@ -21,6 +21,7 @@ import { Item } from '../../models/item';
 
 export class ListComponent {
   displayedColumns = ['text'];
+  // displayedColumns = ['added', 'updated', 'text'];
 
   @Input()
   items: Observable<Item[]>;

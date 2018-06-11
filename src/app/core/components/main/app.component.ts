@@ -42,6 +42,7 @@ export class AppComponent implements AfterViewChecked {
   removeEditedItem() {
     if (this.editedItemId) {
       this.itemService.removeItem(this.editedItemId);
+      this.stopEditing();
     }
   }
 

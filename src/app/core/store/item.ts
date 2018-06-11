@@ -47,7 +47,10 @@ export class SyncRemoveAction implements Action {
 export class AddRequestAction implements Action {
   readonly type = ItemActionTypes.AddRequest;
 
-  constructor(public text: string) { }
+  constructor(
+    public timestamp: number,
+    public text: string
+  ) { }
 }
 
 export class AddSuccessAction implements Action {
@@ -63,7 +66,11 @@ export class AddFailAction implements Action {
 export class UpdateRequestAction implements Action {
   readonly type = ItemActionTypes.UpdateRequest;
 
-  constructor(public id: string, public text: string) { }
+  constructor(
+    public id: string,
+    public timestamp: number,
+    public text: string
+  ) { }
 }
 
 export class UpdateSuccessAction implements Action {

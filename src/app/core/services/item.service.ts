@@ -35,11 +35,11 @@ export class ItemService {
   }
 
   addItem(text: string): void {
-    this.store.dispatch(new AddRequestAction(text));
+    this.store.dispatch(new AddRequestAction(new Date().getTime(), text));
   }
 
   updateItem(id: string, text: string): void {
-    this.store.dispatch(new UpdateRequestAction(id, text));
+    this.store.dispatch(new UpdateRequestAction(id, new Date().getTime(), text));
   }
 
   removeItem(id: string): void {

@@ -71,24 +71,26 @@ export class ItemEffects {
   @Effect()
   removeItem: Observable<Action> = this.actions.ofType(ItemActionTypes.RemoveRequest).pipe(
     map((action: RemoveRequestAction) => action.id),
-    mergeMap(id => of(this.firestore.collection<Item>('items').doc(id).delete())),
-    map((request) => new RemoveSuccessAction()),
+    switchMap(id => of(this.firestore.collection<Item>('items').doc(id).delete())),
+    map(request => new RemoveSuccessAction()),
     catchError(error => of(new RemoveFailAction(error)))
   );
 
   @Effect()
   addItem: Observable<Action> = this.actions.ofType(ItemActionTypes.AddRequest).pipe(
-    map((action: AddRequestAction) => action.text),
-    mergeMap(text => of(this.firestore.collection<Item>('items').add({text} as Item))),
-    map((request) => new AddSuccessAction()),
+    // map((action: AddRequestAction) => action),
+    switchMap((action: AddRequestAction) =>
+      of(this.firestore.collection<Item>('items').add({added: action.timestamp, updated: action.timestamp, text: action.text} as Item))),
+    map(request => new AddSuccessAction()),
     catchError(error => of(new AddFailAction(error)))
   );
 
   @Effect()
   updateItem: Observable<Action> = this.actions.ofType(ItemActionTypes.UpdateRequest).pipe(
-    map((action: UpdateRequestAction) => action),
-    mergeMap(action => of(this.firestore.collection<Item>('items').doc(action.id).set({text: action.text}))),
-    map((request) => new UpdateSuccessAction()),
+    // map((action: UpdateRequestAction) => action),
+    mergeMap((action: UpdateRequestAction) =>
+      of(this.firestore.collection<Item>('items').doc(action.id).set({updated: action.timestamp, text: action.text}, {merge: true}))),
+    map(request => new UpdateSuccessAction()),
     catchError(error => of(new UpdateFailAction(error)))
   );
 }
