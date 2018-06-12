@@ -2,6 +2,8 @@
 
 ## Description
 
+See a [live preview](https://my-notes-preview.appspot.com/).
+
 See [Requirements Specification Draft](https://github.com/coder907/my-notes/blob/master/requirements-specification-draft.md) for a short overview.
 See [Technical Specification](https://github.com/coder907/my-notes/blob/master/technical-specification.md) for details.
 
