@@ -3,7 +3,8 @@ import {
   EventEmitter,
   Input,
   Output,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  HostListener
 } from '@angular/core';
 
 import { Observable } from 'rxjs';
@@ -20,8 +21,11 @@ import { Item } from '../../models/item';
 })
 
 export class ListComponent {
-  displayedColumns = ['text'];
-  // displayedColumns = ['added', 'updated', 'text'];
+  displayedColumns: string[];
+
+  constructor() {
+    this.setColumns();
+  }
 
   @Input()
   items: Observable<Item[]>;
@@ -31,4 +35,19 @@ export class ListComponent {
 
   @Output()
   rowClick = new EventEmitter();
+
+  // ***** TODO: is there a better solution?
+  @HostListener('window:resize')
+  onResize() {
+    this.setColumns();
+  }
+
+  setColumns() {
+    if (window.innerWidth < 768) {
+      this.displayedColumns = ['text'];
+    } else {
+      this.displayedColumns = ['updated', 'text'];
+    }
+  }
+  // *****
 }
