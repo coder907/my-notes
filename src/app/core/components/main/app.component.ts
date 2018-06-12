@@ -18,9 +18,9 @@ import { ItemService } from '../../services/item.service';
 
 export class AppComponent implements AfterViewChecked {
 
-  private editedItemId: string = null;
+  editedItemId: string = null;
 
-  constructor(private itemService: ItemService) { }
+  constructor(public itemService: ItemService) { }
 
   post(text: string) {
     if (this.editedItemId) {

@@ -47,16 +47,16 @@ export class PostComponent implements OnInit, OnDestroy  {
     }
   }
 
-  private onPostClick() {
+  onPostClick() {
     this.post.emit(this.textareaValue());
     this.onClear();
   }
 
-  private onClearClick() {
+  onClearClick() {
     this.onClear();
   }
 
-  private onTextAreaKeyUpEsc() {
+  onTextAreaKeyUpEsc() {
     this.onClear();
   }
 
