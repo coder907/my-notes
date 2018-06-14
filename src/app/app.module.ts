@@ -10,9 +10,12 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AppComponent } from './core/components/main/app.component';
 import { PostComponent } from './core/components/post/post.component';
 import { ListComponent } from './core/components/list/list.component';
+import { DblClickOrPressDirective } from '../shared/directives/dblclickorpress.directive';
 import { ItemEffects } from './core/effects/item';
 import { reducers } from './core/store';
 import { environment } from '../environments/environment';
+import { HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
+import { HammerConfig } from '../config/hammer';
 
 
 
@@ -21,6 +24,7 @@ import { environment } from '../environments/environment';
     AppComponent,
     PostComponent,
     ListComponent,
+    DblClickOrPressDirective,
   ],
   imports: [
     BrowserModule,
@@ -36,7 +40,10 @@ import { environment } from '../environments/environment';
     AngularFirestoreModule.enablePersistence(),
     EffectsModule.forRoot([ItemEffects]),
   ],
-  providers: [],
+  providers: [{
+    provide: HAMMER_GESTURE_CONFIG,
+    useClass: HammerConfig
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

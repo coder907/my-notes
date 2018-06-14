@@ -24,12 +24,14 @@
     <!-- <tr
       mat-header-row
       *matHeaderRowDef="displayedColumns"
-    ></tr> -->
+    >
+    </tr> -->
     <tr 
       mat-row
       *matRowDef="let row; columns: displayedColumns;"
       [class.selected]="row.id === (this.editedItem | async)?.id"
-      (click)="this.rowClick.emit(row.id)">
+      (appDblClickOrPress)="this.startEditing.emit(row.id)"
+    >
     </tr>
   </table>
 </div>

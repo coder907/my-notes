@@ -41,7 +41,7 @@
   class="app-list"
   [items]="itemService.getItems()"
   [editedItem]="itemService.getItem(editedItemId)"
-  (rowClick)="startEditing($event)"
+  (startEditing)="startEditing($event)"
 >
 </app-list>
 

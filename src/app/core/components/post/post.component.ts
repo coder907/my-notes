@@ -60,6 +60,10 @@ export class PostComponent implements OnInit, OnDestroy  {
     this.onClear();
   }
 
+  onAppDblClickOrPress() {
+    window.alert('onAppDblClickOrPress');
+  }
+
   private onClear() {
     this.textareaClear();
     this.clear.emit();

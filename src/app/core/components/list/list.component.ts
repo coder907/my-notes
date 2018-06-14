@@ -34,7 +34,11 @@ export class ListComponent {
   editedItem: Observable<Item>;
 
   @Output()
-  rowClick = new EventEmitter();
+  startEditing = new EventEmitter();
+
+  test(p: any) {
+    window.alert(p);
+  }
 
   // ***** TODO: is there a better solution?
   @HostListener('window:resize')
