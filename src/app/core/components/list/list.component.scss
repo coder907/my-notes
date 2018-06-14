@@ -20,6 +20,11 @@
   tr.selected {
     background-color: mat-color($warn, 300);
   }
+
+  .mat-header-row > th {
+    background-color: mat-color($primary, 300);
+    font-size: 1.25em;
+  }
 }
 
 :host {
@@ -36,6 +41,10 @@
   width: 100%;
 }
 
+thead {
+  display: none;
+}
+
 @media screen and (min-width: 768px) {
   :host {
     padding-bottom: 8px;
@@ -43,6 +52,10 @@
 
   .list-container {
     margin: 0px 8px;
+  }
+
+  thead {
+    display: table-header-group;
   }
 
   .mat-cell {

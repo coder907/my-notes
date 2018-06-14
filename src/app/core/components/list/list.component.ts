@@ -4,7 +4,7 @@ import {
   Input,
   Output,
   ChangeDetectionStrategy,
-  HostListener
+  HostListener,
 } from '@angular/core';
 
 import { Observable } from 'rxjs';
@@ -21,7 +21,8 @@ import { Item } from '../../models/item';
 })
 
 export class ListComponent {
-  displayedColumns: string[];
+
+  public displayedColumns: string[];
 
   constructor() {
     this.setColumns();
@@ -35,10 +36,6 @@ export class ListComponent {
 
   @Output()
   startEditing = new EventEmitter();
-
-  test(p: any) {
-    window.alert(p);
-  }
 
   // ***** TODO: is there a better solution?
   @HostListener('window:resize')

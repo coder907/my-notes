@@ -12,6 +12,7 @@ import { PostComponent } from './core/components/post/post.component';
 import { ListComponent } from './core/components/list/list.component';
 import { DblClickOrPressDirective } from '../shared/directives/dblclickorpress.directive';
 import { FlexHeightDirective } from '../shared/directives/flex-height.directive';
+import { FixHeaderDirective } from './core/components/list/directives/fix-header.directive';
 import { ItemEffects } from './core/effects/item';
 import { reducers } from './core/store';
 import { environment } from '../environments/environment';
@@ -22,11 +23,14 @@ import { HammerConfig } from '../config/hammer';
 
 @NgModule({
   declarations: [
+    // Components
     AppComponent,
     PostComponent,
     ListComponent,
+    // Directives
     DblClickOrPressDirective,
     FlexHeightDirective,
+    FixHeaderDirective,
   ],
   imports: [
     BrowserModule,
