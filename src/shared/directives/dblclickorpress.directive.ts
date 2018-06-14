@@ -1,9 +1,7 @@
 import {
   Directive,
-  ElementRef,
   EventEmitter,
   HostListener,
-  Input,
   Output,
 } from '@angular/core';
 
@@ -17,8 +15,6 @@ import { DetectionUtil } from '../detection-util';
 export class DblClickOrPressDirective {
 
   @Output() appDblClickOrPress = new EventEmitter();
-
-  constructor(private el: ElementRef) {}
 
   @HostListener('dblclick') onDblClick() {
     if (!DetectionUtil.supportsTouch()) {

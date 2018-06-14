@@ -11,6 +11,7 @@ import { AppComponent } from './core/components/main/app.component';
 import { PostComponent } from './core/components/post/post.component';
 import { ListComponent } from './core/components/list/list.component';
 import { DblClickOrPressDirective } from '../shared/directives/dblclickorpress.directive';
+import { FlexHeightDirective } from '../shared/directives/flex-height.directive';
 import { ItemEffects } from './core/effects/item';
 import { reducers } from './core/store';
 import { environment } from '../environments/environment';
@@ -25,6 +26,7 @@ import { HammerConfig } from '../config/hammer';
     PostComponent,
     ListComponent,
     DblClickOrPressDirective,
+    FlexHeightDirective,
   ],
   imports: [
     BrowserModule,

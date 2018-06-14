@@ -2,6 +2,7 @@ import {
   Component,
   ChangeDetectionStrategy,
   AfterViewChecked,
+  OnInit,
   HostListener
 } from '@angular/core';
 
@@ -16,7 +17,7 @@ import { ItemService } from '../../services/item.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
-export class AppComponent implements AfterViewChecked {
+export class AppComponent {
 
   editedItemId: string = null;
 
@@ -45,20 +46,4 @@ export class AppComponent implements AfterViewChecked {
       this.stopEditing();
     }
   }
-
-  // ***** TODO: find CSS solution
-  ngAfterViewChecked() {
-    this.resizeList();
-  }
-
-  @HostListener('window:resize')
-  onResize() {
-    this.resizeList();
-  }
-
-  resizeList() {
-    const list: any = window.document.getElementsByTagName('app-list')[0];
-    list.style.height = (document.body.offsetHeight - list.offsetTop) + 'px';
-  }
-  // *****
 }
