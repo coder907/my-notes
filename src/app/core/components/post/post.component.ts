@@ -1,12 +1,12 @@
 import {
   Component,
   ChangeDetectionStrategy,
+  OnChanges,
+  SimpleChanges,
   EventEmitter,
   Input,
   Output,
   ViewChild,
-  OnInit,
-  OnDestroy
 } from '@angular/core';
 
 import { Observable, Subscription } from 'rxjs';
@@ -21,7 +21,7 @@ import { Item } from '../../models/item';
   styleUrls: ['./post.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PostComponent implements OnInit, OnDestroy  {
+export class PostComponent implements OnChanges  {
 
   @Input()
   item: Observable<Item>;
@@ -35,15 +35,9 @@ export class PostComponent implements OnInit, OnDestroy  {
   @ViewChild('textArea')
   private textArea;
 
-  private subscription: Subscription;
-
-  ngOnInit() {
-    this.subscription = this.item.subscribe(item => this.textareaFocus());
-  }
-
-  ngOnDestroy() {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.item.currentValue && changes.item.currentValue !== changes.item.previousValue) {
+      this.textareaFocus();
     }
   }
 
