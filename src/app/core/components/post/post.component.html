@@ -3,7 +3,7 @@
     #textArea
     matInput
     placeholder="Enter a new note"
-    value="{{ (item | async)?.text }}"
+    value="{{ item?.text }}"
     class="post-textarea mat-elevation-z8"
     (keyup.esc)="onTextAreaKeyUpEsc();"
   >

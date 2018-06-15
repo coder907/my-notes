@@ -24,7 +24,7 @@ import { Item } from '../../models/item';
 export class PostComponent implements OnChanges  {
 
   @Input()
-  item: Observable<Item>;
+  item: Item;
 
   @Output()
   post = new EventEmitter();
@@ -36,7 +36,7 @@ export class PostComponent implements OnChanges  {
   private textArea;
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.item.currentValue && changes.item.currentValue !== changes.item.previousValue) {
+    if (changes.item.currentValue && (changes.item.currentValue !== changes.item.previousValue)) {
       this.textareaFocus();
     }
   }

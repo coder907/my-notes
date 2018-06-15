@@ -31,7 +31,7 @@
 </mat-toolbar>
 
 <app-post
-  [item]="itemService.getItem(editedItemId)"
+  [item]="itemService.getItem(editedItemId) | async"
   (post)="post($event)"
   (clear)="stopEditing()"
 >
