@@ -5,9 +5,17 @@ import {
   Output,
   ChangeDetectionStrategy,
   HostListener,
+  ViewChild,
+  OnInit,
+  OnChanges,
+  SimpleChanges,
 } from '@angular/core';
 
-import { Observable } from 'rxjs';
+import {
+  MatTableDataSource,
+  MatSort,
+  MatSortable
+} from '@angular/material';
 
 import { Item } from '../../models/item';
 
@@ -20,22 +28,39 @@ import { Item } from '../../models/item';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
-export class ListComponent {
+export class ListComponent implements OnInit, OnChanges {
 
-  public displayedColumns: string[];
+  @Input()
+  items: Item[];
+
+  @Input()
+  editedItem: Item;
+
+  @Output()
+  startEditing = new EventEmitter();
+
+  displayedColumns: string[];
+  dataSource = new MatTableDataSource();
+
+  @ViewChild(MatSort) sort: MatSort;
 
   constructor() {
     this.setColumns();
   }
 
-  @Input()
-  items: Observable<Item[]>;
+  ngOnInit() {
+     this.sort.sort(<MatSortable> {
+      id: 'updated',
+      start: 'desc'
+    });
+  }
 
-  @Input()
-  editedItem: Observable<Item>;
-
-  @Output()
-  startEditing = new EventEmitter();
+  // ***** TODO: is there a better solution?
+  ngOnChanges(changes: SimpleChanges) {
+    this.dataSource.data = this.items;
+    this.dataSource.sort = this.sort;
+  }
+  // *****
 
   // ***** TODO: is there a better solution?
   @HostListener('window:resize')

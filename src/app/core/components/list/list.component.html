@@ -3,7 +3,7 @@
     #table
     class="list-table"
     mat-table
-    [dataSource]="items"
+    [dataSource]="dataSource"
     matSort
   >
     <ng-container matColumnDef="id">
@@ -18,7 +18,7 @@
     
     <ng-container matColumnDef="updated">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Updated </th>
-      <td mat-cell *matCellDef="let item"> {{item.updated | date: 'dd.MM.yyyy&nbsp;H:mm'}} </td>
+      <td mat-cell *matCellDef="let item" class="updated"> {{item.updated | date: 'dd.MM.yyyy&nbsp;H:mm'}} </td>
     </ng-container>
     
     <ng-container matColumnDef="text">
@@ -34,7 +34,7 @@
     <tr 
       mat-row
       *matRowDef="let row; columns: displayedColumns;"
-      [class.selected]="row.id === (this.editedItem | async)?.id"
+      [class.selected]="row.id === this.editedItem?.id"
       (appDblClickOrPress)="this.startEditing.emit(row.id)"
     >
     </tr>

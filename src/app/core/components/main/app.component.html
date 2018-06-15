@@ -39,12 +39,10 @@
 
 <app-list
   class="app-list"
-  [items]="itemService.getItems()"
-  [editedItem]="itemService.getItem(editedItemId)"
+  [items]="itemService.getItems() | async"
+  [editedItem]="itemService.getItem(editedItemId) | async"
   (startEditing)="startEditing($event)"
   appFlexHeight
   appFixHeader
 >
 </app-list>
-
-

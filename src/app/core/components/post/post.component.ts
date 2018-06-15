@@ -54,10 +54,6 @@ export class PostComponent implements OnChanges  {
     this.onClear();
   }
 
-  onAppDblClickOrPress() {
-    window.alert('onAppDblClickOrPress');
-  }
-
   private onClear() {
     this.textareaClear();
     this.clear.emit();
