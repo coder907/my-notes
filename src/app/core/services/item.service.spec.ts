@@ -7,10 +7,9 @@ import { TestUtil, name } from '../../../shared/test-util';
 import * as fromCoreStore from '../store';
 
 import {
-  AddOrUpdateAction,
-  RemoveEditedAction,
-  StartEditingAction,
-  StopEditingAction
+  AddRequestAction,
+  UpdateRequestAction,
+  RemoveRequestAction,
 } from '../store/item';
 
 import { Item } from '../models/item';
@@ -56,50 +55,43 @@ describe(name(ItemService) + ' tests.', () => {
     expect(store.pipe).toHaveBeenCalledTimes(1);
   });
 
-  it(name(s.getEditedItem) + ' functions properly.', () => {
+  it(name(s.getItem) + ' functions properly.', () => {
     const item = of({} as Item);
+    const id = 'id';
     spyOn(store, 'pipe').and.returnValue(item);
 
-    let ret = service.getEditedItem();
+    const ret = service.getItem(id);
     expect(ret).toEqual(item);
-
-    ret = service.getEditedItem();
-    expect(ret).toEqual(item);
-
-    expect(store.pipe).toHaveBeenCalledTimes(1);
   });
 
-  it(name(s.addOrUpdateItem) + ' dispatches ' + name(AddOrUpdateAction) + '.', () => {
-    const text = 'test';
-    const action = new AddOrUpdateAction(text);
+  it(name(s.addItem) + ' dispatches ' + name(AddRequestAction) + '.', () => {
+    const updatedDt = new Date().getTime();
+    const text = 'add item';
+    const action = new AddRequestAction(updatedDt, text);
 
-    service.addOrUpdateItem(text);
+    service.addItem(text);
 
     expect(store.dispatch).toHaveBeenCalledWith(action);
   });
 
-  it(name(s.removeEditedItem) + ' dispatches ' + name(RemoveEditedAction) + '.', () => {
-    const action = new RemoveEditedAction();
+  it(name(s.updateItem) + ' dispatches ' + name(UpdateRequestAction) + '.', () => {
+    const id = 'id';
+    const updatedDt = new Date().getTime();
+    const text = 'update item';
+    const action = new UpdateRequestAction(id, updatedDt, text);
 
-    service.removeEditedItem();
-
-    expect(store.dispatch).toHaveBeenCalledWith(action);
-  });
-
-  it(name(s.startEditing) + ' dispatches ' + name(StartEditingAction) + '.', () => {
-    const id = 1;
-    const action = new StartEditingAction(id);
-
-    service.startEditing(id);
+    service.updateItem(id, text);
 
     expect(store.dispatch).toHaveBeenCalledWith(action);
   });
 
-  it(name(s.stopEditing) + ' dispatches ' + name(StopEditingAction) + '.', () => {
-    const action = new StopEditingAction();
+  it(name(s.removeItem) + ' dispatches ' + name(RemoveRequestAction) + '.', () => {
+    const id = 'id';
+    const action = new RemoveRequestAction(id);
 
-    service.stopEditing();
+    service.removeItem(id);
 
     expect(store.dispatch).toHaveBeenCalledWith(action);
   });
+
 });

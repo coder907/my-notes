@@ -25,16 +25,20 @@ export const TestUtil = {
 
   /**
    * Starts tracking whether an HTML element has focus.
-   * @param {any} obj A HTML DOM element.
+   * @param {any} element An HTML DOM element.
    * @param {boolean} setFocus Sets focus on the tracked element.
    */
-  trackFocus: (el: HTMLElement, setFocus: boolean = false) => {
-    el.addEventListener('focus', () => { el[TestUtilPrefix + 'hasFocus'] = true; });
-    el.addEventListener('blur', () => { el[TestUtilPrefix + 'hasFocus'] = false; });
+  trackFocus: (element: HTMLElement, setFocus: boolean = false) => {
+    element.addEventListener('focus', () => { element[TestUtilPrefix + 'hasFocus'] = true; });
+    element.addEventListener('blur', () => { element[TestUtilPrefix + 'hasFocus'] = false; });
 
     if (setFocus) {
-      el.focus();
-      el[TestUtilPrefix + 'hasFocus'] = true;
+      element.focus();
+      element[TestUtilPrefix + 'hasFocus'] = true;
+
+    } else {
+      element.blur();
+      element[TestUtilPrefix + 'hasFocus'] = false;
     }
   },
 
@@ -45,10 +49,10 @@ export const TestUtil = {
    *
    * May return undefined if 'focus' or 'blur' events have not yet occured since TestUtil.trackFocus
    * call.
-   * @param {any} obj A HTML DOM element.
+   * @param {any} element An HTML DOM element.
    */
-  hasFocus: (el: HTMLElement): boolean => {
-    return el[TestUtilPrefix + 'hasFocus'];
+  hasFocus: (element: HTMLElement): boolean => {
+    return element[TestUtilPrefix + 'hasFocus'];
   }
 };
 

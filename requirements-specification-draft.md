@@ -25,6 +25,7 @@ Application facilitates personal note management.
 ### Notes list
  - Search notes
  - Sort notes
+ - Paginate
 
 ### Tags management
  - Add a tag

@@ -1,3 +1,4 @@
+import { SimpleChange } from '@angular/core';
 import { ComponentFixture, TestBed, tick } from '@angular/core/testing';
 import { Observable, of } from 'rxjs';
 
@@ -7,8 +8,6 @@ import { Item } from '../../models/item';
 
 
 describe(name(PostComponent) + ' tests.', () => {
-  const c: PostComponent = TestUtil.nameAllFunctions(new PostComponent()); // Dummy component for use solely in test descriptions
-
   let component: PostComponent;
   let fixture: ComponentFixture<PostComponent>;
 
@@ -24,27 +23,34 @@ describe(name(PostComponent) + ' tests.', () => {
     expect(component).toBeDefined();
   });
 
-  it('Input item works correctly.', () => {
-    /*component.ngOnInit(); // Fails
-
+  it('Input item works correctly.', (done: DoneFn) => {
     const textArea: HTMLTextAreaElement = fixture.nativeElement.querySelector('textarea');
 
     expect(textArea).toBeDefined();
-    expect(textArea.value.trim()).toBe('');
+    textArea.value = 'initial value';
 
-
-    textArea.value = 'afg';
+    TestUtil.trackFocus(textArea, false);
 
     const testNote = 'My test note 1.';
-    component.item = of({
-      id: 1,
+    component.item = {
+      id: 'id',
       text: testNote
+    } as Item;
+
+    fixture.detectChanges();
+    component.ngOnChanges({
+      item: new SimpleChange(null, component.item, true)
     });
 
-    expect(textArea.value).toBe(testNote);*/
+    expect(textArea.value).toBe(testNote);
+
+    window.setTimeout(() => {
+      expect(TestUtil.hasFocus(textArea)).toBe(true);
+      done();
+    }, 0);
   });
 
-  it('Post button works correctly.', () => {
+  it('Post button works correctly.', (done: DoneFn) => {
     const textArea: HTMLTextAreaElement = fixture.nativeElement.querySelector('textarea');
     const btnPost: HTMLButtonElement = fixture.nativeElement.querySelectorAll('button')[0];
 
@@ -63,6 +69,7 @@ describe(name(PostComponent) + ' tests.', () => {
       (text) => {
         expect(text).toBe(testNote);
         expect(TestUtil.hasFocus(textArea)).toBe(true);
+        done();
       },
       fail
     );
@@ -70,7 +77,7 @@ describe(name(PostComponent) + ' tests.', () => {
     btnPost.click();
   });
 
-  it('Clear button works correctly.', () => {
+  it('Clear button works correctly.', (done: DoneFn) => {
     const textArea: HTMLTextAreaElement = fixture.nativeElement.querySelector('textarea');
     const btnClear: HTMLButtonElement = fixture.nativeElement.querySelectorAll('button')[1];
 
@@ -89,6 +96,7 @@ describe(name(PostComponent) + ' tests.', () => {
       () => {
         expect(textArea.value).toBe('');
         expect(TestUtil.hasFocus(textArea)).toBe(true);
+        done();
       },
       fail
     );
