@@ -2,29 +2,35 @@
 
 
 ## Definitions
+
+### General
  - Application: My Notes
- - User: A user of Application
+ - User: A user of the Application
+
+### Completion Status
+ - PREVIEW: A feature preview is released.
+ - COMPLETED: A feature is completed.
 
 
 
 ## Purpose
 
-Application facilitates personal note management.
+The Application facilitates personal note management.
 
 
 
 ## Features
 
 ### Notes management
- - Add a note
- - Edit a note
- - Remove a note
+ - Add a note [PREVIEW]
+ - Edit a note [PREVIEW]
+ - Remove a note [PREVIEW]
  - Tag a note (with one or more tags)
  - Untag a note
 
 ### Notes list
  - Search notes
- - Sort notes
+ - Sort notes [PREVIEW]
  - Paginate
 
 ### Tags management
@@ -32,9 +38,9 @@ Application facilitates personal note management.
  - Edit a tag
 
 ### Styles
- - Material
- - Day theme
- - Night theme
+ - Material [PREVIEW]
+ - Day theme [PREVIEW]
+ - Night theme [PREVIEW]
 
 ### Languages
  - English
@@ -43,7 +49,7 @@ Application facilitates personal note management.
 ### Storage
  - Memory
  - Local
- - Cloud
+ - Cloud [PREVIEW]
 
 ### Navigation
  - Notes management

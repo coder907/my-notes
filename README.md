@@ -4,14 +4,14 @@
 
 See a [live preview](https://my-notes-preview.appspot.com/).
 
-See [Requirements Specification Draft](https://github.com/coder907/my-notes/blob/master/requirements-specification-draft.md) for a short overview.
-See [Technical Specification](https://github.com/coder907/my-notes/blob/master/technical-specification.md) for details.
+See [Requirements Specification Draft](requirements-specification-draft.md) for a short overview.
+See [Technical Specification](technical-specification.md) for details.
 
 ## Dependencies
  - @angular/material
  - @angular/cdk
  - @angular/animations
- - hammerjs
+ - hammerjss
  - rxjs
  - rxjs-compat
  - @ngrx/core
@@ -23,7 +23,7 @@ See [Technical Specification](https://github.com/coder907/my-notes/blob/master/t
  - firebase
  - angularfire2
 
- See [package.json](https://github.com/coder907/my-notes/blob/master/package.json) for a complete list of dependencies
+ See [package.json](package.json) for a complete list of dependencies
 
 ## Angular CLI version
 
