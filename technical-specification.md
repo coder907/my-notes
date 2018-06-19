@@ -7,8 +7,8 @@ This document intentionally avoids terms such as "SHOULD", "MAY" or "MUST", and 
 ## Definitions
 
 ### General
- - Application: My Notes
- - User: A user of the Application
+ - Application: My Notes.
+ - User: A user of the Application.
  - Property: An attribute of an object.
  - Note: A text note with Properties
 
@@ -34,12 +34,12 @@ This document intentionally avoids terms such as "SHOULD", "MAY" or "MUST", and 
 
 ##### Properties
 
-A Note has the following properties:
+A Note has the following Properties:
 
-1. id (unique identifier) 
-2. added (creation timestamp)
-3. modified (modification timestamp)
-4. text (content)
+1. id (unique identifier).
+2. added (creation timestamp).
+3. modified (modification timestamp).
+4. text (content).
 
 
 

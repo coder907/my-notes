@@ -4,8 +4,8 @@
 ## Definitions
 
 ### General
- - Application: My Notes
- - User: A user of the Application
+ - Application: My Notes.
+ - User: A user of the Application.
 
 ### Completion Status
  - PREVIEW: A feature preview is released.
