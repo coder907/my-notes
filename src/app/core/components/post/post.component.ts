@@ -57,7 +57,6 @@ export class PostComponent implements OnChanges  {
   private onClear() {
     this.textareaClear();
     this.clear.emit();
-    this.textareaFocus();
   }
 
   private textareaValue() {
