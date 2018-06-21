@@ -14,55 +14,55 @@ import { ItemService } from '../../services/item.service';
 
 
 
+class ItemServiceStub {
+  nextId = 4;
+
+  items = [
+    { id: '1', text: 'Text 1', added: new Date().getTime(), updated: new Date().getTime() },
+    { id: '2', text: 'Text 2', added: new Date().getTime(), updated: new Date().getTime() },
+    { id: '3', text: 'Text 3', added: new Date().getTime(), updated: new Date().getTime() },
+  ] as Item[];
+
+  items$ = of(this.items);
+
+  getItems(): Observable<Item[]> {
+    return this.items$;
+  }
+
+  getItem(id: string): Observable<Item> {
+    return of(this.items.find(item => item.id === id));
+  }
+
+  addItem(text: string): void {
+    this.items.push({
+        id: '' + (this.nextId++),
+        text,
+        added: new Date().getTime(),
+        updated: new Date().getTime(),
+      } as Item
+    );
+  }
+
+  updateItem(id: string, text: string): void {
+    const itemForUpdate = this.items.find(item => item.id === id);
+    itemForUpdate.text = text;
+    itemForUpdate.updated = new Date().getTime();
+  }
+
+  removeItem(id: string): void {
+    this.items.splice(
+      this.items.findIndex(item => item.id === id),
+      1
+    );
+  }
+}
+
 describe(name(AppComponent) + ' tests.', () => {
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
   let itemService: ItemService;
 
   beforeEach(() => {
-    class ItemServiceStub {
-      nextId = 4;
-
-      items = [
-        { id: '1', text: 'Text 1', added: new Date().getTime(), updated: new Date().getTime() },
-        { id: '2', text: 'Text 2', added: new Date().getTime(), updated: new Date().getTime() },
-        { id: '3', text: 'Text 3', added: new Date().getTime(), updated: new Date().getTime() },
-      ] as Item[];
-
-      items$ = of(this.items);
-
-      getItems(): Observable<Item[]> {
-        return this.items$;
-      }
-
-      getItem(id: string): Observable<Item> {
-        return of(this.items.find(item => item.id === id));
-      }
-
-      addItem(text: string): void {
-        this.items.push({
-            id: '' + (this.nextId++),
-            text,
-            added: new Date().getTime(),
-            updated: new Date().getTime(),
-          } as Item
-        );
-      }
-
-      updateItem(id: string, text: string): void {
-        const itemForUpdate = this.items.find(item => item.id === id);
-        itemForUpdate.text = text;
-        itemForUpdate.updated = new Date().getTime();
-      }
-
-      removeItem(id: string): void {
-        this.items.splice(
-          this.items.findIndex(item => item.id === id),
-          1
-        );
-      }
-    }
-
     TestBed.configureTestingModule({
       declarations: [
         AppComponent,
@@ -142,7 +142,7 @@ describe(name(AppComponent) + ' tests.', () => {
     expect(itemsCount).toBe(3, 'Remove item.');
   });
 
-  fit('Adding a note works correctly. [specification-features-notes-actions-adding-a-note]', () => {
+  it('Adding a note works correctly. [specification-features-notes-actions-adding-a-note]', () => {
     fixture.detectChanges();
 
     // Initial state
