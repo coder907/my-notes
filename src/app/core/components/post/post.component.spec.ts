@@ -38,6 +38,7 @@ describe(name(PostComponent) + ' tests.', () => {
     } as Item;
 
     fixture.detectChanges();
+
     component.ngOnChanges({
       item: new SimpleChange(null, component.item, true)
     });
@@ -52,7 +53,7 @@ describe(name(PostComponent) + ' tests.', () => {
 
   it('Post button works correctly.', (done: DoneFn) => {
     const textArea: HTMLTextAreaElement = fixture.nativeElement.querySelector('textarea');
-    const btnPost: HTMLButtonElement = fixture.nativeElement.querySelectorAll('button')[0];
+    const btnPost = TestUtil.getElementByTextContent(fixture.nativeElement, 'button', 'Post');
 
     expect(textArea).toBeDefined();
     expect(textArea.value.trim()).toBe('');
@@ -79,7 +80,7 @@ describe(name(PostComponent) + ' tests.', () => {
 
   it('Clear button works correctly.', (done: DoneFn) => {
     const textArea: HTMLTextAreaElement = fixture.nativeElement.querySelector('textarea');
-    const btnClear: HTMLButtonElement = fixture.nativeElement.querySelectorAll('button')[1];
+    const btnClear = TestUtil.getElementByTextContent(fixture.nativeElement, 'button', 'Clear');
 
     expect(textArea).toBeDefined();
     expect(textArea.value.trim()).toBe('');

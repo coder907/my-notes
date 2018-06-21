@@ -53,6 +53,27 @@ export const TestUtil = {
    */
   hasFocus: (element: HTMLElement): boolean => {
     return element[TestUtilPrefix + 'hasFocus'];
+  },
+
+  /**
+   * Returns the first element that matches the specified tagName and textContent.
+   *
+   * Returns null if no such element is found.
+   *
+   * @param {any} rootElement An HTML DOM element.
+   * @param {string} tagName Tag name to search for.
+   * @param {string} textContent Text content to search for.
+   */
+  getElementByTextContent: (rootElement: any, tagName: string, textContent: string) => {
+    const elements = rootElement.querySelectorAll(tagName);
+
+    for (let i = 0; i < elements.length; i++) {
+      if (elements[i].textContent.trim() === textContent) {
+        return elements[i];
+      }
+    }
+
+    return null;
   }
 };
 

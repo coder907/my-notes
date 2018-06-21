@@ -9,7 +9,7 @@ import {
   ViewChild,
 } from '@angular/core';
 
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { Item } from '../../models/item';
 

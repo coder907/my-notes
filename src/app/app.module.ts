@@ -7,17 +7,18 @@ import { EffectsModule } from '@ngrx/effects';
 import { MaterialModule } from './material.module';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
+import { HammerConfig } from '../config/hammer';
+
 import { AppComponent } from './core/components/main/app.component';
 import { PostComponent } from './core/components/post/post.component';
 import { ListComponent } from './core/components/list/list.component';
-import { DblClickOrPressDirective } from '../shared/directives/dblclickorpress.directive';
 import { FlexHeightDirective } from '../shared/directives/flex-height.directive';
 import { FixHeaderDirective } from './core/components/list/directives/fix-header.directive';
+import { DblClickOrPressDirective } from '../shared/directives/dblclickorpress.directive';
 import { ItemEffects } from './core/effects/item';
-import { reducers } from './core/store';
 import { environment } from '../environments/environment';
-import { HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
-import { HammerConfig } from '../config/hammer';
+import { reducers } from './core/store';
 
 
 
