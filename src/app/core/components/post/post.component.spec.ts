@@ -48,7 +48,7 @@ describe(name(PostComponent) + ' tests.', () => {
     window.setTimeout(() => {
       expect(TestUtil.hasFocus(textArea)).toBe(true);
       done();
-    }, 0);
+    }, 1000);
   });
 
   it('Post button works correctly.', (done: DoneFn) => {
