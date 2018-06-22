@@ -61,11 +61,15 @@ A Note has the following Properties:
 3. Click Post Button.
 4. The Note is updated and changes synced to Storage and reflected in the List.
 
+[Test: specification-features-notes-actions-updating-a-note](src/app/core/components/main/app.component.spec.ts)
+
 ##### Removing a Note
 
 1. Doubleclick on the desired Note in the List.
 2. Click Delete Tool.
 3. The Note is removed from Storage and List.
+
+[Test: specification-features-notes-actions-removing-a-note](src/app/core/components/main/app.component.spec.ts)
 
 ##### Sorting Notes
 
