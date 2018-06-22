@@ -31,6 +31,7 @@ export class ItemService {
   }
 
   getItem(id: string): Observable<Item> {
+    // TODO: cache observables?
     return this.store.pipe(select(fromCoreStore.getItem(id)));
   }
 
