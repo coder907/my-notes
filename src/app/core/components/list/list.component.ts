@@ -49,7 +49,7 @@ export class ListComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-     this.sort.sort(<MatSortable> {
+    this.sort.sort(<MatSortable> {
       id: 'updated',
       start: 'desc'
     });

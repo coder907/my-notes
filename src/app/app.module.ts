@@ -4,12 +4,12 @@ import { NgModule } from '@angular/core';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
-import { MaterialModule } from './material.module';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { HammerConfig } from '../config/hammer';
 
+import { MaterialModule } from './material.module';
 import { AppComponent } from './core/components/main/app.component';
 import { PostComponent } from './core/components/post/post.component';
 import { ListComponent } from './core/components/list/list.component';
