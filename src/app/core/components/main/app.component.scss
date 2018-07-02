@@ -1,3 +1,16 @@
+@import '~@angular/material/theming';
+
+@mixin app-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+
+  .app-sidenav {
+    background-color: mat-color($primary, 100);
+  }
+
+}
+
 .app-toolbar-spacer {
   width: 10px;
 }
@@ -9,4 +22,10 @@
 .app-list {
   display: block;
   overflow: hidden;
+}
+
+@media screen and (min-width: 768px) {
+  .app-sidenav {
+    width: 15%;
+  }
 }

@@ -1,48 +1,65 @@
-<mat-toolbar class="mat-elevation-z4" color="primary">
-
-  <button mat-icon-button>
-    <mat-icon>menu</mat-icon>
-  </button>
-
-  <span class="app-toolbar-spacer"></span>
-
-  <button
-    mat-icon-button
-    *ngIf="editedItemId"
-    (click)="removeEditedItem()"
+<mat-sidenav-container>
+  <mat-sidenav
+    #sidenav
+    class="app-sidenav"
+    [mode]="(isHandset | async)!.matches ? 'over' : 'side'"
+    [opened]="!(isHandset | async)!.matches"
   >
-    <mat-icon>delete</mat-icon>
-  </button>
+    <app-menu>
+    </app-menu>
+  </mat-sidenav>
 
-  <span class="app-toolbar-spacer"></span>
-  
-  <span class="app-toolbar-flex"></span>
+  <mat-sidenav-content>
+    <mat-toolbar class="mat-elevation-z4" color="primary">
+      <button
+        mat-icon-button
+        (click)="sidenav.toggle()"
+      >
+        <mat-icon>menu</mat-icon>
+      </button>
+    
+      <span class="app-toolbar-spacer"></span>
+    
+      <button
+        mat-icon-button
+        *ngIf="editedItemId"
+        (click)="removeEditedItem()"
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
+    
+      <span class="app-toolbar-spacer"></span>
+      
+      <span class="app-toolbar-flex"></span>
+    
+      <button mat-icon-button>
+        <mat-icon>search</mat-icon>
+      </button>
+    
+      <span class="app-toolbar-spacer"></span>
+      
+      <button mat-icon-button>
+        <mat-icon>more_vert</mat-icon>
+      </button>
+    
+    </mat-toolbar>
+    
+    <app-post
+      [item]="itemService.getItem(editedItemId) | async"
+      (post)="post($event)"
+      (clear)="stopEditing()"
+    >
+    </app-post>
+    
+    <app-list
+      class="app-list"
+      [items]="itemService.getItems() | async"
+      [editedItem]="itemService.getItem(editedItemId) | async"
+      (startEditing)="startEditing($event)"
+      appFlexHeight
+      appFixHeader
+    >
+    </app-list>
+  </mat-sidenav-content>
 
-  <button mat-icon-button>
-    <mat-icon>search</mat-icon>
-  </button>
-
-  <span class="app-toolbar-spacer"></span>
-  
-  <button mat-icon-button>
-    <mat-icon>more_vert</mat-icon>
-  </button>
-
-</mat-toolbar>
-
-<app-post
-  [item]="itemService.getItem(editedItemId) | async"
-  (post)="post($event)"
-  (clear)="stopEditing()"
->
-</app-post>
-
-<app-list
-  class="app-list"
-  [items]="itemService.getItems() | async"
-  [editedItem]="itemService.getItem(editedItemId) | async"
-  (startEditing)="startEditing($event)"
-  appFlexHeight
-  appFixHeader
->
-</app-list>
+</mat-sidenav-container>

@@ -6,6 +6,9 @@ import {
   HostListener
 } from '@angular/core';
 
+import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
+import { Observable } from 'rxjs';
+
 import { ItemService } from '../../services/item.service';
 
 
@@ -19,9 +22,16 @@ import { ItemService } from '../../services/item.service';
 
 export class AppComponent {
 
+  isHandset: Observable<BreakpointState> = this.breakpointObserver.observe(Breakpoints.Handset);
+
   editedItemId: string = null;
 
-  constructor(public itemService: ItemService) { }
+  constructor(
+    public itemService: ItemService,
+    private breakpointObserver: BreakpointObserver,
+  ) { }
+
+
 
   post(text: string) {
     if (this.editedItemId) {

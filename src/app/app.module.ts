@@ -13,6 +13,7 @@ import { MaterialModule } from './material.module';
 import { AppComponent } from './core/components/main/app.component';
 import { PostComponent } from './core/components/post/post.component';
 import { ListComponent } from './core/components/list/list.component';
+import { MenuComponent } from './core/components/menu/menu.component';
 import { DblClickOrPressDirective } from '../shared/directives/dblclickorpress.directive';
 import { FlexHeightDirective } from '../shared/directives/flex-height.directive';
 import { FixHeaderDirective } from './core/components/list/directives/fix-header.directive';
@@ -28,6 +29,7 @@ import { reducers } from './core/store';
     AppComponent,
     PostComponent,
     ListComponent,
+    MenuComponent,
     // Directives
     DblClickOrPressDirective,
     FlexHeightDirective,

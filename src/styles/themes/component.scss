@@ -1,5 +1,9 @@
+@import '../../app/core/components/main/app.component.scss';
+@import '../../app/core/components/menu/menu.component.scss';
 @import '../../app/core/components/list/list.component.scss';
 
 @mixin component-themes($theme) {
+  @include app-theme($theme);
+  @include menu-theme($theme);
   @include list-theme($theme);
 }
