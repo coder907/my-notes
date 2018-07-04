@@ -52,6 +52,7 @@ The Application facilitates personal note management.
  - Cloud [PREVIEW]
 
 ### Navigation
+ - Menu/sidenav 
  - Notes management
  - Tags management
  - Settings
@@ -64,6 +65,7 @@ The Application facilitates personal note management.
 
 ### Login
   - Hardcoded credentials
+  - OAuth (Google)
 
 
 
