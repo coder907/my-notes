@@ -9,7 +9,13 @@
   min-width: 200px;
   min-height: 100px;
   font-size: 2.0em;
+  outline: none;
+  border-radius: 4px;
 }
+
+/*.post-textarea:focus {
+  border: 2px solid black;
+}*/
 
 .post-button-container {
   margin: 0;
@@ -37,6 +43,7 @@
 
   .post-textarea {
     width: 60%;
+    border-radius: 8px;    
   }
 
   .post-button-container {
