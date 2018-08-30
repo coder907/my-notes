@@ -22,6 +22,7 @@ import {
     MatTableModule,
     MatSortModule,
     MatSidenavModule,
+    MatListModule,
   ],
   exports: [
     MatButtonModule,

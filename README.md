@@ -2,7 +2,7 @@
 
 ## Description
 
-See a [live preview](https://my-notes-preview.appspot.com/).
+See a [live preview](https://my-notes-17a1e.firebaseapp.com/).
 
 See [Requirements Specification Draft](requirements-specification-draft.md) for a short overview.
 See [Technical Specification](technical-specification.md) for details.

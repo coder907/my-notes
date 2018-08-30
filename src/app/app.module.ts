@@ -5,12 +5,16 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { HammerConfig } from '../config/hammer';
 
+import { AppRoutingModule } from './app-routing.module';
 import { MaterialModule } from './material.module';
-import { AppComponent } from './core/components/main/app.component';
+import { AppComponent } from './app.component';
+import { LoginComponent } from './auth/components/login/login.component';
+import { MainComponent } from './core/components/main/main.component';
 import { PostComponent } from './core/components/post/post.component';
 import { ListComponent } from './core/components/list/list.component';
 import { MenuComponent } from './core/components/menu/menu.component';
@@ -27,6 +31,8 @@ import { reducers } from './core/store';
   declarations: [
     // Components
     AppComponent,
+    LoginComponent,
+    MainComponent,
     PostComponent,
     ListComponent,
     MenuComponent,
@@ -38,6 +44,7 @@ import { reducers } from './core/store';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    AppRoutingModule,
     MaterialModule,
     StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument({
@@ -46,6 +53,7 @@ import { reducers } from './core/store';
       maxAge: 10
     }),
     AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAuthModule,
     AngularFirestoreModule.enablePersistence(),
     EffectsModule.forRoot([ItemEffects]),
   ],

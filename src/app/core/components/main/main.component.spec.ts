@@ -6,7 +6,7 @@ import { Observable, of, BehaviorSubject } from 'rxjs';
 
 import { TestUtil, name } from '../../../../shared/test-util';
 import { MaterialModule } from '../../../material.module';
-import { AppComponent } from './app.component';
+import { MainComponent } from './main.component';
 import { PostComponent } from '../post/post.component';
 import { ListComponent } from '../list/list.component';
 import { DblClickOrPressDirective } from '../../../../shared/directives/dblclickorpress.directive';
@@ -65,15 +65,15 @@ class ItemServiceStub {
   }
 }
 
-describe(name(AppComponent) + ' tests.', () => {
-  let component: AppComponent;
-  let fixture: ComponentFixture<AppComponent>;
+describe(name(MainComponent) + ' tests.', () => {
+  let component: MainComponent;
+  let fixture: ComponentFixture<MainComponent>;
   let itemService: ItemService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [
-        AppComponent,
+        MainComponent,
         PostComponent,
         ListComponent,
         DblClickOrPressDirective,
@@ -89,12 +89,12 @@ describe(name(AppComponent) + ' tests.', () => {
       ]
     });
 
-    fixture = TestBed.createComponent(AppComponent);
+    fixture = TestBed.createComponent(MainComponent);
     component = fixture.componentInstance;
     itemService = TestBed.get(ItemService);
   });
 
-  it(name(AppComponent) + ' is created.', () => {
+  it(name(MainComponent) + ' is created.', () => {
     expect(component).toBeDefined();
   });
 

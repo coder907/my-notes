@@ -6,7 +6,12 @@ import {
   HostListener
 } from '@angular/core';
 
-import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
+import {
+  BreakpointObserver,
+  Breakpoints,
+  BreakpointState
+} from '@angular/cdk/layout';
+
 import { Observable } from 'rxjs';
 
 import { ItemService } from '../../services/item.service';
@@ -14,13 +19,13 @@ import { ItemService } from '../../services/item.service';
 
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  selector: 'app-main',
+  templateUrl: './main.component.html',
+  styleUrls: ['./main.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
-export class AppComponent {
+export class MainComponent {
 
   isHandset: Observable<BreakpointState> = this.breakpointObserver.observe(Breakpoints.Handset);
 
@@ -30,8 +35,6 @@ export class AppComponent {
     public itemService: ItemService,
     private breakpointObserver: BreakpointObserver,
   ) { }
-
-
 
   post(text: string) {
     if (this.editedItemId) {

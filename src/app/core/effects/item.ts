@@ -32,8 +32,8 @@ export class ItemEffects {
 
   constructor(
     private actions: Actions,
-    private firestore: AngularFirestore) {
-  }
+    private firestore: AngularFirestore
+  ) {}
 
   @Effect()
   items = this.firestore.collection<Item>('items').stateChanges().pipe(
