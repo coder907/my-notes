@@ -64,8 +64,9 @@ The Application facilitates personal note management.
  - Storage (Memory/Local/Cloud)
 
 ### Login
-  - Hardcoded credentials
-  - OAuth (Google)
+  - Anonymous authentication [PREVIEW]
+  - Username/Password authentication
+  - OAuth authentication
 
 
 
