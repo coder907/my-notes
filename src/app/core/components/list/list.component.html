@@ -39,4 +39,11 @@
     >
     </tr>
   </table>
+
+  <div
+    *ngIf="!items.length"
+    class="list-noitems-container"
+  >
+    <span class="list-noitems-label">No items to display.</span>
+  </div>
 </div>

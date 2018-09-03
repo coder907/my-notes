@@ -1,11 +1,19 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import {
+  Injectable,
+  OnDestroy
+} from '@angular/core';
+
 import { Router } from '@angular/router';
 
-import { Observable, Subscription } from 'rxjs';
+import {
+  Observable,
+  Subscription
+} from 'rxjs';
+
+import { map } from 'rxjs/operators';
 
 import { AngularFireAuth } from 'angularfire2/auth';
-import * as firebase from 'firebase/app';
-import { map } from 'rxjs/operators';
+import { User } from 'firebase';
 
 
 
@@ -14,8 +22,8 @@ import { map } from 'rxjs/operators';
 })
 export class AuthService implements OnDestroy {
 
-  private __user: firebase.User = null;
-  private __user$: Observable<firebase.User>;
+  private __user: User = null;
+  private __user$: Observable<User>;
 
   private __userName$: Observable<string>;
 

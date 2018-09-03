@@ -19,7 +19,7 @@ export class SignInComponent {
     this.__authService.redirectToMainPage();
   }
 
-  signInFailure(error) {
+  onSignInFailure(error) {
     console.log('Error while signing in: ' + error);
   }
 }
