@@ -6,7 +6,7 @@ import {
 } from '@angular/router';
 
 import { AuthGuardService } from './auth/services/auth-guard.service';
-import { SignInComponent } from './auth/components/sign-in/sign-in.component';
+// import { SignInComponent } from './auth/components/sign-in/sign-in.component';
 import { MainComponent } from './core/containers/main/main.component';
 import { NotesManagerComponent } from './core/containers/notes-manager/notes-manager.component';
 import { TagsManagerComponent } from './core/containers/tags-manager/tags-manager.component';
@@ -17,7 +17,8 @@ import { SettingsManagerComponent } from './core/containers/settings-manager/set
 const routes: Routes = [
   {
     path: 'signin',
-    component: SignInComponent
+    loadChildren: './auth/auth.module#AuthModule'
+    // component: SignInComponent
   },
   {
     path: '',
