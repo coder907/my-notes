@@ -1,15 +1,15 @@
 <app-post
-  [item]="noteService.getNote(editedNoteId) | async"
+  [item]="noteService.editedNote$ | async"
   (post)="post($event)"
-  (clear)="stopEditing()"
+  (clear)="noteService.stopEditing()"
 >
 </app-post>
 
 <app-list
   class="main-list"
-  [items]="noteService.getNotes() | async"
-  [editedItem]="noteService.getNotes(editedNoteId) | async"
-  (startEditing)="startEditing($event)"
+  [items]="noteService.notes$ | async"
+  [editedItem]="noteService.editedNote$ | async"
+  (startEditing)="noteService.startEditing($event)"
   appFixHeader
 >
 </app-list>

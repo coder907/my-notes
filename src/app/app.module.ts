@@ -14,17 +14,6 @@ import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { MaterialModule } from './material.module';
 import { AppComponent } from './app.component';
-import { MainComponent } from './core/containers/main/main.component';
-import { MenuComponent } from './core/containers/menu/menu.component';
-import { NotesManagerComponent } from './core/containers/notes-manager/notes-manager.component';
-import { TagsManagerComponent } from './core/containers/tags-manager/tags-manager.component';
-import { SettingsManagerComponent } from './core/containers/settings-manager/settings-manager.component';
-import { PostComponent } from './core/components/post/post.component';
-import { ListComponent } from './core/components/list/list.component';
-import { DblClickOrPressDirective } from '../shared/directives/dblclickorpress.directive';
-import { FlexHeightDirective } from '../shared/directives/flex-height.directive';
-import { FixHeaderDirective } from './core/components/list/directives/fix-header.directive';
-import { NoteEffects } from './core/effects/note';
 import { reducers } from './core/store';
 
 
@@ -44,22 +33,10 @@ import { reducers } from './core/store';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AngularFirestoreModule.enablePersistence(),
-    EffectsModule.forRoot([NoteEffects]),
+    EffectsModule.forRoot([]),
   ],
   declarations: [
-    // Components
     AppComponent,
-    MainComponent,
-    MenuComponent,
-    NotesManagerComponent,
-    TagsManagerComponent,
-    SettingsManagerComponent,
-    PostComponent,
-    ListComponent,
-    // Directives
-    DblClickOrPressDirective,
-    FlexHeightDirective,
-    FixHeaderDirective,
   ],
   providers: [{
     provide: HAMMER_GESTURE_CONFIG,
@@ -67,4 +44,4 @@ import { reducers } from './core/store';
   }],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

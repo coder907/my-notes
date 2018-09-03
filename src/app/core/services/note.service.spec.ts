@@ -53,14 +53,14 @@ describe(name(NoteService) + ' tests.', () => {
     expect(service).toBeTruthy();
   });
 
-  it(name(s.getNotes) + ' functions properly.', () => {
+  it(name(s.notes$) + ' functions properly.', () => {
     const notes$ = of([] as Note[]);
     spyOn(store, 'pipe').and.returnValue(notes$);
 
-    let ret = service.getNotes();
+    let ret = service.notes$;
     expect(ret).toEqual(notes$);
 
-    ret = service.getNotes();
+    ret = service.notes$;
     expect(ret).toEqual(notes$);
 
     expect(store.pipe).toHaveBeenCalledTimes(1);

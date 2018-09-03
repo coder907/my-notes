@@ -11,8 +11,8 @@ import {
 } from '@angular/material';
 
 import { AuthService } from '../../../auth/services/auth-service';
-import { GuiService } from '../../services/gui.service';
 import { NoteService } from '../../services/note.service';
+import { GuiService } from '../../services/gui.service';
 
 
 
@@ -32,11 +32,13 @@ export class MainComponent implements OnInit {
   constructor(
     public guiService: GuiService,
     public authService: AuthService,
+    public noteService: NoteService,
     private __snackBar: MatSnackBar,
   ) {}
 
   ngOnInit() {
     this.guiService.init(this.__sidenav, this.__snackBar);
+    this.noteService.startSync();
   }
 
   signOut() {

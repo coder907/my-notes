@@ -15,10 +15,11 @@ import { Note } from '../models/note';
 
 // #region Actions
 export enum NoteActionTypes {
+  // LoadRequest     = '[Note] LoadRequest',
+  Sync            = '[Note] Sync',
   SyncAdd         = '[Note] Add',
   SyncUpdate      = '[Note] Update',
   SyncRemove      = '[Note] Remove',
-  // LoadRequest     = '[Note] LoadRequest',
   AddRequest      = '[Note] AddRequest',
   AddSuccess      = '[Note] AddSuccess',
   AddFail         = '[Note] AddFail',
@@ -28,6 +29,14 @@ export enum NoteActionTypes {
   RemoveRequest   = '[Note] RemoveRequest',
   RemoveSuccess   = '[Note] RemoveSuccess',
   RemoveFail      = '[Note] RemoveFail',
+}
+
+// export class LoadRequestAction implements Action {
+//   readonly type = NoteActionTypes.LoadRequest;
+// }
+
+export class SyncAction implements Action {
+  readonly type = NoteActionTypes.Sync;
 }
 
 export class SyncAddAction implements Action {
@@ -47,10 +56,6 @@ export class SyncRemoveAction implements Action {
 
   constructor(public id: string) { }
 }
-
-// export class LoadRequestAction implements Action {
-//   readonly type = NoteActionTypes.LoadRequest;
-// }
 
 export class AddRequestAction implements Action {
   readonly type = NoteActionTypes.AddRequest;

@@ -114,13 +114,13 @@ describe(name(MainComponent) + ' tests.', () => {
   it(name(NoteServiceStub) + ' works correctly.', () => {
     expect(noteService).toBeDefined();
 
-    let notesCount = TestUtil.getObservableLength(noteService.getNotes());
+    let notesCount = TestUtil.getObservableLength(noteService.notes$);
     expect(notesCount).toBe(3, 'Initial state.');
 
     // Add note
     noteService.addNote('Text 4');
 
-    notesCount = TestUtil.getObservableLength(noteService.getNotes());
+    notesCount = TestUtil.getObservableLength(noteService.notes$);
     expect(notesCount).toBe(4, 'Add note.');
 
     // Update note
@@ -129,7 +129,7 @@ describe(name(MainComponent) + ' tests.', () => {
 
     noteService.updateNote(editId, editText);
 
-    notesCount = TestUtil.getObservableLength(noteService.getNotes());
+    notesCount = TestUtil.getObservableLength(noteService.notes$);
     expect(notesCount).toBe(4, 'Update note.');
 
     const editedNote = TestUtil.getObservableObject(noteService.getNote(editId));
@@ -138,14 +138,14 @@ describe(name(MainComponent) + ' tests.', () => {
     // Remove note
     noteService.removeNote('1');
 
-    notesCount = TestUtil.getObservableLength(noteService.getNotes());
+    notesCount = TestUtil.getObservableLength(noteService.notes$);
     expect(notesCount).toBe(3, 'Remove note.');
   });
 
   it('Initial state is correct.', () => {
     fixture.detectChanges();
 
-    const notesCount = TestUtil.getObservableLength(noteService.getNotes());
+    const notesCount = TestUtil.getObservableLength(noteService.notes$);
     expect(notesCount).toBe(3, 'Initial storage note count.');
 
     const table: HTMLTableElement = fixture.nativeElement.querySelector('table');
@@ -181,7 +181,7 @@ describe(name(MainComponent) + ' tests.', () => {
     const addedNote: Note = TestUtil.getObservableObject(noteService.getNote('4'));
     expect(addedNote.text).toBe(text, 'Added note text.');
 
-    const notesCount = TestUtil.getObservableLength(noteService.getNotes());
+    const notesCount = TestUtil.getObservableLength(noteService.notes$);
     expect(notesCount).toBe(4, 'Storage note count after add.');
 
     fixture.detectChanges();
@@ -208,7 +208,7 @@ describe(name(MainComponent) + ' tests.', () => {
     btnPost.click();
     fixture.detectChanges();
 
-    const notesCount = TestUtil.getObservableLength(noteService.getNotes());
+    const notesCount = TestUtil.getObservableLength(noteService.notes$);
     expect(notesCount).toBe(3, 'Storage note count after update.');
 
     note1 = TestUtil.getObservableObject(noteService.getNote('1'));
@@ -232,7 +232,7 @@ describe(name(MainComponent) + ' tests.', () => {
     btnDelete.click();
     fixture.detectChanges();
 
-    const notesCount = TestUtil.getObservableLength(noteService.getNotes());
+    const notesCount = TestUtil.getObservableLength(noteService.notes$);
     expect(notesCount).toBe(2, 'Storage note count after remove.');
   });
 

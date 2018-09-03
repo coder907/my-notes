@@ -22,8 +22,8 @@
     
       <button
         mat-icon-button
-        *ngIf="editedNoteId"
-        (click)="removeEditedNote()"
+        *ngIf="noteService.editedNote$ | async"
+        (click)="noteService.removeEditedNote()"
       >
         <mat-icon>delete</mat-icon>
       </button>
