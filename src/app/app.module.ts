@@ -32,22 +32,6 @@ import { reducers } from './core/store';
 
 
 @NgModule({
-  declarations: [
-    // Components
-    AppComponent,
-    SignInComponent,
-    MainComponent,
-    MenuComponent,
-    NotesManagerComponent,
-    TagsManagerComponent,
-    SettingsManagerComponent,
-    PostComponent,
-    ListComponent,
-    // Directives
-    DblClickOrPressDirective,
-    FlexHeightDirective,
-    FixHeaderDirective,
-  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -64,6 +48,22 @@ import { reducers } from './core/store';
     FirebaseUIModule.forRoot(environment.firebaseUiAuthConfig),
     AngularFirestoreModule.enablePersistence(),
     EffectsModule.forRoot([NoteEffects]),
+  ],
+  declarations: [
+    // Components
+    AppComponent,
+    SignInComponent,
+    MainComponent,
+    MenuComponent,
+    NotesManagerComponent,
+    TagsManagerComponent,
+    SettingsManagerComponent,
+    PostComponent,
+    ListComponent,
+    // Directives
+    DblClickOrPressDirective,
+    FlexHeightDirective,
+    FixHeaderDirective,
   ],
   providers: [{
     provide: HAMMER_GESTURE_CONFIG,

@@ -33,7 +33,7 @@ export class PostComponent implements OnChanges  {
   clear = new EventEmitter();
 
   @ViewChild('textArea')
-  private textArea;
+  private __textArea;
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.item.currentValue && (changes.item.currentValue !== changes.item.previousValue)) {
@@ -60,14 +60,14 @@ export class PostComponent implements OnChanges  {
   }
 
   private textareaValue() {
-    return this.textArea.nativeElement.value;
+    return this.__textArea.nativeElement.value;
   }
 
   private textareaClear() {
-    this.textArea.nativeElement.value = '';
+    this.__textArea.nativeElement.value = '';
   }
 
   private textareaFocus() {
-    this.textArea.nativeElement.focus();
+    this.__textArea.nativeElement.focus();
   }
 }

@@ -5,6 +5,7 @@ import { Observable, Subscription } from 'rxjs';
 
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
+import { map } from 'rxjs/operators';
 
 
 
@@ -15,6 +16,8 @@ export class AuthService implements OnDestroy {
 
   private __user: firebase.User = null;
   private __user$: Observable<firebase.User>;
+
+  private __userName$: Observable<string>;
 
   private __userSubscription: Subscription;
 
@@ -31,12 +34,30 @@ export class AuthService implements OnDestroy {
     );
   }
 
+  get user() {
+    return this.__user;
+  }
+
   get user$() {
     return this.__user$;
   }
 
-  get user() {
-    return this.__user;
+  get userName$() {
+    if (!this.__userName$) {
+      this.__userName$ = this.__user$.pipe(
+        map(user => {
+          if (user.isAnonymous) {
+            return 'Guest';
+
+          } else {
+            return user.displayName;
+          }
+
+        })
+      );
+    }
+
+    return this.__userName$;
   }
 
   ngOnDestroy() {

@@ -11,7 +11,9 @@ import {
 })
 export class FlexHeightDirective {
 
-  constructor(private element: ElementRef) {}
+  constructor(
+    private __element: ElementRef
+  ) {}
 
   @HostListener('window:resize')
   onResize() {
@@ -24,7 +26,7 @@ export class FlexHeightDirective {
   }
 
   resize() {
-    const nativeElement = this.element.nativeElement;
+    const nativeElement = this.__element.nativeElement;
     nativeElement.style.height = (document.body.offsetHeight - nativeElement.offsetTop) + 'px';
   }
 }

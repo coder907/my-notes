@@ -26,28 +26,28 @@ export class NoteService {
 
   private __notes$: Observable<Note[]>;
 
-  constructor(private store: Store<fromCoreStore.State>) {}
+  constructor(private __store: Store<fromCoreStore.State>) {}
 
   getNotes(): Observable<Note[]> {
     if (!this.__notes$) {
-      this.__notes$ = this.store.pipe(select(fromCoreStore.getAllNotes));
+      this.__notes$ = this.__store.pipe(select(fromCoreStore.getAllNotes));
     }
     return this.__notes$;
   }
 
   getNote(id: string): Observable<Note> {
-    return this.store.pipe(select(fromCoreStore.getNote(id)));
+    return this.__store.pipe(select(fromCoreStore.getNote(id)));
   }
 
   addNote(text: string): void {
-    this.store.dispatch(new AddRequestAction(new Date().getTime(), text));
+    this.__store.dispatch(new AddRequestAction(new Date().getTime(), text));
   }
 
   updateNote(id: string, text: string): void {
-    this.store.dispatch(new UpdateRequestAction(id, new Date().getTime(), text));
+    this.__store.dispatch(new UpdateRequestAction(id, new Date().getTime(), text));
   }
 
   removeNote(id: string): void {
-    this.store.dispatch(new RemoveRequestAction(id));
+    this.__store.dispatch(new RemoveRequestAction(id));
   }
 }

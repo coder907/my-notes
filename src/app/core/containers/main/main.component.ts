@@ -31,7 +31,7 @@ export class MainComponent implements OnInit {
 
   constructor(
     public guiService: GuiService,
-    private __authService: AuthService,
+    public authService: AuthService,
     private __snackBar: MatSnackBar,
   ) {}
 
@@ -40,7 +40,7 @@ export class MainComponent implements OnInit {
   }
 
   signOut() {
-    this.__authService.signOut();
+    this.authService.signOut();
   }
 
   showAbout() {
