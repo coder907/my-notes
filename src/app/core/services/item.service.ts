@@ -1,5 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Store, select } from '@ngrx/store';
+
+import {
+  Store,
+  select,
+} from '@ngrx/store';
+
 import { Observable } from 'rxjs';
 
 import { Item } from '../models/item';
@@ -19,15 +24,15 @@ import * as fromCoreStore from '../store';
 })
 export class ItemService {
 
-  private items: Observable<Item[]>;
+  private __items$: Observable<Item[]>;
 
   constructor(private store: Store<fromCoreStore.State>) {}
 
   getItems(): Observable<Item[]> {
-    if (!this.items) {
-      this.items = this.store.pipe(select(fromCoreStore.getAllItems));
+    if (!this.__items$) {
+      this.__items$ = this.store.pipe(select(fromCoreStore.getAllItems));
     }
-    return this.items;
+    return this.__items$;
   }
 
   getItem(id: string): Observable<Item> {
@@ -45,5 +50,4 @@ export class ItemService {
   removeItem(id: string): void {
     this.store.dispatch(new RemoveRequestAction(id));
   }
-
 }

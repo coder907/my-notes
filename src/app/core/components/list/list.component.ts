@@ -42,14 +42,15 @@ export class ListComponent implements OnInit, OnChanges {
   displayedColumns: string[];
   dataSource = new MatTableDataSource();
 
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatSort)
+  private __sort: MatSort;
 
   constructor() {
-    this.setColumns();
+    this.__setColumns();
   }
 
   ngOnInit() {
-    this.sort.sort(<MatSortable> {
+    this.__sort.sort(<MatSortable> {
       id: 'updated',
       start: 'desc'
     });
@@ -58,17 +59,17 @@ export class ListComponent implements OnInit, OnChanges {
   // ***** TODO: is there a better solution?
   ngOnChanges(changes: SimpleChanges) {
     this.dataSource.data = this.items;
-    this.dataSource.sort = this.sort;
+    this.dataSource.sort = this.__sort;
   }
   // *****
 
   // ***** TODO: is there a better solution?
   @HostListener('window:resize')
   onResize() {
-    this.setColumns();
+    this.__setColumns();
   }
 
-  setColumns() {
+  private __setColumns() {
     if (window.innerWidth < 768) {
       this.displayedColumns = ['text'];
     } else {

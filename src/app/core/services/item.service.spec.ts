@@ -1,9 +1,20 @@
-import { TestBed, inject } from '@angular/core/testing';
-import { StoreModule, Store } from '@ngrx/store';
+import {
+  TestBed,
+  inject
+} from '@angular/core/testing';
+
+import {
+  StoreModule,
+  Store
+} from '@ngrx/store';
 
 import { of } from 'rxjs';
 
-import { TestUtil, name } from '../../../shared/test-util';
+import {
+  TestUtil,
+  name
+} from '../../../shared/test-util';
+
 import * as fromCoreStore from '../store';
 
 import {

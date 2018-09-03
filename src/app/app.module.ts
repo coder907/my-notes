@@ -6,6 +6,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { FirebaseUIModule } from 'firebaseui-angular';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { HammerConfig } from '../config/hammer';
@@ -13,11 +14,14 @@ import { HammerConfig } from '../config/hammer';
 import { AppRoutingModule } from './app-routing.module';
 import { MaterialModule } from './material.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './auth/components/login/login.component';
-import { MainComponent } from './core/components/main/main.component';
+import { SignInComponent } from './auth/components/sign-in/sign-in.component';
+import { MainComponent } from './core/containers/main/main.component';
+import { MenuComponent } from './core/containers/menu/menu.component';
+import { NotesManagerComponent } from './core/containers/notes-manager/notes-manager.component';
+import { TagsManagerComponent } from './core/containers/tags-manager/tags-manager.component';
+import { SettingsManagerComponent } from './core/containers/settings-manager/settings-manager.component';
 import { PostComponent } from './core/components/post/post.component';
 import { ListComponent } from './core/components/list/list.component';
-import { MenuComponent } from './core/components/menu/menu.component';
 import { DblClickOrPressDirective } from '../shared/directives/dblclickorpress.directive';
 import { FlexHeightDirective } from '../shared/directives/flex-height.directive';
 import { FixHeaderDirective } from './core/components/list/directives/fix-header.directive';
@@ -31,11 +35,14 @@ import { reducers } from './core/store';
   declarations: [
     // Components
     AppComponent,
-    LoginComponent,
+    SignInComponent,
     MainComponent,
+    MenuComponent,
+    NotesManagerComponent,
+    TagsManagerComponent,
+    SettingsManagerComponent,
     PostComponent,
     ListComponent,
-    MenuComponent,
     // Directives
     DblClickOrPressDirective,
     FlexHeightDirective,
@@ -54,6 +61,7 @@ import { reducers } from './core/store';
     }),
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
+    FirebaseUIModule.forRoot(environment.firebaseUiAuthConfig),
     AngularFirestoreModule.enablePersistence(),
     EffectsModule.forRoot([ItemEffects]),
   ],

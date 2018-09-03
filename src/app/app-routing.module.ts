@@ -6,20 +6,42 @@ import {
 } from '@angular/router';
 
 import { AuthGuardService } from './auth/services/auth-guard.service';
-import { LoginComponent } from './auth/components/login/login.component';
-import { MainComponent } from './core/components/main/main.component';
+import { SignInComponent } from './auth/components/sign-in/sign-in.component';
+import { MainComponent } from './core/containers/main/main.component';
+import { NotesManagerComponent } from './core/containers/notes-manager/notes-manager.component';
+import { TagsManagerComponent } from './core/containers/tags-manager/tags-manager.component';
+import { SettingsManagerComponent } from './core/containers/settings-manager/settings-manager.component';
 
 
 
 const routes: Routes = [
   {
-    path: '',
-    component: MainComponent,
-    canActivate: [AuthGuardService]
+    path: 'signin',
+    component: SignInComponent
   },
   {
-    path: 'login',
-    component: LoginComponent
+    path: '',
+    redirectTo: 'notes',
+    pathMatch: 'full',
+  },
+  {
+    path: '',
+    component: MainComponent,
+    children: [
+      {
+        path: 'notes',
+        component: NotesManagerComponent,
+      },
+      {
+        path: 'tags',
+        component: TagsManagerComponent,
+      },
+      {
+        path: 'settings',
+        component: SettingsManagerComponent,
+      },
+    ],
+    canActivate: [AuthGuardService]
   },
   {
     path: '**',

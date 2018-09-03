@@ -14,15 +14,18 @@ import { DetectionUtil } from '../detection-util';
 })
 export class DblClickOrPressDirective {
 
-  @Output() appDblClickOrPress = new EventEmitter();
+  @Output()
+  appDblClickOrPress = new EventEmitter();
 
-  @HostListener('dblclick') onDblClick() {
+  @HostListener('dblclick')
+  onDblClick() {
     if (!DetectionUtil.supportsTouch()) {
       this.appDblClickOrPress.emit();
     }
   }
 
-  @HostListener('press') onPress() {
+  @HostListener('press')
+  onPress() {
     if (DetectionUtil.supportsTouch()) {
       this.appDblClickOrPress.emit();
     }

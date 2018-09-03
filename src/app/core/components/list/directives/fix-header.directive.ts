@@ -13,10 +13,12 @@ import { ListComponent } from '../list.component';
 })
 export class FixHeaderDirective implements OnInit {
 
-  constructor(private element: ElementRef) {}
+  constructor(
+    private __element: ElementRef
+  ) {}
 
   ngOnInit () {
-    const listContainer = this.element.nativeElement.firstChild;
+    const listContainer = this.__element.nativeElement.firstChild;
 
     const fixHeader = function () {
       const ths = listContainer.getElementsByTagName('th');

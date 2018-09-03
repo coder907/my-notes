@@ -2,8 +2,8 @@
   <mat-sidenav
     #sidenav
     class="main-sidenav"
-    [mode]="(isHandset | async)!.matches ? 'over' : 'side'"
-    [opened]="!(isHandset | async)!.matches"
+    [mode]="(guiService.isHandset$ | async)!.matches ? 'over' : 'side'"
+    [opened]="!(guiService.isHandset$ | async)!.matches"
   >
     <app-menu>
     </app-menu>
@@ -37,36 +37,31 @@
       </button>
     
       <span class="main-toolbar-spacer"></span>
-      
-      <button mat-icon-button>
+
+      <button
+        mat-icon-button
+        [matMenuTriggerFor]="appMenu"
+      >
         <mat-icon>more_vert</mat-icon>
       </button>
-    
+
+      <mat-menu #appMenu="matMenu">
+        <button
+          mat-menu-item
+          (click)="signOut()"
+        >Sign Out</button>
+
+        <button
+          mat-menu-item
+          (click)="showAbout()"
+        >About My Notes</button>
+      </mat-menu>
+
     </mat-toolbar>
     
-    <app-post
-      [item]="itemService.getItem(editedItemId) | async"
-      (post)="post($event)"
-      (clear)="stopEditing()"
-    >
-    </app-post>
-    
-    <!-- <app-list
-      class="main-list"
-      [items]="itemService.getItems() | async"
-      [editedItem]="itemService.getItem(editedItemId) | async"
-      (startEditing)="startEditing($event)"
-      appFlexHeight
-      appFixHeader
-    > -->
-    <app-list
-      class="main-list"
-      [items]="itemService.getItems() | async"
-      [editedItem]="itemService.getItem(editedItemId) | async"
-      (startEditing)="startEditing($event)"
-      appFixHeader
-    >
-    </app-list>
+    <router-outlet>
+    </router-outlet>
+
   </mat-sidenav-content>
 
 </mat-sidenav-container>

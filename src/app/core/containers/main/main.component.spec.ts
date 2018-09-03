@@ -1,67 +1,80 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SimpleChange } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Observable, of, BehaviorSubject } from 'rxjs';
 
-import { TestUtil, name } from '../../../../shared/test-util';
+import {
+  ComponentFixture,
+  TestBed
+} from '@angular/core/testing';
+
+import {
+  Observable,
+  BehaviorSubject,
+  of,
+} from 'rxjs';
+
+import {
+  TestUtil,
+  name
+} from '../../../../shared/test-util';
+
 import { MaterialModule } from '../../../material.module';
 import { MainComponent } from './main.component';
-import { PostComponent } from '../post/post.component';
-import { ListComponent } from '../list/list.component';
+import { PostComponent } from '../../components/post/post.component';
+import { ListComponent } from '../../components/list/list.component';
+import { FixHeaderDirective } from '../../components/list/directives/fix-header.directive';
 import { DblClickOrPressDirective } from '../../../../shared/directives/dblclickorpress.directive';
-import { FixHeaderDirective } from '../list/directives/fix-header.directive';
 import { Item } from '../../models/item';
 import { ItemService } from '../../services/item.service';
 
 
 
 class ItemServiceStub {
-  nextId = 4;
+  private __nextId = 4;
 
-  items = [
+  private __items = [
     { id: '1', text: 'Text 1', added: new Date().getTime(), updated: new Date().getTime() },
     { id: '2', text: 'Text 2', added: new Date().getTime(), updated: new Date().getTime() },
     { id: '3', text: 'Text 3', added: new Date().getTime(), updated: new Date().getTime() },
   ] as Item[];
 
-  items$ = new BehaviorSubject<Item[]>(this.items);
+  private __items$ = new BehaviorSubject<Item[]>(this.__items);
 
   getItems(): Observable<Item[]> {
-    return this.items$.asObservable();
+    return this.__items$.asObservable();
   }
 
   getItem(id: string): Observable<Item> {
-    return of(this.items.find(item => item.id === id));
+    return of(this.__items.find(item => item.id === id));
   }
 
   addItem(text: string): void {
-    this.items = this.items.concat([{
-        id: '' + (this.nextId++),
+    this.__items = this.__items.concat([{
+        id: '' + (this.__nextId++),
         text,
         added: new Date().getTime(),
         updated: new Date().getTime(),
       }
     ]);
 
-    this.items$.next(this.items);
+    this.__items$.next(this.__items);
   }
 
   updateItem(id: string, text: string): void {
-    const itemForUpdate = this.items.find(item => item.id === id);
+    const itemForUpdate = this.__items.find(item => item.id === id);
     itemForUpdate.text = text;
     itemForUpdate.updated = new Date().getTime();
 
-    this.items$.next(this.items);
+    this.__items$.next(this.__items);
   }
 
   removeItem(id: string): void {
-    this.items.splice(
-      this.items.findIndex(item => item.id === id),
+    this.__items.splice(
+      this.__items.findIndex(item => item.id === id),
       1
     );
 
-    this.items$.next(this.items);
+    this.__items$.next(this.__items);
   }
 }
 

@@ -31,12 +31,12 @@ import {
 export class ItemEffects {
 
   constructor(
-    private actions: Actions,
-    private firestore: AngularFirestore
+    private __actions: Actions,
+    private __firestore: AngularFirestore
   ) {}
 
   @Effect()
-  items = this.firestore.collection<Item>('items').stateChanges().pipe(
+  items = this.__firestore.collection<Item>('items').stateChanges().pipe(
     mergeMap(actions => actions),
     map(action => {
       switch (action.type) {
@@ -69,27 +69,27 @@ export class ItemEffects {
   */
 
   @Effect()
-  removeItem: Observable<Action> = this.actions.ofType(ItemActionTypes.RemoveRequest).pipe(
+  removeItem: Observable<Action> = this.__actions.ofType(ItemActionTypes.RemoveRequest).pipe(
     map((action: RemoveRequestAction) => action.id),
-    switchMap(id => of(this.firestore.collection<Item>('items').doc(id).delete())),
+    switchMap(id => of(this.__firestore.collection<Item>('items').doc(id).delete())),
     map(request => new RemoveSuccessAction()),
     catchError(error => of(new RemoveFailAction(error)))
   );
 
   @Effect()
-  addItem: Observable<Action> = this.actions.ofType(ItemActionTypes.AddRequest).pipe(
+  addItem: Observable<Action> = this.__actions.ofType(ItemActionTypes.AddRequest).pipe(
     // map((action: AddRequestAction) => action),
     switchMap((action: AddRequestAction) =>
-      of(this.firestore.collection<Item>('items').add({added: action.timestamp, updated: action.timestamp, text: action.text} as Item))),
+      of(this.__firestore.collection<Item>('items').add({added: action.timestamp, updated: action.timestamp, text: action.text} as Item))),
     map(request => new AddSuccessAction()),
     catchError(error => of(new AddFailAction(error)))
   );
 
   @Effect()
-  updateItem: Observable<Action> = this.actions.ofType(ItemActionTypes.UpdateRequest).pipe(
+  updateItem: Observable<Action> = this.__actions.ofType(ItemActionTypes.UpdateRequest).pipe(
     // map((action: UpdateRequestAction) => action),
     mergeMap((action: UpdateRequestAction) =>
-      of(this.firestore.collection<Item>('items').doc(action.id).set({updated: action.timestamp, text: action.text}, {merge: true}))),
+      of(this.__firestore.collection<Item>('items').doc(action.id).set({updated: action.timestamp, text: action.text}, {merge: true}))),
     map(request => new UpdateSuccessAction()),
     catchError(error => of(new UpdateFailAction(error)))
   );

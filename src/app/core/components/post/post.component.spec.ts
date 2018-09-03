@@ -1,10 +1,23 @@
 import { SimpleChange } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Observable, of } from 'rxjs';
 
-import { TestUtil, name } from '../../../../shared/test-util';
+import {
+  ComponentFixture,
+  TestBed
+} from '@angular/core/testing';
+
+import {
+  Observable,
+  of
+} from 'rxjs';
+
+import {
+  TestUtil,
+  name
+} from '../../../../shared/test-util';
+
 import { PostComponent } from './post.component';
 import { Item } from '../../models/item';
+
 
 
 describe(name(PostComponent) + ' tests.', () => {

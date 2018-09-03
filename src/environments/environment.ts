@@ -3,10 +3,12 @@
 // The list of file replacements can be found in `angular.json`.
 
 import { firebaseConfig } from '../config/firebase';
+import { firebaseUiAuthConfig } from '../config/firebaseui-auth';
 
 export const environment = {
   production: false,
-  firebaseConfig: firebaseConfig
+  firebaseConfig,
+  firebaseUiAuthConfig,
 };
 
 /*

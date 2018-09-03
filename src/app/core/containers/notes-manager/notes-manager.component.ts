@@ -1,40 +1,21 @@
-import {
-  Component,
-  ChangeDetectionStrategy,
-  AfterViewChecked,
-  OnInit,
-  HostListener
-} from '@angular/core';
-
-import {
-  BreakpointObserver,
-  Breakpoints,
-  BreakpointState
-} from '@angular/cdk/layout';
-
-import { Observable } from 'rxjs';
+import { Component } from '@angular/core';
 
 import { ItemService } from '../../services/item.service';
 
 
 
 @Component({
-  selector: 'app-main',
-  templateUrl: './main.component.html',
-  styleUrls: ['./main.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'app-notes-manager',
+  templateUrl: './notes-manager.component.html',
+  styleUrls: ['./notes-manager.component.scss'],
 })
-
-export class MainComponent {
-
-  isHandset: Observable<BreakpointState> = this.breakpointObserver.observe(Breakpoints.Handset);
+export class NotesManagerComponent  {
 
   editedItemId: string = null;
 
   constructor(
     public itemService: ItemService,
-    private breakpointObserver: BreakpointObserver,
-  ) { }
+  ) {}
 
   post(text: string) {
     if (this.editedItemId) {

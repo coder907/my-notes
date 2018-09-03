@@ -1,0 +1,15 @@
+<app-post
+  [item]="itemService.getItem(editedItemId) | async"
+  (post)="post($event)"
+  (clear)="stopEditing()"
+>
+</app-post>
+
+<app-list
+  class="main-list"
+  [items]="itemService.getItems() | async"
+  [editedItem]="itemService.getItem(editedItemId) | async"
+  (startEditing)="startEditing($event)"
+  appFixHeader
+>
+</app-list>
