@@ -1,5 +1,5 @@
 <app-post
-  [item]="itemService.getItem(editedItemId) | async"
+  [item]="noteService.getNote(editedNoteId) | async"
   (post)="post($event)"
   (clear)="stopEditing()"
 >
@@ -7,8 +7,8 @@
 
 <app-list
   class="main-list"
-  [items]="itemService.getItems() | async"
-  [editedItem]="itemService.getItem(editedItemId) | async"
+  [items]="noteService.getNotes() | async"
+  [editedItem]="noteService.getNotes(editedNoteId) | async"
   (startEditing)="startEditing($event)"
   appFixHeader
 >

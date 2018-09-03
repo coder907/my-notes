@@ -24,32 +24,32 @@ import { PostComponent } from '../../components/post/post.component';
 import { ListComponent } from '../../components/list/list.component';
 import { FixHeaderDirective } from '../../components/list/directives/fix-header.directive';
 import { DblClickOrPressDirective } from '../../../../shared/directives/dblclickorpress.directive';
-import { Item } from '../../models/item';
-import { ItemService } from '../../services/item.service';
+import { Note } from '../../models/note';
+import { NoteService } from '../../services/note.service';
 
 
 
-class ItemServiceStub {
+class NoteServiceStub {
   private __nextId = 4;
 
-  private __items = [
+  private __notes = [
     { id: '1', text: 'Text 1', added: new Date().getTime(), updated: new Date().getTime() },
     { id: '2', text: 'Text 2', added: new Date().getTime(), updated: new Date().getTime() },
     { id: '3', text: 'Text 3', added: new Date().getTime(), updated: new Date().getTime() },
-  ] as Item[];
+  ] as Note[];
 
-  private __items$ = new BehaviorSubject<Item[]>(this.__items);
+  private __notes$ = new BehaviorSubject<Note[]>(this.__notes);
 
-  getItems(): Observable<Item[]> {
-    return this.__items$.asObservable();
+  getNotes(): Observable<Note[]> {
+    return this.__notes$.asObservable();
   }
 
-  getItem(id: string): Observable<Item> {
-    return of(this.__items.find(item => item.id === id));
+  getNote(id: string): Observable<Note> {
+    return of(this.__notes.find(note => note.id === id));
   }
 
-  addItem(text: string): void {
-    this.__items = this.__items.concat([{
+  addNote(text: string): void {
+    this.__notes = this.__notes.concat([{
         id: '' + (this.__nextId++),
         text,
         added: new Date().getTime(),
@@ -57,31 +57,31 @@ class ItemServiceStub {
       }
     ]);
 
-    this.__items$.next(this.__items);
+    this.__notes$.next(this.__notes);
   }
 
-  updateItem(id: string, text: string): void {
-    const itemForUpdate = this.__items.find(item => item.id === id);
-    itemForUpdate.text = text;
-    itemForUpdate.updated = new Date().getTime();
+  updateNote(id: string, text: string): void {
+    const noteForUpdate = this.__notes.find(note => note.id === id);
+    noteForUpdate.text = text;
+    noteForUpdate.updated = new Date().getTime();
 
-    this.__items$.next(this.__items);
+    this.__notes$.next(this.__notes);
   }
 
-  removeItem(id: string): void {
-    this.__items.splice(
-      this.__items.findIndex(item => item.id === id),
+  removeNote(id: string): void {
+    this.__notes.splice(
+      this.__notes.findIndex(note => note.id === id),
       1
     );
 
-    this.__items$.next(this.__items);
+    this.__notes$.next(this.__notes);
   }
 }
 
 describe(name(MainComponent) + ' tests.', () => {
   let component: MainComponent;
   let fixture: ComponentFixture<MainComponent>;
-  let itemService: ItemService;
+  let noteService: NoteService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -98,71 +98,71 @@ describe(name(MainComponent) + ' tests.', () => {
         MaterialModule,
       ],
       providers: [
-        {provide: ItemService, useClass: ItemServiceStub}
+        {provide: NoteService, useClass: NoteServiceStub}
       ]
     });
 
     fixture = TestBed.createComponent(MainComponent);
     component = fixture.componentInstance;
-    itemService = TestBed.get(ItemService);
+    noteService = TestBed.get(NoteService);
   });
 
   it(name(MainComponent) + ' is created.', () => {
     expect(component).toBeDefined();
   });
 
-  it(name(ItemServiceStub) + ' works correctly.', () => {
-    expect(itemService).toBeDefined();
+  it(name(NoteServiceStub) + ' works correctly.', () => {
+    expect(noteService).toBeDefined();
 
-    let itemsCount = TestUtil.getObservableLength(itemService.getItems());
-    expect(itemsCount).toBe(3, 'Initial state.');
+    let notesCount = TestUtil.getObservableLength(noteService.getNotes());
+    expect(notesCount).toBe(3, 'Initial state.');
 
-    // Add item
-    itemService.addItem('Text 4');
+    // Add note
+    noteService.addNote('Text 4');
 
-    itemsCount = TestUtil.getObservableLength(itemService.getItems());
-    expect(itemsCount).toBe(4, 'Add item.');
+    notesCount = TestUtil.getObservableLength(noteService.getNotes());
+    expect(notesCount).toBe(4, 'Add note.');
 
-    // Update item
+    // Update note
     const editId = '1';
     const editText = 'Text 1 edited.';
 
-    itemService.updateItem(editId, editText);
+    noteService.updateNote(editId, editText);
 
-    itemsCount = TestUtil.getObservableLength(itemService.getItems());
-    expect(itemsCount).toBe(4, 'Update item.');
+    notesCount = TestUtil.getObservableLength(noteService.getNotes());
+    expect(notesCount).toBe(4, 'Update note.');
 
-    const editedItem = TestUtil.getObservableObject(itemService.getItem(editId));
-    expect(editedItem.text).toBe(editText, 'Update item.');
+    const editedNote = TestUtil.getObservableObject(noteService.getNote(editId));
+    expect(editedNote.text).toBe(editText, 'Update note.');
 
-    // Remove item
-    itemService.removeItem('1');
+    // Remove note
+    noteService.removeNote('1');
 
-    itemsCount = TestUtil.getObservableLength(itemService.getItems());
-    expect(itemsCount).toBe(3, 'Remove item.');
+    notesCount = TestUtil.getObservableLength(noteService.getNotes());
+    expect(notesCount).toBe(3, 'Remove note.');
   });
 
   it('Initial state is correct.', () => {
     fixture.detectChanges();
 
-    const itemsCount = TestUtil.getObservableLength(itemService.getItems());
-    expect(itemsCount).toBe(3, 'Initial storage item count.');
+    const notesCount = TestUtil.getObservableLength(noteService.getNotes());
+    expect(notesCount).toBe(3, 'Initial storage note count.');
 
     const table: HTMLTableElement = fixture.nativeElement.querySelector('table');
     expect(table).toBeDefined();
-    expect(table.rows.length - 1).toBe(3, 'Initial table item count.');
+    expect(table.rows.length - 1).toBe(3, 'Initial table note count.');
 
-    const item1: Item = TestUtil.getObservableObject(itemService.getItem('1'));
-    const tdItem1 = TestUtil.getElementByTextContent(fixture.nativeElement, 'td', item1.text);
-    expect(tdItem1).toBeDefined();
+    const note1: Note = TestUtil.getObservableObject(noteService.getNote('1'));
+    const tdNote1 = TestUtil.getElementByTextContent(fixture.nativeElement, 'td', note1.text);
+    expect(tdNote1).toBeDefined();
 
-    const item2: Item = TestUtil.getObservableObject(itemService.getItem('2'));
-    const tdItem2 = TestUtil.getElementByTextContent(fixture.nativeElement, 'td', item2.text);
-    expect(tdItem2).toBeDefined();
+    const note2: Note = TestUtil.getObservableObject(noteService.getNote('2'));
+    const tdNote2 = TestUtil.getElementByTextContent(fixture.nativeElement, 'td', note2.text);
+    expect(tdNote2).toBeDefined();
 
-    const item3: Item = TestUtil.getObservableObject(itemService.getItem('3'));
-    const tdItem3 = TestUtil.getElementByTextContent(fixture.nativeElement, 'td', item3.text);
-    expect(tdItem3).toBeDefined();
+    const note3: Note = TestUtil.getObservableObject(noteService.getNote('3'));
+    const tdNote3 = TestUtil.getElementByTextContent(fixture.nativeElement, 'td', note3.text);
+    expect(tdNote3).toBeDefined();
   });
 
   it('Adding a note works correctly. [specification-features-notes-actions-adding-a-note]', () => {
@@ -172,32 +172,32 @@ describe(name(MainComponent) + ' tests.', () => {
     expect(textArea).toBeDefined();
     textArea.click();
 
-    const text = 'Newly added item.';
+    const text = 'Newly added note.';
     textArea.value = text;
 
     const btnPost = TestUtil.getElementByTextContent(fixture.nativeElement, 'button', 'Post');
     btnPost.click();
 
-    const addedItem: Item = TestUtil.getObservableObject(itemService.getItem('4'));
-    expect(addedItem.text).toBe(text, 'Added item text.');
+    const addedNote: Note = TestUtil.getObservableObject(noteService.getNote('4'));
+    expect(addedNote.text).toBe(text, 'Added note text.');
 
-    const itemsCount = TestUtil.getObservableLength(itemService.getItems());
-    expect(itemsCount).toBe(4, 'Storage item count after add.');
+    const notesCount = TestUtil.getObservableLength(noteService.getNotes());
+    expect(notesCount).toBe(4, 'Storage note count after add.');
 
     fixture.detectChanges();
 
     const table: HTMLTableElement = fixture.nativeElement.querySelector('table');
-    expect(table.rows.length - 1).toBe(4, 'Table item count after add.');
+    expect(table.rows.length - 1).toBe(4, 'Table note count after add.');
   });
 
   it('Updating a note works correctly. [specification-features-notes-actions-updating-a-note]', () => {
     fixture.detectChanges();
 
-    let item1: Item = TestUtil.getObservableObject(itemService.getItem('1'));
-    let tdItem1 = TestUtil.getElementByTextContent(fixture.nativeElement, 'td', item1.text);
-    expect(tdItem1.textContent.trim()).toBe(item1.text, 'Select table cell.');
+    let note1: Note = TestUtil.getObservableObject(noteService.getNote('1'));
+    let tdNote1 = TestUtil.getElementByTextContent(fixture.nativeElement, 'td', note1.text);
+    expect(tdNote1.textContent.trim()).toBe(note1.text, 'Select table cell.');
 
-    TestUtil.dblclick(tdItem1);
+    TestUtil.dblclick(tdNote1);
     fixture.detectChanges();
 
     const textArea: HTMLTextAreaElement = fixture.nativeElement.querySelector('textarea');
@@ -208,32 +208,32 @@ describe(name(MainComponent) + ' tests.', () => {
     btnPost.click();
     fixture.detectChanges();
 
-    const itemsCount = TestUtil.getObservableLength(itemService.getItems());
-    expect(itemsCount).toBe(3, 'Storage item count after update.');
+    const notesCount = TestUtil.getObservableLength(noteService.getNotes());
+    expect(notesCount).toBe(3, 'Storage note count after update.');
 
-    item1 = TestUtil.getObservableObject(itemService.getItem('1'));
-    expect(item1.text).toBe(newText, 'Updated item text.');
+    note1 = TestUtil.getObservableObject(noteService.getNote('1'));
+    expect(note1.text).toBe(newText, 'Updated note text.');
 
-    tdItem1 = TestUtil.getElementByTextContent(fixture.nativeElement, 'td', item1.text);
-    expect(tdItem1.textContent.trim()).toBe(newText, 'Select updated table cell.');
+    tdNote1 = TestUtil.getElementByTextContent(fixture.nativeElement, 'td', note1.text);
+    expect(tdNote1.textContent.trim()).toBe(newText, 'Select updated table cell.');
   });
 
   it('Removing a note works correctly. [specification-features-notes-actions-removing-a-note]', () => {
     fixture.detectChanges();
 
-    const item1: Item = TestUtil.getObservableObject(itemService.getItem('1'));
-    const tdItem1 = TestUtil.getElementByTextContent(fixture.nativeElement, 'td', item1.text);
-    expect(tdItem1.textContent.trim()).toBe(item1.text, 'Select table cell.');
+    const note1: Note = TestUtil.getObservableObject(noteService.getNote('1'));
+    const tdNote1 = TestUtil.getElementByTextContent(fixture.nativeElement, 'td', note1.text);
+    expect(tdNote1.textContent.trim()).toBe(note1.text, 'Select table cell.');
 
-    TestUtil.dblclick(tdItem1);
+    TestUtil.dblclick(tdNote1);
     fixture.detectChanges();
 
     const btnDelete = TestUtil.getElementByTextContent(fixture.nativeElement, 'button', 'delete');
     btnDelete.click();
     fixture.detectChanges();
 
-    const itemsCount = TestUtil.getObservableLength(itemService.getItems());
-    expect(itemsCount).toBe(2, 'Storage item count after remove.');
+    const notesCount = TestUtil.getObservableLength(noteService.getNotes());
+    expect(notesCount).toBe(2, 'Storage note count after remove.');
   });
 
 });

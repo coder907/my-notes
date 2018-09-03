@@ -11,7 +11,7 @@ import {
 
 import { Observable } from 'rxjs';
 
-import { Item } from '../../models/item';
+import { Note } from '../../models/note';
 
 
 
@@ -24,7 +24,7 @@ import { Item } from '../../models/item';
 export class PostComponent implements OnChanges  {
 
   @Input()
-  item: Item;
+  item: Note;
 
   @Output()
   post = new EventEmitter();

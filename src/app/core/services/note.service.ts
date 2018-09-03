@@ -7,13 +7,13 @@ import {
 
 import { Observable } from 'rxjs';
 
-import { Item } from '../models/item';
+import { Note } from '../models/note';
 
 import {
   AddRequestAction,
   UpdateRequestAction,
   RemoveRequestAction,
-} from '../store/item';
+} from '../store/note';
 
 import * as fromCoreStore from '../store';
 
@@ -22,32 +22,32 @@ import * as fromCoreStore from '../store';
 @Injectable({
   providedIn: 'root',
 })
-export class ItemService {
+export class NoteService {
 
-  private __items$: Observable<Item[]>;
+  private __notes$: Observable<Note[]>;
 
   constructor(private store: Store<fromCoreStore.State>) {}
 
-  getItems(): Observable<Item[]> {
-    if (!this.__items$) {
-      this.__items$ = this.store.pipe(select(fromCoreStore.getAllItems));
+  getNotes(): Observable<Note[]> {
+    if (!this.__notes$) {
+      this.__notes$ = this.store.pipe(select(fromCoreStore.getAllNotes));
     }
-    return this.__items$;
+    return this.__notes$;
   }
 
-  getItem(id: string): Observable<Item> {
-    return this.store.pipe(select(fromCoreStore.getItem(id)));
+  getNote(id: string): Observable<Note> {
+    return this.store.pipe(select(fromCoreStore.getNote(id)));
   }
 
-  addItem(text: string): void {
+  addNote(text: string): void {
     this.store.dispatch(new AddRequestAction(new Date().getTime(), text));
   }
 
-  updateItem(id: string, text: string): void {
+  updateNote(id: string, text: string): void {
     this.store.dispatch(new UpdateRequestAction(id, new Date().getTime(), text));
   }
 
-  removeItem(id: string): void {
+  removeNote(id: string): void {
     this.store.dispatch(new RemoveRequestAction(id));
   }
 }

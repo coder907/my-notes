@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { ItemService } from '../../services/item.service';
+import { NoteService } from '../../services/note.service';
 
 
 
@@ -11,32 +11,32 @@ import { ItemService } from '../../services/item.service';
 })
 export class NotesManagerComponent  {
 
-  editedItemId: string = null;
+  editedNoteId: string = null;
 
   constructor(
-    public itemService: ItemService,
+    public noteService: NoteService,
   ) {}
 
   post(text: string) {
-    if (this.editedItemId) {
-      this.itemService.updateItem(this.editedItemId, text);
+    if (this.editedNoteId) {
+      this.noteService.updateNote(this.editedNoteId, text);
 
     } else {
-      this.itemService.addItem(text);
+      this.noteService.addNote(text);
     }
   }
 
   startEditing(id: string) {
-    this.editedItemId = id;
+    this.editedNoteId = id;
   }
 
   stopEditing() {
-    this.editedItemId = null;
+    this.editedNoteId = null;
   }
 
-  removeEditedItem() {
-    if (this.editedItemId) {
-      this.itemService.removeItem(this.editedItemId);
+  removeEditedNote() {
+    if (this.editedNoteId) {
+      this.noteService.removeNote(this.editedNoteId);
       this.stopEditing();
     }
   }

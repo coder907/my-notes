@@ -21,18 +21,18 @@ import {
   AddRequestAction,
   UpdateRequestAction,
   RemoveRequestAction,
-} from '../store/item';
+} from '../store/note';
 
-import { Item } from '../models/item';
-import { ItemService } from './item.service';
+import { Note } from '../models/note';
+import { NoteService } from './note.service';
 
 
 
-describe(name(ItemService) + ' tests.', () => {
+describe(name(NoteService) + ' tests.', () => {
   // An attempt to create refactor-friendly test descriptions. Will see how it works in practice.
-  const s: ItemService = TestUtil.nameAllFunctions(new ItemService(null)); // Dummy service for use solely in test descriptions
+  const s: NoteService = TestUtil.nameAllFunctions(new NoteService(null)); // Dummy service for use solely in test descriptions
 
-  let service: ItemService;
+  let service: NoteService;
   let store: Store<fromCoreStore.State>;
 
   beforeEach(() => {
@@ -40,67 +40,67 @@ describe(name(ItemService) + ' tests.', () => {
       imports: [
         StoreModule.forRoot(fromCoreStore.reducers),
       ],
-      providers: [ItemService]
+      providers: [NoteService]
     });
 
     store = TestBed.get(Store);
-    service = TestBed.get(ItemService);
+    service = TestBed.get(NoteService);
 
     spyOn(store, 'dispatch').and.callThrough();
   });
 
-  it(name(ItemService) + ' is created.', () => {
+  it(name(NoteService) + ' is created.', () => {
     expect(service).toBeTruthy();
   });
 
-  it(name(s.getItems) + ' functions properly.', () => {
-    const items = of([] as Item[]);
-    spyOn(store, 'pipe').and.returnValue(items);
+  it(name(s.getNotes) + ' functions properly.', () => {
+    const notes$ = of([] as Note[]);
+    spyOn(store, 'pipe').and.returnValue(notes$);
 
-    let ret = service.getItems();
-    expect(ret).toEqual(items);
+    let ret = service.getNotes();
+    expect(ret).toEqual(notes$);
 
-    ret = service.getItems();
-    expect(ret).toEqual(items);
+    ret = service.getNotes();
+    expect(ret).toEqual(notes$);
 
     expect(store.pipe).toHaveBeenCalledTimes(1);
   });
 
-  it(name(s.getItem) + ' functions properly.', () => {
-    const item = of({} as Item);
+  it(name(s.getNote) + ' functions properly.', () => {
+    const note$ = of({} as Note);
     const id = 'id';
-    spyOn(store, 'pipe').and.returnValue(item);
+    spyOn(store, 'pipe').and.returnValue(note$);
 
-    const ret = service.getItem(id);
-    expect(ret).toEqual(item);
+    const ret = service.getNote(id);
+    expect(ret).toEqual(note$);
   });
 
-  it(name(s.addItem) + ' dispatches ' + name(AddRequestAction) + '.', () => {
+  it(name(s.addNote) + ' dispatches ' + name(AddRequestAction) + '.', () => {
     const updatedDt = new Date().getTime();
-    const text = 'add item';
+    const text = 'add note';
     const action = new AddRequestAction(updatedDt, text);
 
-    service.addItem(text);
+    service.addNote(text);
 
     expect(store.dispatch).toHaveBeenCalledWith(action);
   });
 
-  it(name(s.updateItem) + ' dispatches ' + name(UpdateRequestAction) + '.', () => {
+  it(name(s.updateNote) + ' dispatches ' + name(UpdateRequestAction) + '.', () => {
     const id = 'id';
     const updatedDt = new Date().getTime();
-    const text = 'update item';
+    const text = 'update note';
     const action = new UpdateRequestAction(id, updatedDt, text);
 
-    service.updateItem(id, text);
+    service.updateNote(id, text);
 
     expect(store.dispatch).toHaveBeenCalledWith(action);
   });
 
-  it(name(s.removeItem) + ' dispatches ' + name(RemoveRequestAction) + '.', () => {
+  it(name(s.removeNote) + ' dispatches ' + name(RemoveRequestAction) + '.', () => {
     const id = 'id';
     const action = new RemoveRequestAction(id);
 
-    service.removeItem(id);
+    service.removeNote(id);
 
     expect(store.dispatch).toHaveBeenCalledWith(action);
   });

@@ -12,7 +12,7 @@ import {
 
 import { AuthService } from '../../../auth/services/auth-service';
 import { GuiService } from '../../services/gui.service';
-import { ItemService } from '../../services/item.service';
+import { NoteService } from '../../services/note.service';
 
 
 

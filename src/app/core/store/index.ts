@@ -10,18 +10,18 @@ import { storeFreeze } from 'ngrx-store-freeze';
 
 import { environment } from '../../../environments/environment';
 import * as fromSettings from './settings';
-import * as fromItem from './item';
+import * as fromNote from './note';
 
 
 
 export interface State {
   settings: fromSettings.State;
-  items: fromItem.State;
+  notes: fromNote.State;
 }
 
 export const reducers: ActionReducerMap<State> = {
   settings: fromSettings.reducer,
-  items: fromItem.reducer,
+  notes: fromNote.reducer,
 };
 
 export function logger(reducer: ActionReducer<State>): ActionReducer<State> {
@@ -38,5 +38,5 @@ export const metaReducers: MetaReducer<State>[] =
     ? [logger, storeFreeze]
     : [];
 
-export const getAllItems = fromItem.getAllItems;
-export const getItem = fromItem.getItem;
+export const getAllNotes = fromNote.getAllNotes;
+export const getNote = fromNote.getNote;

@@ -16,7 +16,7 @@ import {
 } from '../../../../shared/test-util';
 
 import { PostComponent } from './post.component';
-import { Item } from '../../models/item';
+import { Note } from '../../models/note';
 
 
 
@@ -48,7 +48,7 @@ describe(name(PostComponent) + ' tests.', () => {
     component.item = {
       id: 'id',
       text: testNote
-    } as Item;
+    } as Note;
 
     fixture.detectChanges();
 

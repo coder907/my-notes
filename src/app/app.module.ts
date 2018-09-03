@@ -25,7 +25,7 @@ import { ListComponent } from './core/components/list/list.component';
 import { DblClickOrPressDirective } from '../shared/directives/dblclickorpress.directive';
 import { FlexHeightDirective } from '../shared/directives/flex-height.directive';
 import { FixHeaderDirective } from './core/components/list/directives/fix-header.directive';
-import { ItemEffects } from './core/effects/item';
+import { NoteEffects } from './core/effects/note';
 import { environment } from '../environments/environment';
 import { reducers } from './core/store';
 
@@ -63,7 +63,7 @@ import { reducers } from './core/store';
     AngularFireAuthModule,
     FirebaseUIModule.forRoot(environment.firebaseUiAuthConfig),
     AngularFirestoreModule.enablePersistence(),
-    EffectsModule.forRoot([ItemEffects]),
+    EffectsModule.forRoot([NoteEffects]),
   ],
   providers: [{
     provide: HAMMER_GESTURE_CONFIG,
