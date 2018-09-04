@@ -2,28 +2,14 @@
 
 ## Description
 
-See a [live preview](https://my-notes-17a1e.firebaseapp.com/).
+See a [Live Preview](https://my-notes-17a1e.firebaseapp.com/).
 
 See [Requirements Specification Draft](requirements-specification-draft.md) for a short overview.
+
 See [Technical Specification](technical-specification.md) for details.
 
 ## Dependencies
- - @angular/material
- - @angular/cdk
- - @angular/animations
- - hammerjss
- - rxjs
- - rxjs-compat
- - @ngrx/core
- - @ngrx/store
- - @ngrx/store-devtools
- - @ngrx/entity
- - @ngrx/effects
- - ngrx-store-freeze
- - firebase
- - angularfire2
-
- See [package.json](package.json) for a complete list of dependencies
+See [package.json](package.json) for a complete list of dependencies
 
 ## Angular CLI version
 

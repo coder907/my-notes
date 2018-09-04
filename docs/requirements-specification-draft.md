@@ -8,8 +8,8 @@
  - User: A user of the Application.
 
 ### Completion Status
- - PREVIEW: A feature preview is released.
- - COMPLETED: A feature is completed.
+ - PREVIEW: Feature preview is released.
+ - COMPLETED: Feature is completed.
 
 
 
@@ -28,14 +28,14 @@ The Application facilitates personal note management.
  - Tag a note (with one or more tags)
  - Untag a note
 
-### Notes list
- - Search notes
- - Sort notes [PREVIEW]
- - Paginate
-
 ### Tags management
  - Add a tag
  - Edit a tag
+
+### Items (notes, tags) list
+  - Sort [PREVIEW]
+  - Paginate
+  - Search
 
 ### Styles
  - Material [PREVIEW]
@@ -43,7 +43,7 @@ The Application facilitates personal note management.
  - Night theme [PREVIEW]
 
 ### Languages
- - English
+ - English [PREVIEW]
  - Slovenian
 
 ### Storage
@@ -52,11 +52,11 @@ The Application facilitates personal note management.
  - Cloud [PREVIEW]
 
 ### Navigation
- - Menu/sidenav 
- - Notes management
- - Tags management
- - Settings
- - Log out
+ - Menu (sidenav) [PREVIEW]
+ - Notes management [PREVIEW]
+ - Tags management [PREVIEW]
+ - Settings [PREVIEW]
+ - Log out [PREVIEW]
 
 ### Settings
  - Theme (Day/Night)
@@ -65,8 +65,8 @@ The Application facilitates personal note management.
 
 ### Login
   - Anonymous authentication [PREVIEW]
+  - OAuth authentication (Google) [PREVIEW]
   - Username/Password authentication
-  - OAuth authentication
 
 
 
