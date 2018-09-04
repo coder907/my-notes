@@ -22,28 +22,27 @@ import { AuthService } from '../../services/auth-service';
 export class SignInComponent implements OnInit, OnDestroy {
 
   private __firebaseUiInstance: firebaseui.auth.AuthUI;
-
   private __userSubscription: Subscription;
 
   constructor(
     private __angularFireAuth: AngularFireAuth,
     private __authService: AuthService,
   ) {
-    if (!this.__authService.redirectIfSignedIn()) {
-      const windowRef = window as any;
+    const windowRef = window as any;
 
-      if (!windowRef.firebaseUiInstance) {
-        windowRef.firebaseUiInstance = new firebaseui.auth.AuthUI(__angularFireAuth.auth);
-      }
+    if (!windowRef.firebaseUiInstance) {
+      windowRef.firebaseUiInstance = new firebaseui.auth.AuthUI(__angularFireAuth.auth);
+    }
 
-      this.__firebaseUiInstance = windowRef.firebaseUiInstance as firebaseui.auth.AuthUI;
+    this.__firebaseUiInstance = windowRef.firebaseUiInstance as firebaseui.auth.AuthUI;
 
-      this.__userSubscription = this.__authService.user$.subscribe(
-        (user) => {
+    this.__userSubscription = this.__authService.user$.subscribe(
+      (user) => {
+        if (user) {
           this.__authService.redirectToMainPage();
         }
-      );
-    }
+      }
+    );
   }
 
   ngOnInit() {

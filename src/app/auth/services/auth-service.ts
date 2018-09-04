@@ -14,6 +14,10 @@ import { map } from 'rxjs/operators';
 
 import { AngularFireAuth } from 'angularfire2/auth';
 import { User } from 'firebase';
+import { Store } from '@ngrx/store';
+
+import * as fromCoreStore from '../../core/store';
+import { SignOutAction } from '../../core/store/auth';
 
 
 
@@ -22,43 +26,35 @@ import { User } from 'firebase';
 })
 export class AuthService implements OnDestroy {
 
-  private __user: User = null;
   private __user$: Observable<User>;
-
   private __userName$: Observable<string>;
-
   private __userSubscription: Subscription;
 
   constructor(
     private __router: Router,
-    private __angularFireAuth: AngularFireAuth
+    private __angularFireAuth: AngularFireAuth,
+    private __store: Store<fromCoreStore.State>
   ) {
     this.__user$ = this.__angularFireAuth.authState;
-
-    this.__userSubscription = this.__user$.subscribe(
-      (user) => {
-        this.__user = user;
-      }
-    );
   }
 
-  get user() {
-    return this.__user;
-  }
-
-  get user$() {
+  get user$(): Observable<User> {
     return this.__user$;
   }
 
-  get userName$() {
+  get userName$(): Observable<string> {
     if (!this.__userName$) {
-      this.__userName$ = this.__user$.pipe(
+      this.__userName$ = this.user$.pipe(
         map(user => {
-          if (user.isAnonymous) {
-            return 'Guest';
+          if (user) {
+            if (user.isAnonymous) {
+              return 'Guest';
 
+            } else {
+              return user.displayName;
+            }
           } else {
-            return user.displayName;
+            return '';
           }
         })
       );
@@ -81,14 +77,9 @@ export class AuthService implements OnDestroy {
     this.__router.navigate(['']);
   }
 
-  redirectIfSignedIn() {
-    if (this.__user) {
-      this.redirectToMainPage();
-    }
-  }
-
   signOut() {
     this.__angularFireAuth.auth.signOut();
+    this.__store.dispatch(new SignOutAction());
     this.redirectToSignInPage();
   }
 }
