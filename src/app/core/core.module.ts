@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FirebaseUIModule } from 'firebaseui-angular';
 
 import { environment } from '../../environments/environment';
 import { CoreRoutingModule } from './core-routing.module';

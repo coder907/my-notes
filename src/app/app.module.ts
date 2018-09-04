@@ -22,17 +22,17 @@ import { reducers } from './core/store';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    AppRoutingModule,
     MaterialModule,
+    AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAuthModule,
+    AngularFirestoreModule.enablePersistence(),
     StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument({
       name: 'My Notes DevTools',
       // logOnly: environment.production,
       maxAge: 10
     }),
-    AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireAuthModule,
-    AngularFirestoreModule.enablePersistence(),
     EffectsModule.forRoot([]),
   ],
   declarations: [

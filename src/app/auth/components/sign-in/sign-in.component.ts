@@ -1,5 +1,15 @@
-import { Component } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy
+} from '@angular/core';
 
+import { AngularFireAuth } from 'angularfire2/auth';
+import * as firebaseui from 'firebaseui';
+
+import { Subscription } from 'rxjs';
+
+import { environment } from '../../../../environments/environment';
 import { AuthService } from '../../services/auth-service';
 
 
@@ -9,17 +19,42 @@ import { AuthService } from '../../services/auth-service';
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.scss'],
 })
-export class SignInComponent {
+export class SignInComponent implements OnInit, OnDestroy {
+
+  private __firebaseUiInstance: firebaseui.auth.AuthUI;
+
+  private __userSubscription: Subscription;
 
   constructor(
+    private __angularFireAuth: AngularFireAuth,
     private __authService: AuthService,
-  ) { }
+  ) {
+    if (!this.__authService.redirectIfSignedIn()) {
+      const windowRef = window as any;
 
-  onSignInSuccess(event) {
-    this.__authService.redirectToMainPage();
+      if (!windowRef.firebaseUiInstance) {
+        windowRef.firebaseUiInstance = new firebaseui.auth.AuthUI(__angularFireAuth.auth);
+      }
+
+      this.__firebaseUiInstance = windowRef.firebaseUiInstance as firebaseui.auth.AuthUI;
+
+      this.__userSubscription = this.__authService.user$.subscribe(
+        (user) => {
+          this.__authService.redirectToMainPage();
+        }
+      );
+    }
   }
 
-  onSignInFailure(error) {
-    console.log('Error while signing in: ' + error);
+  ngOnInit() {
+    if (this.__firebaseUiInstance) {
+      this.__firebaseUiInstance.start('#firebaseui-auth-container', environment.firebaseUiAuthConfig);
+    }
+  }
+
+  ngOnDestroy() {
+    if (this.__userSubscription) {
+      this.__userSubscription.unsubscribe();
+    }
   }
 }

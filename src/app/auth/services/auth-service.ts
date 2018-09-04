@@ -31,11 +31,11 @@ export class AuthService implements OnDestroy {
 
   constructor(
     private __router: Router,
-    private __afAuth: AngularFireAuth
+    private __angularFireAuth: AngularFireAuth
   ) {
-    this.__user$ = this.__afAuth.authState;
+    this.__user$ = this.__angularFireAuth.authState;
 
-    this.__user$.subscribe(
+    this.__userSubscription = this.__user$.subscribe(
       (user) => {
         this.__user = user;
       }
@@ -60,7 +60,6 @@ export class AuthService implements OnDestroy {
           } else {
             return user.displayName;
           }
-
         })
       );
     }
@@ -82,8 +81,14 @@ export class AuthService implements OnDestroy {
     this.__router.navigate(['']);
   }
 
+  redirectIfSignedIn() {
+    if (this.__user) {
+      this.redirectToMainPage();
+    }
+  }
+
   signOut() {
-    this.__afAuth.auth.signOut();
+    this.__angularFireAuth.auth.signOut();
     this.redirectToSignInPage();
   }
 }
