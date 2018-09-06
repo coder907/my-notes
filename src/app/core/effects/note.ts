@@ -80,30 +80,6 @@ export class NoteEffects implements OnDestroy {
   //   catchError(error => of(new RemoveFailAction(error)))
   // );
 
-  // @Effect()
-  // sync$ = this.__firestore.collection<Note>(this.__notesCollectionPath).stateChanges().pipe(
-  //   mergeMap(actions => actions),
-  //   map(action => {
-  //     switch (action.type) {
-  //       case FirestoreAction.Added:
-  //         return new SyncAddAction({
-  //           id: action.payload.doc.id,
-  //           ...action.payload.doc.data()
-  //         } as Note);
-
-  //       case FirestoreAction.Modified:
-  //         return new SyncUpdateAction({
-  //           id: action.payload.doc.id,
-  //           ...action.payload.doc.data()
-  //         } as Partial<Note>);
-
-  //       case FirestoreAction.Removed:
-  //         return new SyncRemoveAction(action.payload.doc.id);
-  //     }
-  //   }),
-  //   // catchError(error => of(new SyncError(err)))
-  // );
-
   @Effect()
   sync$: Observable<Action> = this.__actions.ofType(NoteActionTypes.Sync).pipe(
     switchMap(a => this.__firestore.collection<Note>(this.__notesCollectionPath).stateChanges().pipe(

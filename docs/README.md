@@ -9,7 +9,7 @@ See [Requirements Specification Draft](requirements-specification-draft.md) for 
 See [Technical Specification](technical-specification.md) for details.
 
 ## Dependencies
-See [package.json](../package.json) for a complete list of dependencies
+See [package.json](../package.json) for a complete list of dependencies.
 
 ## Angular CLI version
 

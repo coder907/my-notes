@@ -37,7 +37,6 @@
 
 .list-container {
   margin: 0px 4px;
-  // height: 100%;
   height: calc(80vh - 88px);
   overflow: auto;
   border-radius: 4px;
@@ -57,7 +56,7 @@ td.updated, th.updated {
 
 .list-noitems-container {
   width: 100%;
-  height: 100%;
+  height: calc(100% - 104px);
   text-align: center;
 }
 

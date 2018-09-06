@@ -63,10 +63,10 @@ The Application facilitates personal note management.
  - Language (English/Slovenian)
  - Storage (Memory/Local/Cloud)
 
-### Login
-  - Anonymous authentication [PREVIEW]
-  - OAuth authentication (Google) [PREVIEW]
-  - Username/Password authentication
+### Sign In
+  - As a guest [PREVIEW]
+  - With Google [PREVIEW]
+  - Using Username/Password
 
 
 

@@ -1,6 +1,5 @@
 import {
   Injectable,
-  OnDestroy
 } from '@angular/core';
 
 import { Router } from '@angular/router';
@@ -24,11 +23,10 @@ import { SignOutAction } from '../../core/store/auth';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthService implements OnDestroy {
+export class AuthService {
 
   private __user$: Observable<User>;
   private __userName$: Observable<string>;
-  private __userSubscription: Subscription;
 
   constructor(
     private __router: Router,
@@ -61,12 +59,6 @@ export class AuthService implements OnDestroy {
     }
 
     return this.__userName$;
-  }
-
-  ngOnDestroy() {
-    if (this.__userSubscription) {
-      this.__userSubscription.unsubscribe();
-    }
   }
 
   redirectToSignInPage() {
