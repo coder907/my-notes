@@ -1,3 +1,17 @@
-<h1 class="tags-label">
-  Tags
-</h1>
+<app-post
+  [multiline]="false"
+  [item]="tagService.editedTag$ | async"
+  placeholder="Enter a new tag"
+  (post)="post($event)"
+  (clear)="tagService.stopEditing()"
+>
+</app-post>
+
+<app-list
+  [items]="tagService.tags$ | async"
+  [editedItem]="tagService.editedTag$ | async"
+  noItemsLabel="No tags to display."
+  (startEditing)="tagService.startEditing($event)"
+  appFixHeader
+>
+</app-list>

@@ -17,8 +17,6 @@ import {
   MatSortable
 } from '@angular/material';
 
-import { Note } from '../../models/note';
-
 
 
 @Component({
@@ -31,10 +29,13 @@ import { Note } from '../../models/note';
 export class ListComponent implements OnInit, OnChanges {
 
   @Input()
-  items: Note[];
+  items: {id: string, text: string, added: number, updated: number}[];
 
   @Input()
-  editedItem: Note;
+  editedItem: {id: string};
+
+  @Input()
+  noItemsLabel = 'No items to display.';
 
   @Output()
   startEditing = new EventEmitter();

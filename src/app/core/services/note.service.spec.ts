@@ -18,9 +18,9 @@ import {
 import * as fromCoreStore from '../store';
 
 import {
-  AddRequestAction,
-  UpdateRequestAction,
-  RemoveRequestAction,
+  AddNoteRequestAction,
+  UpdateNoteRequestAction,
+  RemoveNoteRequestAction,
 } from '../store/note';
 
 import { Note } from '../models/note';
@@ -75,30 +75,30 @@ describe(name(NoteService) + ' tests.', () => {
     expect(ret).toEqual(note$);
   });
 
-  it(name(s.addNote) + ' dispatches ' + name(AddRequestAction) + '.', () => {
+  it(name(s.addNote) + ' dispatches ' + name(AddNoteRequestAction) + '.', () => {
     const updatedDt = new Date().getTime();
     const text = 'add note';
-    const action = new AddRequestAction(updatedDt, text);
+    const action = new AddNoteRequestAction(updatedDt, text);
 
     service.addNote(text);
 
     expect(store.dispatch).toHaveBeenCalledWith(action);
   });
 
-  it(name(s.updateNote) + ' dispatches ' + name(UpdateRequestAction) + '.', () => {
+  it(name(s.updateNote) + ' dispatches ' + name(UpdateNoteRequestAction) + '.', () => {
     const id = 'id';
     const updatedDt = new Date().getTime();
     const text = 'update note';
-    const action = new UpdateRequestAction(id, updatedDt, text);
+    const action = new UpdateNoteRequestAction(id, updatedDt, text);
 
     service.updateNote(id, text);
 
     expect(store.dispatch).toHaveBeenCalledWith(action);
   });
 
-  it(name(s.removeNote) + ' dispatches ' + name(RemoveRequestAction) + '.', () => {
+  it(name(s.removeNote) + ' dispatches ' + name(RemoveNoteRequestAction) + '.', () => {
     const id = 'id';
-    const action = new RemoveRequestAction(id);
+    const action = new RemoveNoteRequestAction(id);
 
     service.removeNote(id);
 

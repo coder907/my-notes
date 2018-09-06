@@ -36,18 +36,18 @@ import { Note } from '../models/note';
 import {
   NoteActionTypes,
   // LoadRequestAction,
-  AddRequestAction,
-  AddSuccessAction,
-  AddFailAction,
-  UpdateRequestAction,
-  UpdateSuccessAction,
-  UpdateFailAction,
-  RemoveRequestAction,
-  RemoveSuccessAction,
-  RemoveFailAction,
-  SyncAddAction,
-  SyncUpdateAction,
-  SyncRemoveAction,
+  AddNoteRequestAction,
+  AddNoteSuccessAction,
+  AddNoteFailAction,
+  UpdateNoteRequestAction,
+  UpdateNoteSuccessAction,
+  UpdateNoteFailAction,
+  RemoveNoteRequestAction,
+  RemoveNoteSuccessAction,
+  RemoveNoteAction,
+  SyncNotesAddAction,
+  SyncNotesUpdateAction,
+  SyncNotesRemoveAction,
 } from '../store/note';
 
 
@@ -73,62 +73,55 @@ export class NoteEffects implements OnDestroy {
     );
   }
 
-  // @Effect()
-  // load$: Observable<Action> = this.__actions.ofType(NoteActionTypes.LoadRequest).pipe(
-  //   switchMap(action => fromPromise(this.__firestore.collection<Note>('notes').ref.limit(20).get())),
-  //   map(query => query.forEach(doc => doc.data())),
-  //   catchError(error => of(new RemoveFailAction(error)))
-  // );
-
   @Effect()
-  sync$: Observable<Action> = this.__actions.ofType(NoteActionTypes.Sync).pipe(
+  sync$: Observable<Action> = this.__actions.ofType(NoteActionTypes.SyncNotes).pipe(
     switchMap(a => this.__firestore.collection<Note>(this.__notesCollectionPath).stateChanges().pipe(
       mergeMap(actions => actions),
       map(action => {
         switch (action.type) {
           case FirestoreAction.Added:
-            return new SyncAddAction({
+            return new SyncNotesAddAction({
               id: action.payload.doc.id,
               ...action.payload.doc.data()
             } as Note);
 
           case FirestoreAction.Modified:
-            return new SyncUpdateAction({
+            return new SyncNotesUpdateAction({
               id: action.payload.doc.id,
               ...action.payload.doc.data()
             } as Partial<Note>);
 
           case FirestoreAction.Removed:
-            return new SyncRemoveAction(action.payload.doc.id);
+            return new SyncNotesRemoveAction(action.payload.doc.id);
         }
       })
     )),
   );
 
   @Effect()
-  remove$: Observable<Action> = this.__actions.ofType(NoteActionTypes.RemoveRequest).pipe(
-    map((action: RemoveRequestAction) => action.id),
+  remove$: Observable<Action> = this.__actions.ofType(NoteActionTypes.RemoveNoteRequest).pipe(
+    map((action: RemoveNoteRequestAction) => action.id),
     switchMap(id => of(this.__firestore.collection<Note>(this.__notesCollectionPath).doc(id).delete())),
-    map(request => new RemoveSuccessAction()),
-    catchError(error => of(new RemoveFailAction(error)))
+    map(request => new RemoveNoteSuccessAction()),
+    catchError(error => of(new RemoveNoteAction(error)))
   );
 
   @Effect()
-  add$: Observable<Action> = this.__actions.ofType(NoteActionTypes.AddRequest).pipe(
+  add$: Observable<Action> = this.__actions.ofType(NoteActionTypes.AddNoteRequest).pipe(
     // map((action: AddRequestAction) => action),
-    switchMap((action: AddRequestAction) =>
+    switchMap((action: AddNoteRequestAction) =>
       of(this.__firestore.collection<Note>(this.__notesCollectionPath).add({added: action.timestamp, updated: action.timestamp, text: action.text} as Note))),
-    map(request => new AddSuccessAction()),
-    catchError(error => of(new AddFailAction(error)))
+    map(request => new AddNoteSuccessAction()),
+    catchError(error => of(new AddNoteFailAction(error)))
   );
 
   @Effect()
-  update$: Observable<Action> = this.__actions.ofType(NoteActionTypes.UpdateRequest).pipe(
+  update$: Observable<Action> = this.__actions.ofType(NoteActionTypes.UpdateNoteRequest).pipe(
     // map((action: UpdateRequestAction) => action),
-    mergeMap((action: UpdateRequestAction) =>
+    mergeMap((action: UpdateNoteRequestAction) =>
       of(this.__firestore.collection<Note>(this.__notesCollectionPath).doc(action.id).set({updated: action.timestamp, text: action.text}, {merge: true}))),
-    map(request => new UpdateSuccessAction()),
-    catchError(error => of(new UpdateFailAction(error)))
+    map(request => new UpdateNoteSuccessAction()),
+    catchError(error => of(new UpdateNoteFailAction(error)))
   );
 
   ngOnDestroy() {

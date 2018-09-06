@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+import { TagService } from '../../services/tag.service';
+
 
 
 @Component({
@@ -9,4 +11,11 @@ import { Component } from '@angular/core';
 })
 export class TagsManagerComponent  {
 
+  constructor(
+    public tagService: TagService,
+  ) {}
+
+  post(text: string) {
+    this.tagService.addOrUpdateTag(text);
+  }
 }

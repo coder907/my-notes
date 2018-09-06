@@ -9,10 +9,6 @@ import {
   ViewChild,
 } from '@angular/core';
 
-import { Observable } from 'rxjs';
-
-import { Note } from '../../models/note';
-
 
 
 @Component({
@@ -24,7 +20,13 @@ import { Note } from '../../models/note';
 export class PostComponent implements OnChanges  {
 
   @Input()
-  item: Note;
+  item: {text: string};
+
+  @Input()
+  multiline: boolean;
+
+  @Input()
+  placeholder: string;
 
   @Output()
   post = new EventEmitter();
@@ -32,17 +34,17 @@ export class PostComponent implements OnChanges  {
   @Output()
   clear = new EventEmitter();
 
-  @ViewChild('textArea')
-  private __textArea;
+  @ViewChild('textElement')
+  private __textElement;
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.item.currentValue && (changes.item.currentValue !== changes.item.previousValue)) {
-      this.textareaFocus();
+      this.textElementFocus();
     }
   }
 
   onPostClick() {
-    this.post.emit(this.textareaValue());
+    this.post.emit(this.textElementValue());
     this.onClear();
   }
 
@@ -50,24 +52,24 @@ export class PostComponent implements OnChanges  {
     this.onClear();
   }
 
-  onTextAreaKeyUpEsc() {
+  onTextElementKeyUpEsc() {
     this.onClear();
   }
 
   private onClear() {
-    this.textareaClear();
+    this.textElementClear();
     this.clear.emit();
   }
 
-  private textareaValue() {
-    return this.__textArea.nativeElement.value;
+  private textElementValue() {
+    return this.__textElement.nativeElement.value;
   }
 
-  private textareaClear() {
-    this.__textArea.nativeElement.value = '';
+  private textElementClear() {
+    this.__textElement.nativeElement.value = '';
   }
 
-  private textareaFocus() {
-    this.__textArea.nativeElement.focus();
+  private textElementFocus() {
+    this.__textElement.nativeElement.focus();
   }
 }

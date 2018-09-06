@@ -132,7 +132,7 @@ describe(name(MainComponent) + ' tests.', () => {
     notesCount = TestUtil.getObservableLength(noteService.notes$);
     expect(notesCount).toBe(4, 'Update note.');
 
-    const editedNote = TestUtil.getObservableObject(noteService.getNote(editId));
+    const editedNote = TestUtil.getObservableObject(noteService.__getNote(editId));
     expect(editedNote.text).toBe(editText, 'Update note.');
 
     // Remove note
@@ -152,15 +152,15 @@ describe(name(MainComponent) + ' tests.', () => {
     expect(table).toBeDefined();
     expect(table.rows.length - 1).toBe(3, 'Initial table note count.');
 
-    const note1: Note = TestUtil.getObservableObject(noteService.getNote('1'));
+    const note1: Note = TestUtil.getObservableObject(noteService.__getNote('1'));
     const tdNote1 = TestUtil.getElementByTextContent(fixture.nativeElement, 'td', note1.text);
     expect(tdNote1).toBeDefined();
 
-    const note2: Note = TestUtil.getObservableObject(noteService.getNote('2'));
+    const note2: Note = TestUtil.getObservableObject(noteService.__getNote('2'));
     const tdNote2 = TestUtil.getElementByTextContent(fixture.nativeElement, 'td', note2.text);
     expect(tdNote2).toBeDefined();
 
-    const note3: Note = TestUtil.getObservableObject(noteService.getNote('3'));
+    const note3: Note = TestUtil.getObservableObject(noteService.__getNote('3'));
     const tdNote3 = TestUtil.getElementByTextContent(fixture.nativeElement, 'td', note3.text);
     expect(tdNote3).toBeDefined();
   });
@@ -178,7 +178,7 @@ describe(name(MainComponent) + ' tests.', () => {
     const btnPost = TestUtil.getElementByTextContent(fixture.nativeElement, 'button', 'Post');
     btnPost.click();
 
-    const addedNote: Note = TestUtil.getObservableObject(noteService.getNote('4'));
+    const addedNote: Note = TestUtil.getObservableObject(noteService.__getNote('4'));
     expect(addedNote.text).toBe(text, 'Added note text.');
 
     const notesCount = TestUtil.getObservableLength(noteService.notes$);
@@ -193,7 +193,7 @@ describe(name(MainComponent) + ' tests.', () => {
   it('Updating a note works correctly. [specification-features-notes-actions-updating-a-note]', () => {
     fixture.detectChanges();
 
-    let note1: Note = TestUtil.getObservableObject(noteService.getNote('1'));
+    let note1: Note = TestUtil.getObservableObject(noteService.__getNote('1'));
     let tdNote1 = TestUtil.getElementByTextContent(fixture.nativeElement, 'td', note1.text);
     expect(tdNote1.textContent.trim()).toBe(note1.text, 'Select table cell.');
 
@@ -211,7 +211,7 @@ describe(name(MainComponent) + ' tests.', () => {
     const notesCount = TestUtil.getObservableLength(noteService.notes$);
     expect(notesCount).toBe(3, 'Storage note count after update.');
 
-    note1 = TestUtil.getObservableObject(noteService.getNote('1'));
+    note1 = TestUtil.getObservableObject(noteService.__getNote('1'));
     expect(note1.text).toBe(newText, 'Updated note text.');
 
     tdNote1 = TestUtil.getElementByTextContent(fixture.nativeElement, 'td', note1.text);
@@ -221,7 +221,7 @@ describe(name(MainComponent) + ' tests.', () => {
   it('Removing a note works correctly. [specification-features-notes-actions-removing-a-note]', () => {
     fixture.detectChanges();
 
-    const note1: Note = TestUtil.getObservableObject(noteService.getNote('1'));
+    const note1: Note = TestUtil.getObservableObject(noteService.__getNote('1'));
     const tdNote1 = TestUtil.getElementByTextContent(fixture.nativeElement, 'td', note1.text);
     expect(tdNote1.textContent.trim()).toBe(note1.text, 'Select table cell.');
 

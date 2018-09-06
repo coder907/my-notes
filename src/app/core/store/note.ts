@@ -15,50 +15,45 @@ import { Note } from '../models/note';
 
 // #region Actions
 export enum NoteActionTypes {
-  // LoadRequest     = '[Note] LoadRequest',
-  Sync            = '[Note] Sync',
-  SyncAdd         = '[Note] Add',
-  SyncUpdate      = '[Note] Update',
-  SyncRemove      = '[Note] Remove',
-  AddRequest      = '[Note] AddRequest',
-  AddSuccess      = '[Note] AddSuccess',
-  AddFail         = '[Note] AddFail',
-  UpdateRequest   = '[Note] UpdateRequest',
-  UpdateSuccess   = '[Note] UpdateSuccess',
-  UpdateFail      = '[Note] UpdateFail',
-  RemoveRequest   = '[Note] RemoveRequest',
-  RemoveSuccess   = '[Note] RemoveSuccess',
-  RemoveFail      = '[Note] RemoveFail',
+  SyncNotes           = '[Note] SyncNotes',
+  SyncNotesAdd        = '[Note] SyncNotesAdd',
+  SyncNotesUpdate     = '[Note] SyncNotesUpdate',
+  SyncNotesRemove     = '[Note] SyncNotesRemove',
+  AddNoteRequest      = '[Note] AddNoteRequest',
+  AddNoteSuccess      = '[Note] AddNoteSuccess',
+  AddNoteFail         = '[Note] AddNoteFail',
+  UpdateNoteRequest   = '[Note] UpdateNoteRequest',
+  UpdateNoteSuccess   = '[Note] UpdateNoteSuccess',
+  UpdateNoteFail      = '[Note] UpdateNoteFail',
+  RemoveNoteRequest   = '[Note] RemoveNoteRequest',
+  RemoveNoteSuccess   = '[Note] RemoveNoteSuccess',
+  RemoveNoteFail      = '[Note] RemoveNoteFail',
 }
 
-// export class LoadRequestAction implements Action {
-//   readonly type = NoteActionTypes.LoadRequest;
-// }
-
-export class SyncAction implements Action {
-  readonly type = NoteActionTypes.Sync;
+export class SyncNotesAction implements Action {
+  readonly type = NoteActionTypes.SyncNotes;
 }
 
-export class SyncAddAction implements Action {
-  readonly type = NoteActionTypes.SyncAdd;
+export class SyncNotesAddAction implements Action {
+  readonly type = NoteActionTypes.SyncNotesAdd;
 
   constructor(public note: Note) { }
 }
 
-export class SyncUpdateAction implements Action {
-  readonly type = NoteActionTypes.SyncUpdate;
+export class SyncNotesUpdateAction implements Action {
+  readonly type = NoteActionTypes.SyncNotesUpdate;
 
   constructor(public note: Partial<Note>) { }
 }
 
-export class SyncRemoveAction implements Action {
-  readonly type = NoteActionTypes.SyncRemove;
+export class SyncNotesRemoveAction implements Action {
+  readonly type = NoteActionTypes.SyncNotesRemove;
 
   constructor(public id: string) { }
 }
 
-export class AddRequestAction implements Action {
-  readonly type = NoteActionTypes.AddRequest;
+export class AddNoteRequestAction implements Action {
+  readonly type = NoteActionTypes.AddNoteRequest;
 
   constructor(
     public timestamp: number,
@@ -66,18 +61,18 @@ export class AddRequestAction implements Action {
   ) {}
 }
 
-export class AddSuccessAction implements Action {
-  readonly type = NoteActionTypes.AddSuccess;
+export class AddNoteSuccessAction implements Action {
+  readonly type = NoteActionTypes.AddNoteSuccess;
 }
 
-export class AddFailAction implements Action {
-  readonly type = NoteActionTypes.AddFail;
+export class AddNoteFailAction implements Action {
+  readonly type = NoteActionTypes.AddNoteFail;
 
   constructor(public error: any) { }
 }
 
-export class UpdateRequestAction implements Action {
-  readonly type = NoteActionTypes.UpdateRequest;
+export class UpdateNoteRequestAction implements Action {
+  readonly type = NoteActionTypes.UpdateNoteRequest;
 
   constructor(
     public id: string,
@@ -86,46 +81,45 @@ export class UpdateRequestAction implements Action {
   ) {}
 }
 
-export class UpdateSuccessAction implements Action {
-  readonly type = NoteActionTypes.UpdateSuccess;
+export class UpdateNoteSuccessAction implements Action {
+  readonly type = NoteActionTypes.UpdateNoteSuccess;
 }
 
-export class UpdateFailAction implements Action {
-  readonly type = NoteActionTypes.UpdateFail;
+export class UpdateNoteFailAction implements Action {
+  readonly type = NoteActionTypes.UpdateNoteFail;
 
   constructor(public error: any) { }
 }
 
-export class RemoveRequestAction implements Action {
-  readonly type = NoteActionTypes.RemoveRequest;
+export class RemoveNoteRequestAction implements Action {
+  readonly type = NoteActionTypes.RemoveNoteRequest;
 
   constructor(public id: string) { }
 }
 
-export class RemoveSuccessAction implements Action {
-  readonly type = NoteActionTypes.RemoveSuccess;
+export class RemoveNoteSuccessAction implements Action {
+  readonly type = NoteActionTypes.RemoveNoteSuccess;
 }
 
-export class RemoveFailAction implements Action {
-  readonly type = NoteActionTypes.RemoveFail;
+export class RemoveNoteAction implements Action {
+  readonly type = NoteActionTypes.RemoveNoteFail;
 
   constructor(public error: any) { }
 }
 
 export type NoteAction =
-  SyncAddAction |
-  SyncUpdateAction |
-  SyncRemoveAction |
-// LoadRequestAction |
-  AddRequestAction |
-  AddSuccessAction |
-  AddFailAction |
-  UpdateRequestAction |
-  UpdateSuccessAction |
-  UpdateFailAction |
-  RemoveRequestAction |
-  RemoveSuccessAction |
-  RemoveFailAction
+  SyncNotesAddAction |
+  SyncNotesUpdateAction |
+  SyncNotesRemoveAction |
+  AddNoteRequestAction |
+  AddNoteSuccessAction |
+  AddNoteFailAction |
+  UpdateNoteRequestAction |
+  UpdateNoteSuccessAction |
+  UpdateNoteFailAction |
+  RemoveNoteRequestAction |
+  RemoveNoteSuccessAction |
+  RemoveNoteAction
 ;
 // #endregion Actions
 
@@ -144,10 +138,10 @@ const initialState: State = adapter.getInitialState({});
 // #region Reducer
 export function reducer(state: State = initialState, action: NoteAction): State {
   switch (action.type) {
-  case NoteActionTypes.SyncAdd:
+  case NoteActionTypes.SyncNotesAdd:
       return adapter.addOne(action.note, state);
 
-  case NoteActionTypes.SyncUpdate:
+  case NoteActionTypes.SyncNotesUpdate:
     return adapter.updateOne({
         id: action.note.id,
         changes: {
@@ -157,7 +151,7 @@ export function reducer(state: State = initialState, action: NoteAction): State 
       state
     );
 
-  case NoteActionTypes.SyncRemove:
+  case NoteActionTypes.SyncNotesRemove:
     return adapter.removeOne(action.id, state);
 
     default:

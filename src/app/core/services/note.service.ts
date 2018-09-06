@@ -10,10 +10,10 @@ import { Observable } from 'rxjs';
 import { Note } from '../models/note';
 
 import {
-  SyncAction,
-  AddRequestAction,
-  UpdateRequestAction,
-  RemoveRequestAction,
+  SyncNotesAction,
+  AddNoteRequestAction,
+  UpdateNoteRequestAction,
+  RemoveNoteRequestAction,
 } from '../store/note';
 
 import * as fromCoreStore from '../store';
@@ -25,16 +25,16 @@ import * as fromCoreStore from '../store';
 })
 export class NoteService {
 
-  private __editedNoteId: string = null;
-
   private __notes$: Observable<Note[]>;
+
+  private __editedNoteId: string = null;
 
   constructor(
     private __store: Store<fromCoreStore.State>
   ) {}
 
   startSync(): void {
-    this.__store.dispatch(new SyncAction());
+    this.__store.dispatch(new SyncNotesAction());
   }
 
   get notes$(): Observable<Note[]> {
@@ -49,15 +49,15 @@ export class NoteService {
   }
 
   addNote(text: string): void {
-    this.__store.dispatch(new AddRequestAction(new Date().getTime(), text));
+    this.__store.dispatch(new AddNoteRequestAction(new Date().getTime(), text));
   }
 
   updateNote(id: string, text: string): void {
-    this.__store.dispatch(new UpdateRequestAction(id, new Date().getTime(), text));
+    this.__store.dispatch(new UpdateNoteRequestAction(id, new Date().getTime(), text));
   }
 
   removeNote(id: string): void {
-    this.__store.dispatch(new RemoveRequestAction(id));
+    this.__store.dispatch(new RemoveNoteRequestAction(id));
   }
 
   addOrUpdateNote(text: string) {
@@ -68,6 +68,16 @@ export class NoteService {
       this.addNote(text);
     }
   }
+
+  get editedNote$() {
+    if (this.__editedNoteId) {
+      return this.getNote(this.__editedNoteId);
+
+    } else {
+      return null;
+    }
+  }
+
   startEditing(id: string) {
     this.__editedNoteId = id;
   }
@@ -80,15 +90,6 @@ export class NoteService {
     if (this.__editedNoteId) {
       this.removeNote(this.__editedNoteId);
       this.stopEditing();
-    }
-  }
-
-  get editedNote$() {
-    if (this.__editedNoteId) {
-      return this.getNote(this.__editedNoteId);
-
-    } else {
-      return null;
     }
   }
 }
