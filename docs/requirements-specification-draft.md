@@ -29,8 +29,8 @@ The Application facilitates personal note management.
  - Untag a note
 
 ### Tags management
- - Add a tag
- - Edit a tag
+ - Add a tag [PREVIEW]
+ - Edit a tag [PREVIEW]
 
 ### Items (notes, tags) list
   - Sort [PREVIEW]
