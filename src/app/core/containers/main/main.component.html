@@ -22,12 +22,12 @@
     
       <button
         mat-icon-button
-        *ngIf="noteService.editedNote$ | async"
-        (click)="noteService.removeEditedNote()"
+        *ngIf="isRemoveButtonVisible$ | async"
+        (click)="removeEditedItem()"
       >
         <mat-icon>delete</mat-icon>
       </button>
-    
+
       <span class="main-toolbar-spacer"></span>
       
       <span class="main-toolbar-flex"></span>

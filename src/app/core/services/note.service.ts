@@ -14,6 +14,8 @@ import {
   AddNoteRequestAction,
   UpdateNoteRequestAction,
   RemoveNoteRequestAction,
+  StartEditingNoteAction,
+  StopEditingNoteAction,
 } from '../store/note';
 
 import * as fromCoreStore from '../store';
@@ -26,8 +28,7 @@ import * as fromCoreStore from '../store';
 export class NoteService {
 
   private __notes$: Observable<Note[]>;
-
-  private __editedNoteId: string = null;
+  private __editedNote$: Observable<Note>;
 
   constructor(
     private __store: Store<fromCoreStore.State>
@@ -61,35 +62,52 @@ export class NoteService {
   }
 
   addOrUpdateNote(text: string) {
-    if (this.__editedNoteId) {
-      this.updateNote(this.__editedNoteId, text);
+    const subscription = this.editedNote$.subscribe(
+      (editedNote) => {
+        if (editedNote) {
+          this.updateNote(editedNote.id, text);
 
-    } else {
-      this.addNote(text);
-    }
+        } else {
+          this.addNote(text);
+        }
+
+        subscription.unsubscribe();
+      },
+      (error) => {
+        console.error('Error adding or updating note: ' + error);
+        subscription.unsubscribe();
+      }
+    );
   }
 
-  get editedNote$() {
-    if (this.__editedNoteId) {
-      return this.getNote(this.__editedNoteId);
-
-    } else {
-      return null;
+  get editedNote$(): Observable<Note> {
+    if (!this.__editedNote$) {
+      this.__editedNote$ = this.__store.pipe(select(fromCoreStore.getEditedNote));
     }
+
+    return this.__editedNote$;
   }
 
   startEditing(id: string) {
-    this.__editedNoteId = id;
+    this.__store.dispatch(new StartEditingNoteAction(id));
   }
 
   stopEditing() {
-    this.__editedNoteId = null;
+    this.__store.dispatch(new StopEditingNoteAction());
   }
 
   removeEditedNote() {
-    if (this.__editedNoteId) {
-      this.removeNote(this.__editedNoteId);
-      this.stopEditing();
-    }
+    const subscription = this.editedNote$.subscribe(
+      (editedNote) => {
+        if (editedNote) {
+          this.removeNote(editedNote.id);
+          subscription.unsubscribe();
+        }
+      },
+      (error) => {
+        console.error('Error removing edited note: ' + error);
+        subscription.unsubscribe();
+      }
+    );
   }
 }

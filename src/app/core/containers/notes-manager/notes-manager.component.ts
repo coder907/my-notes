@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import {
+  Component,
+  OnDestroy
+} from '@angular/core';
 
 import { NoteService } from '../../services/note.service';
 
@@ -9,7 +12,7 @@ import { NoteService } from '../../services/note.service';
   templateUrl: './notes-manager.component.html',
   styleUrls: ['./notes-manager.component.scss'],
 })
-export class NotesManagerComponent  {
+export class NotesManagerComponent implements OnDestroy  {
 
   constructor(
     public noteService: NoteService,
@@ -17,5 +20,9 @@ export class NotesManagerComponent  {
 
   post(text: string) {
     this.noteService.addOrUpdateNote(text);
+  }
+
+  ngOnDestroy() {
+    this.noteService.stopEditing();
   }
 }

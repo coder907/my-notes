@@ -35,7 +35,6 @@ import { Note } from '../models/note';
 
 import {
   NoteActionTypes,
-  // LoadRequestAction,
   AddNoteRequestAction,
   AddNoteSuccessAction,
   AddNoteFailAction,

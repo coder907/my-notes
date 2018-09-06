@@ -19,6 +19,7 @@ export enum NoteActionTypes {
   SyncNotesAdd        = '[Note] SyncNotesAdd',
   SyncNotesUpdate     = '[Note] SyncNotesUpdate',
   SyncNotesRemove     = '[Note] SyncNotesRemove',
+
   AddNoteRequest      = '[Note] AddNoteRequest',
   AddNoteSuccess      = '[Note] AddNoteSuccess',
   AddNoteFail         = '[Note] AddNoteFail',
@@ -28,6 +29,9 @@ export enum NoteActionTypes {
   RemoveNoteRequest   = '[Note] RemoveNoteRequest',
   RemoveNoteSuccess   = '[Note] RemoveNoteSuccess',
   RemoveNoteFail      = '[Note] RemoveNoteFail',
+
+  StartEditingNote    = '[Note] StartEditingNote',
+  StopEditingNote     = '[Note] StopEditingNote',
 }
 
 export class SyncNotesAction implements Action {
@@ -107,6 +111,16 @@ export class RemoveNoteAction implements Action {
   constructor(public error: any) { }
 }
 
+export class StartEditingNoteAction implements Action {
+  readonly type = NoteActionTypes.StartEditingNote;
+
+  constructor(public id: string) { }
+}
+
+export class StopEditingNoteAction implements Action {
+  readonly type = NoteActionTypes.StopEditingNote;
+}
+
 export type NoteAction =
   SyncNotesAddAction |
   SyncNotesUpdateAction |
@@ -119,18 +133,24 @@ export type NoteAction =
   UpdateNoteFailAction |
   RemoveNoteRequestAction |
   RemoveNoteSuccessAction |
-  RemoveNoteAction
+  RemoveNoteAction |
+  StartEditingNoteAction |
+  StopEditingNoteAction
 ;
 // #endregion Actions
 
 
 
 // #region State
-export interface State extends EntityState<Note> {}
+export interface State extends EntityState<Note> {
+  editedId: string | null;
+}
 
 export const adapter = createEntityAdapter<Note>();
 
-const initialState: State = adapter.getInitialState({});
+const initialState: State = adapter.getInitialState({
+  editedId: null,
+});
 // #endregion State
 
 
@@ -138,21 +158,33 @@ const initialState: State = adapter.getInitialState({});
 // #region Reducer
 export function reducer(state: State = initialState, action: NoteAction): State {
   switch (action.type) {
-  case NoteActionTypes.SyncNotesAdd:
+    case NoteActionTypes.SyncNotesAdd:
       return adapter.addOne(action.note, state);
 
-  case NoteActionTypes.SyncNotesUpdate:
-    return adapter.updateOne({
-        id: action.note.id,
-        changes: {
-          ...action.note
-        }
-      },
-      state
-    );
+    case NoteActionTypes.SyncNotesUpdate:
+      return adapter.updateOne({
+          id: action.note.id,
+          changes: {
+            ...action.note
+          }
+        },
+        state
+      );
 
-  case NoteActionTypes.SyncNotesRemove:
-    return adapter.removeOne(action.id, state);
+    case NoteActionTypes.SyncNotesRemove:
+      return adapter.removeOne(action.id, state);
+
+    case NoteActionTypes.StartEditingNote:
+      return {
+        ...state,
+        editedId: action.id,
+      };
+
+    case NoteActionTypes.StopEditingNote:
+      return {
+        ...state,
+        editedId: null,
+      };
 
     default:
       return state;
@@ -163,7 +195,14 @@ export function reducer(state: State = initialState, action: NoteAction): State 
 
 
 // #region Selectors
+export const getEditedId = (state: State) => state.editedId;
+
 export const getNoteState = createFeatureSelector<State>('notes');
+
+export const getEditedNoteId = createSelector(
+  getNoteState,
+  getEditedId
+);
 
 export const {
   selectIds: getNoteIds,
@@ -175,7 +214,15 @@ export const {
 export const getNote = (id: string) => createSelector(
   getNoteEntities,
   (entities) => {
-    return id && entities[id];
+    return entities[id];
+  }
+);
+
+export const getEditedNote = createSelector(
+  getNoteEntities,
+  getEditedNoteId,
+  (entities, editedId) => {
+    return editedId && entities[editedId];
   }
 );
 // #endregion Selectors

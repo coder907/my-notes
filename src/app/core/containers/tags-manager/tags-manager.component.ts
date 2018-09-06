@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import {
+  Component,
+  OnDestroy
+} from '@angular/core';
 
 import { TagService } from '../../services/tag.service';
 
@@ -9,7 +12,7 @@ import { TagService } from '../../services/tag.service';
   templateUrl: './tags-manager.component.html',
   styleUrls: ['./tags-manager.component.scss'],
 })
-export class TagsManagerComponent  {
+export class TagsManagerComponent implements OnDestroy  {
 
   constructor(
     public tagService: TagService,
@@ -17,5 +20,9 @@ export class TagsManagerComponent  {
 
   post(text: string) {
     this.tagService.addOrUpdateTag(text);
+  }
+
+  ngOnDestroy() {
+    this.tagService.stopEditing();
   }
 }

@@ -5,6 +5,8 @@ import { environment } from '../../environments/environment';
 import { CoreRoutingModule } from './core-routing.module';
 import { MaterialModule } from '../material.module';
 import { EffectsModule } from '@ngrx/effects';
+import { NoteEffects } from './effects/note';
+import { TagEffects } from './effects/tag';
 import { MainComponent } from './containers/main/main.component';
 import { MenuComponent } from './containers/menu/menu.component';
 import { NotesManagerComponent } from './containers/notes-manager/notes-manager.component';
@@ -14,7 +16,6 @@ import { PostComponent } from './components/post/post.component';
 import { ListComponent } from './components/list/list.component';
 import { DblClickOrPressDirective } from '../../shared/directives/dblclickorpress.directive';
 import { FixHeaderDirective } from './components/list/directives/fix-header.directive';
-import { NoteEffects } from './effects/note';
 
 
 
@@ -23,7 +24,7 @@ import { NoteEffects } from './effects/note';
     CommonModule,
     CoreRoutingModule,
     MaterialModule,
-    EffectsModule.forFeature([NoteEffects]),
+    EffectsModule.forFeature([NoteEffects, TagEffects]),
   ],
   declarations: [
     MainComponent,

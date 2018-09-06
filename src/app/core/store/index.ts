@@ -50,6 +50,8 @@ export const metaReducers: MetaReducer<State>[] =
 
 export const getAllNotes = fromNote.getAllNotes;
 export const getNote = fromNote.getNote;
+export const getEditedNote = fromNote.getEditedNote;
 
 export const getAllTags = fromTag.getAllTags;
 export const getTag = fromTag.getTag;
+export const getEditedTag = fromTag.getEditedTag;

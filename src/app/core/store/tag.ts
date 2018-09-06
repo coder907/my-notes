@@ -19,6 +19,7 @@ export enum TagActionTypes {
   SyncTagsAdd         = '[Tag] SyncTagsAdd',
   SyncTagsUpdate      = '[Tag] SyncTagsUpdate',
   SyncTagsRemove      = '[Tag] SyncTagsRemove',
+
   AddTagRequest       = '[Tag] AddTagRequest',
   AddTagSuccess       = '[Tag] AddTagSuccess',
   AddTagFail          = '[Tag] AddTagFail',
@@ -28,6 +29,9 @@ export enum TagActionTypes {
   RemoveTagRequest    = '[Tag] RemoveTagRequest',
   RemoveTagSuccess    = '[Tag] RemoveTagSuccess',
   RemoveTagFail       = '[Tag] RemoveTagFail',
+
+  StartEditingTag     = '[Tag] StartEditingTag',
+  StopEditingTag      = '[Tag] StopEditingTag',
 }
 
 export class SyncTagsAction implements Action {
@@ -107,6 +111,16 @@ export class RemoveTagFailAction implements Action {
   constructor(public error: any) { }
 }
 
+export class StartEditingTagAction implements Action {
+  readonly type = TagActionTypes.StartEditingTag;
+
+  constructor(public id: string) { }
+}
+
+export class StopEditingTagAction implements Action {
+  readonly type = TagActionTypes.StopEditingTag;
+}
+
 export type TagAction =
   SyncTagsAddAction |
   SyncTagsUpdateAction |
@@ -119,18 +133,24 @@ export type TagAction =
   UpdateTagFailAction |
   RemoveTagRequestAction |
   RemoveTagSuccessAction |
-  RemoveTagFailAction
+  RemoveTagFailAction |
+  StartEditingTagAction |
+  StopEditingTagAction
 ;
 // #endregion Actions
 
 
 
 // #region State
-export interface State extends EntityState<Tag> {}
+export interface State extends EntityState<Tag> {
+  editedId: string | null;
+}
 
 export const adapter = createEntityAdapter<Tag>();
 
-const initialState: State = adapter.getInitialState({});
+const initialState: State = adapter.getInitialState({
+  editedId: null,
+});
 // #endregion State
 
 
@@ -138,21 +158,33 @@ const initialState: State = adapter.getInitialState({});
 // #region Reducer
 export function reducer(state: State = initialState, action: TagAction): State {
   switch (action.type) {
-  case TagActionTypes.SyncTagsAdd:
-      return adapter.addOne(action.tag, state);
+    case TagActionTypes.SyncTagsAdd:
+        return adapter.addOne(action.tag, state);
 
-  case TagActionTypes.SyncTagsUpdate:
-    return adapter.updateOne({
-        id: action.tag.id,
-        changes: {
-          ...action.tag
-        }
-      },
-      state
-    );
+    case TagActionTypes.SyncTagsUpdate:
+      return adapter.updateOne({
+          id: action.tag.id,
+          changes: {
+            ...action.tag
+          }
+        },
+        state
+      );
 
-  case TagActionTypes.SyncTagsRemove:
-    return adapter.removeOne(action.id, state);
+    case TagActionTypes.SyncTagsRemove:
+      return adapter.removeOne(action.id, state);
+
+    case TagActionTypes.StartEditingTag:
+      return {
+        ...state,
+        editedId: action.id,
+      };
+
+    case TagActionTypes.StopEditingTag:
+      return {
+        ...state,
+        editedId: null,
+      };
 
     default:
       return state;
@@ -163,7 +195,14 @@ export function reducer(state: State = initialState, action: TagAction): State {
 
 
 // #region Selectors
+export const getEditedId = (state: State) => state.editedId;
+
 export const getTagState = createFeatureSelector<State>('tags');
+
+export const getEditedTagId = createSelector(
+  getTagState,
+  getEditedId
+);
 
 export const {
   selectIds: getTagIds,
@@ -176,6 +215,14 @@ export const getTag = (id: string) => createSelector(
   getTagEntities,
   (entities) => {
     return id && entities[id];
+  }
+);
+
+export const getEditedTag = createSelector(
+  getTagEntities,
+  getEditedTagId,
+  (entities, editedId) => {
+    return editedId && entities[editedId];
   }
 );
 // #endregion Selectors

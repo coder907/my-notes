@@ -61,15 +61,24 @@ export class PostComponent implements OnChanges  {
     this.clear.emit();
   }
 
-  private textElementValue() {
-    return this.__textElement.nativeElement.value;
+  private textElementValue(): string {
+    if (this.__textElement) {
+      return this.__textElement.nativeElement.value;
+
+    } else {
+      return '';
+    }
   }
 
   private textElementClear() {
-    this.__textElement.nativeElement.value = '';
+    if (this.__textElement) {
+      this.__textElement.nativeElement.value = '';
+    }
   }
 
   private textElementFocus() {
-    this.__textElement.nativeElement.focus();
+    if (this.__textElement) {
+      this.__textElement.nativeElement.focus();
+    }
   }
 }

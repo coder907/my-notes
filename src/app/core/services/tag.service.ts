@@ -14,6 +14,8 @@ import {
   AddTagRequestAction,
   UpdateTagRequestAction,
   RemoveTagRequestAction,
+  StartEditingTagAction,
+  StopEditingTagAction,
 } from '../store/tag';
 
 import * as fromCoreStore from '../store';
@@ -26,8 +28,7 @@ import * as fromCoreStore from '../store';
 export class TagService {
 
   private __tags$: Observable<Tag[]>;
-
-  private __editedTagId: string = null;
+  private __editedTag$: Observable<Tag>;
 
   constructor(
     private __store: Store<fromCoreStore.State>
@@ -61,35 +62,52 @@ export class TagService {
   }
 
   addOrUpdateTag(text: string) {
-    if (this.__editedTagId) {
-      this.updateTag(this.__editedTagId, text);
+    const subscription = this.editedTag$.subscribe(
+      (editedTag) => {
+        if (editedTag) {
+          this.updateTag(editedTag.id, text);
 
-    } else {
-      this.addTag(text);
-    }
+        } else {
+          this.addTag(text);
+        }
+
+        subscription.unsubscribe();
+      },
+      (error) => {
+        console.error('Error adding or updating tag: ' + error);
+        subscription.unsubscribe();
+      }
+    );
   }
 
   get editedTag$() {
-    if (this.__editedTagId) {
-      return this.getTag(this.__editedTagId);
-
-    } else {
-      return null;
+    if (!this.__editedTag$) {
+      this.__editedTag$ = this.__store.pipe(select(fromCoreStore.getEditedTag));
     }
+
+    return this.__editedTag$;
   }
 
   startEditing(id: string) {
-    this.__editedTagId = id;
+    this.__store.dispatch(new StartEditingTagAction(id));
   }
 
   stopEditing() {
-    this.__editedTagId = null;
+    this.__store.dispatch(new StopEditingTagAction());
   }
 
   removeEditedTag() {
-    if (this.__editedTagId) {
-      this.removeTag(this.__editedTagId);
-      this.stopEditing();
-    }
+    const subscription = this.editedTag$.subscribe(
+      (editedTag) => {
+        if (editedTag) {
+          this.removeTag(editedTag.id);
+          subscription.unsubscribe();
+        }
+      },
+      (error) => {
+        console.error('Error removing edited tag: ' + error);
+        subscription.unsubscribe();
+      }
+    );
   }
 }
