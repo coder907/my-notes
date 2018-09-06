@@ -6,6 +6,7 @@ import {
 } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 import { Tag } from '../models/tag';
 
@@ -62,7 +63,7 @@ export class TagService {
   }
 
   addOrUpdateTag(text: string) {
-    const subscription = this.editedTag$.subscribe(
+    this.editedTag$.pipe(take(1)).subscribe(
       (editedTag) => {
         if (editedTag) {
           this.updateTag(editedTag.id, text);
@@ -70,12 +71,9 @@ export class TagService {
         } else {
           this.addTag(text);
         }
-
-        subscription.unsubscribe();
       },
       (error) => {
         console.error('Error adding or updating tag: ' + error);
-        subscription.unsubscribe();
       }
     );
   }
@@ -97,16 +95,14 @@ export class TagService {
   }
 
   removeEditedTag() {
-    const subscription = this.editedTag$.subscribe(
+    this.editedTag$.pipe(take(1)).subscribe(
       (editedTag) => {
         if (editedTag) {
           this.removeTag(editedTag.id);
-          subscription.unsubscribe();
         }
       },
       (error) => {
         console.error('Error removing edited tag: ' + error);
-        subscription.unsubscribe();
       }
     );
   }

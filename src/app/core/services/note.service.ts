@@ -6,6 +6,7 @@ import {
 } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 import { Note } from '../models/note';
 
@@ -62,7 +63,7 @@ export class NoteService {
   }
 
   addOrUpdateNote(text: string) {
-    const subscription = this.editedNote$.subscribe(
+    this.editedNote$.pipe(take(1)).subscribe(
       (editedNote) => {
         if (editedNote) {
           this.updateNote(editedNote.id, text);
@@ -70,12 +71,9 @@ export class NoteService {
         } else {
           this.addNote(text);
         }
-
-        subscription.unsubscribe();
       },
       (error) => {
         console.error('Error adding or updating note: ' + error);
-        subscription.unsubscribe();
       }
     );
   }
@@ -97,16 +95,14 @@ export class NoteService {
   }
 
   removeEditedNote() {
-    const subscription = this.editedNote$.subscribe(
+    this.editedNote$.pipe(take(1)).subscribe(
       (editedNote) => {
         if (editedNote) {
           this.removeNote(editedNote.id);
-          subscription.unsubscribe();
         }
       },
       (error) => {
         console.error('Error removing edited note: ' + error);
-        subscription.unsubscribe();
       }
     );
   }
