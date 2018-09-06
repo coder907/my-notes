@@ -1,1 +1,9 @@
+.notes-manager-container {
+  height: calc(100vh - 64px);
+  display: flex;
+  flex-direction: column;
+}
 
+.notes-manager-list {
+  flex: 1 1 auto;
+}

@@ -1,17 +1,20 @@
-<app-post
-  [multiline]="true"
-  placeholder="Enter a new note"
-  [item]="noteService.editedNote$ | async"
-  (post)="post($event)"
-  (clear)="noteService.stopEditing()"
->
-</app-post>
+<div class="notes-manager-container">
+  <app-post
+    [multiline]="true"
+    placeholder="Enter a new note"
+    [item]="noteService.editedNote$ | async"
+    (post)="post($event)"
+    (clear)="noteService.stopEditing()"
+  >
+  </app-post>
 
-<app-list
-  [items]="noteService.notes$ | async"
-  [editedItem]="noteService.editedNote$ | async"
-  noItemsLabel="No notes to display."
-  (startEditing)="noteService.startEditing($event)"
-  appFixHeader
->
-</app-list>
+  <app-list
+    class="notes-manager-list"
+    [items]="noteService.notes$ | async"
+    [editedItem]="noteService.editedNote$ | async"
+    noItemsLabel="No notes to display."
+    (startEditing)="noteService.startEditing($event)"
+    appFixHeader
+  >
+  </app-list>
+</div>

@@ -32,14 +32,16 @@
 }
 
 :host {
-  padding-bottom: 4px;
+  display: flex;
 }
 
 .list-container {
+  position: relative;
+  display: flex;
+  flex: 1 1 auto;
   margin: 0px 4px;
-  height: calc(80vh - 88px);
-  overflow: auto;
   border-radius: 4px;
+  overflow: auto;
 }
 
 .list-table {
@@ -55,14 +57,11 @@ td.updated, th.updated {
 }
 
 .list-no-items-container {
-  width: 100%;
-  height: calc(100% - 104px);
-  text-align: center;
-}
-
-.list-no-items-label {
-  position: relative;
+  position: absolute;
   top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
 }
 
 @media screen and (min-width: 768px) {
