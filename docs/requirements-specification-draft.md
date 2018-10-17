@@ -7,10 +7,6 @@
  - Application: My Notes.
  - User: A user of the Application.
 
-### Completion Status
- - PREVIEW: Feature preview is released.
- - COMPLETED: Feature is completed.
-
 
 
 ## Purpose
@@ -22,50 +18,47 @@ The Application facilitates personal note management.
 ## Features
 
 ### Notes management
- - Add a note [PREVIEW]
- - Edit a note [PREVIEW]
- - Remove a note [PREVIEW]
+ - Add a note [DONE]
+ - Edit a note [DONE]
+ - Remove a note [DONE]
  - Tag a note (with one or more tags)
  - Untag a note
 
 ### Tags management
- - Add a tag [PREVIEW]
- - Edit a tag [PREVIEW]
+ - Add a tag [DONE]
+ - Edit a tag [DONE]
 
 ### Items (notes, tags) list
-  - Sort [PREVIEW]
+  - Sort
   - Paginate
   - Search
 
 ### Styles
- - Material [PREVIEW]
- - Day theme [PREVIEW]
- - Night theme [PREVIEW]
+ - Material [DONE]
+ - Day theme [DONE]
+ - Night theme [DONE]
 
 ### Languages
- - English [PREVIEW]
+ - English [DONE]
  - Slovenian
 
 ### Storage
- - Memory
- - Local
- - Cloud [PREVIEW]
+ - Cloud (Firestore) [DONE]
 
 ### Navigation
- - Menu (sidenav) [PREVIEW]
- - Notes management [PREVIEW]
- - Tags management [PREVIEW]
- - Settings [PREVIEW]
- - Log out [PREVIEW]
+ - Menu (sidenav) [DONE]
+ - Notes management [DONE]
+ - Tags management [DONE]
+ - Settings [DONE]
+ - Log out [DONE]
 
 ### Settings
  - Theme (Day/Night)
  - Language (English/Slovenian)
- - Storage (Memory/Local/Cloud)
 
 ### Sign In
-  - As a guest [PREVIEW]
-  - With Google [PREVIEW]
+  - As a guest [DONE]
+  - With Google [DONE]
   - Using Username/Password
 
 
