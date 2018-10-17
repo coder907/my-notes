@@ -14,17 +14,17 @@ import { take } from 'rxjs/operators';
 export class MenuComponent  {
 
   constructor(
+    public guiService: GuiService,
     private __router: Router,
-    private __guiService: GuiService,
   ) {}
 
   async navigate(link: string) {
     this.__router.navigate([link]);
 
-    const isHandset = (await this.__guiService.isHandset$.pipe(take(1)).toPromise()).matches; // TODO: does this really make sense?
+    const isHandset = (await this.guiService.isHandset$.pipe(take(1)).toPromise()).matches; // TODO: does this really make sense?
 
     if (isHandset) {
-      this.__guiService.closeSidenav();
+      this.guiService.closeSidenav();
     }
   }
 }

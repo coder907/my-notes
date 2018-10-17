@@ -1,5 +1,8 @@
-<div class="menu-header">
-  My Notes&nbsp;
+<div
+  class="menu-header"
+  *ngIf="!(guiService.isHandset$ | async).matches"
+>
+  My Notes
 </div>
 
 <mat-nav-list>

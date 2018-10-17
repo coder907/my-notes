@@ -14,6 +14,7 @@
       <button
         mat-icon-button
         (click)="sidenav.toggle()"
+        *ngIf="(guiService.isHandset$ | async).matches"
       >
         <mat-icon>menu</mat-icon>
       </button>
