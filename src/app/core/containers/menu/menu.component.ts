@@ -1,8 +1,13 @@
-import { Component } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+} from '@angular/core';
+
 import { Router } from '@angular/router';
 
-import { GuiService } from '../../services/gui.service';
 import { take } from 'rxjs/operators';
+
+import { GuiService } from '../../services/gui.service';
 
 
 
@@ -10,6 +15,7 @@ import { take } from 'rxjs/operators';
   selector: 'app-menu',
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MenuComponent  {
 

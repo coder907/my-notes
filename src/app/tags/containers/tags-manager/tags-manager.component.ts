@@ -2,6 +2,7 @@ import {
   Component,
   OnInit,
   OnDestroy,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 
 import { Subscription } from 'rxjs';
@@ -18,6 +19,7 @@ import { ColumnFormat } from '../../../core/components/list/models/column-format
   selector: 'app-tags-manager',
   templateUrl: './tags-manager.component.html',
   styleUrls: ['./tags-manager.component.scss'],
+  // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TagsManagerComponent implements OnInit, OnDestroy  {
 

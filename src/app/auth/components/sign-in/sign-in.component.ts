@@ -1,7 +1,8 @@
 import {
   Component,
   OnInit,
-  OnDestroy
+  OnDestroy,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -18,6 +19,7 @@ import { AuthService } from '../../services/auth-service';
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SignInComponent implements OnInit, OnDestroy {
 
