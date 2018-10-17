@@ -15,8 +15,8 @@ import {
 import { Observable } from 'rxjs';
 
 import { AuthService } from '../../../auth/services/auth-service';
-import { NoteService } from '../../services/note.service';
-import { TagService } from '../../services/tag.service';
+import { NoteService } from '../../../notes/services/note.service';
+import { TagService } from '../../../tags/services/tag.service';
 import { GuiService } from '../../services/gui.service';
 
 import { combineLatest } from 'rxjs';
@@ -40,20 +40,18 @@ export class MainComponent implements OnInit {
   constructor(
     public guiService: GuiService,
     public authService: AuthService,
-    public noteService: NoteService,
-    public tagService: TagService,
+    public __noteService: NoteService,
+    public __tagService: TagService,
     private __router: Router,
     private __snackBar: MatSnackBar,
   ) {}
 
   ngOnInit() {
     this.guiService.init(this.__sidenav, this.__snackBar);
-    this.noteService.startSync();
-    this.tagService.startSync();
 
     this.isRemoveButtonVisible$ = combineLatest(
-      this.noteService.editedNote$,
-      this.tagService.editedTag$,
+      this.__noteService.editedNote$,
+      this.__tagService.editedTag$,
 
       (editedNote, editedTag) => {
         if (editedNote || editedTag) {
@@ -70,10 +68,10 @@ export class MainComponent implements OnInit {
     const url = this.__router.url;
 
     if (url === '/notes') {
-      this.noteService.removeEditedNote();
+      this.__noteService.removeEditedNote();
 
     } else if (url === '/tags') {
-      this.tagService.removeEditedTag();
+      this.__tagService.removeEditedTag();
     }
   }
 

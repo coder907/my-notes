@@ -12,10 +12,10 @@ import { HammerConfig } from '../config/hammer';
 
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
-import { MaterialModule } from './material.module';
 import { AppComponent } from './app.component';
-import { reducers } from './core/store';
-import { metaReducers } from './core/store';
+// import { reducers } from './core/store';
+// import { metaReducers } from './core/store';
+import { reducers } from './store';
 
 
 
@@ -23,26 +23,28 @@ import { metaReducers } from './core/store';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    MaterialModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AngularFirestoreModule.enablePersistence(),
-    StoreModule.forRoot(reducers, {metaReducers: metaReducers}),
+    // StoreModule.forRoot(reducers, {metaReducers: metaReducers}),
+    StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument({
       name: 'My Notes DevTools',
-      // logOnly: environment.production,
       maxAge: 10
     }),
     EffectsModule.forRoot([]),
   ],
+
   declarations: [
     AppComponent,
   ],
+
   providers: [{
     provide: HAMMER_GESTURE_CONFIG,
     useClass: HammerConfig
   }],
+
   bootstrap: [AppComponent]
 })
 export class AppModule {}

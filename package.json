@@ -31,6 +31,7 @@
     "@ngrx/entity": "^6.1.0",
     "@ngrx/store": "^6.1.0",
     "@ngrx/store-devtools": "^6.1.0",
+    "angular-split": "^1.0.0-rc.3",
     "angularfire2": "^5.0.0-rc.12",
     "core-js": "^2.5.7",
     "firebase": "^5.4.2",

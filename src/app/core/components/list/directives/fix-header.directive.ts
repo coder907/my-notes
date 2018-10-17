@@ -4,8 +4,6 @@ import {
   OnInit,
 } from '@angular/core';
 
-import { ListComponent } from '../list.component';
-
 
 
 @Directive({
