@@ -71,7 +71,7 @@ export class TagEffects implements OnDestroy {
 
   @Effect()
   sync$: Observable<Action> = this.__actions.pipe(
-    ofType(TagActionTypes.SyncTags),
+    ofType(TagActionTypes.SyncTagsRequest),
 
     switchMap(a => this.__firestore.collection<Tag>(this.__tagsCollectionPath).stateChanges().pipe(
 

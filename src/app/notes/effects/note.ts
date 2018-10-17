@@ -71,7 +71,7 @@ export class NoteEffects implements OnDestroy {
 
   @Effect()
   sync$: Observable<Action> = this.__actions.pipe(
-    ofType(NoteActionTypes.SyncNotes),
+    ofType(NoteActionTypes.SyncNotesRequest),
 
     switchMap(a => this.__firestore.collection<Note>(this.__notesCollectionPath).stateChanges().pipe(
 

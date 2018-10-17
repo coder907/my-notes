@@ -11,7 +11,7 @@ import { take } from 'rxjs/operators';
 import { Tag } from '../models/tag';
 import { TagsState } from '../store/state';
 
-import { SyncTagsAction } from '../store/actions/sync-tags.action';
+import { SyncTagsRequestAction } from '../store/actions/sync-tags-request.action';
 import { AddTagRequestAction } from '../store/actions/add-tag-request.action';
 import { UpdateTagRequestAction } from '../store/actions/update-tag-request.action';
 import { RemoveTagRequestAction } from '../store/actions/remove-tag-request.action';
@@ -36,7 +36,7 @@ export class TagService {
   ) {}
 
   startSync(): void {
-    this.__store.dispatch(new SyncTagsAction());
+    this.__store.dispatch(new SyncTagsRequestAction());
   }
 
   get tags$(): Observable<Tag[]> {

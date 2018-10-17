@@ -11,7 +11,7 @@ import { take } from 'rxjs/operators';
 import { Note } from '../models/note';
 import { NotesState } from '../store/state';
 
-import { SyncNotesAction } from '../store/actions/sync-notes.action';
+import { SyncNotesRequestAction } from '../store/actions/sync-notes-request.action';
 import { AddNoteRequestAction } from '../store/actions/add-note-request.action';
 import { UpdateNoteRequestAction } from '../store/actions/update-note-request.action';
 import { RemoveNoteRequestAction } from '../store/actions/remove-note-request.action';
@@ -35,7 +35,7 @@ export class NoteService {
   ) {}
 
   startSync(): void {
-    this.__store.dispatch(new SyncNotesAction());
+    this.__store.dispatch(new SyncNotesRequestAction());
   }
 
   get notes$(): Observable<Note[]> {

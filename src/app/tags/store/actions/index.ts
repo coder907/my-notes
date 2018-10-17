@@ -16,7 +16,7 @@ import { StopEditingTagAction } from './stop-editing.action';
 
 
 export enum TagActionTypes {
-  SyncTags           = '[Tag] SyncTags',
+  SyncTagsRequest           = '[Tag] SyncTags',
   SyncTagsAdd        = '[Tag] SyncTagsAdd',
   SyncTagsUpdate     = '[Tag] SyncTagsUpdate',
   SyncTagsRemove     = '[Tag] SyncTagsRemove',

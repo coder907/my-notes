@@ -16,7 +16,7 @@ import { StopEditingNoteAction } from './stop-editing.action';
 
 
 export enum NoteActionTypes {
-  SyncNotes           = '[Note] SyncNotes',
+  SyncNotesRequest    = '[Note] SyncNotesRequest',
   SyncNotesAdd        = '[Note] SyncNotesAdd',
   SyncNotesUpdate     = '[Note] SyncNotesUpdate',
   SyncNotesRemove     = '[Note] SyncNotesRemove',
@@ -49,7 +49,7 @@ export type NoteAction =
   RemoveNoteRequestAction |
   RemoveNoteSuccessAction |
   RemoveNoteFailAction |
-  
+
   StartEditingNoteAction |
   StopEditingNoteAction
 ;
