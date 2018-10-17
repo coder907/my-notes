@@ -8,7 +8,7 @@
   >
   </app-post>
 
-  <app-list
+  <app-static-list
     class="notes-manager-list"
     [items]="noteService.notes$ | async"
     [editedItem]="noteService.editedNote$ | async"
@@ -16,5 +16,5 @@
     (startEditing)="noteService.startEditing($event)"
     appFixHeader
   >
-  </app-list>
+  </app-static-list>
 </div>

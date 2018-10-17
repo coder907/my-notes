@@ -1,7 +1,7 @@
-<div class="list-container mat-elevation-z8">
+<div class="static-list-container mat-elevation-z8">
   <table
     #table
-    class="list-table"
+    class="static-list-table"
     mat-table
     [dataSource]="dataSource"
     matSort
@@ -42,7 +42,7 @@
 
   <div
     *ngIf="!items.length"
-    class="list-no-items-container"
+    class="static-list-no-items-container"
   >
     <span>{{ noItemsLabel }}</span>
   </div>

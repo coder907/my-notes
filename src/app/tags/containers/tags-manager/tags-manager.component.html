@@ -8,7 +8,7 @@
   >
   </app-post>
 
-  <app-list
+  <app-static-list
     class="tags-manager-list"
     [items]="tagService.tags$ | async"
     [editedItem]="tagService.editedTag$ | async"
@@ -16,6 +16,6 @@
     (startEditing)="tagService.startEditing($event)"
     appFixHeader
   >
-  </app-list>
+  </app-static-list>
 </div>
   

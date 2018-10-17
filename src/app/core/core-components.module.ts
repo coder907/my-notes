@@ -8,7 +8,7 @@ import {
   MatSortModule,
 } from '@angular/material';
 
-import { ListComponent } from './components/list/list.component';
+import { StaticListComponent } from './components/static-list/static-list.component';
 import { PostComponent } from './components/post/post.component';
 import { DblClickOrPressDirective } from '../directives/dblclickorpress.directive';
 
@@ -23,12 +23,12 @@ import { DblClickOrPressDirective } from '../directives/dblclickorpress.directiv
     MatSortModule,
   ],
   declarations: [
-    ListComponent,
+    StaticListComponent,
     PostComponent,
     DblClickOrPressDirective,
   ],
   exports: [
-    ListComponent,
+    StaticListComponent,
     PostComponent,
     DblClickOrPressDirective,
   ]

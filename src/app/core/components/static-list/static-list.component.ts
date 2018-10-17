@@ -20,13 +20,13 @@ import {
 
 
 @Component({
-  selector: 'app-list',
-  styleUrls: ['list.component.scss'],
-  templateUrl: 'list.component.html',
+  selector: 'app-static-list',
+  styleUrls: ['static-list.component.scss'],
+  templateUrl: 'static-list.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
-export class ListComponent implements OnInit, OnChanges {
+export class StaticListComponent implements OnInit, OnChanges {
 
   @Input()
   items: {id: string, text: string, added: number, updated: number}[];
