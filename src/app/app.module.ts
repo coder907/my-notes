@@ -14,6 +14,7 @@ import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { reducers } from './store';
+import { metaReducers } from './store';
 
 
 
@@ -25,7 +26,7 @@ import { reducers } from './store';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AngularFirestoreModule.enablePersistence(),
-    StoreModule.forRoot(reducers),
+    StoreModule.forRoot(reducers, {metaReducers: metaReducers}),
     StoreDevtoolsModule.instrument({
       name: 'My Notes DevTools',
       maxAge: 10
