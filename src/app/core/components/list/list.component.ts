@@ -4,6 +4,8 @@ import {
   Input,
   Output,
   OnInit,
+  OnChanges,
+  SimpleChanges,
   ChangeDetectionStrategy,
 } from '@angular/core';
 
@@ -20,7 +22,7 @@ import { ColumnFormat } from './models/column-format';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
-export class ListComponent implements OnInit {
+export class ListComponent implements OnInit, OnChanges {
 
   @Input()
   listDefinition: ListDefinition;
@@ -43,6 +45,20 @@ export class ListComponent implements OnInit {
   displayedColumns: string[];
 
   ngOnInit() {
+    this.__updateDisplayedColumns();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    const columnDefinitions = changes.columnDefinitions;
+
+    if (  columnDefinitions &&
+         (columnDefinitions.currentValue !== columnDefinitions.previousValue)
+    ) {
+      this.__updateDisplayedColumns();
+    }
+  }
+
+  __updateDisplayedColumns() {
     this.displayedColumns = this.columnDefinitions.map(columnDefinition => columnDefinition.name);
   }
 

@@ -42,6 +42,10 @@
   width: 100%;
 }
 
+thead {
+  display: none;
+}
+
 .mat-cell {
   padding-right: 16px;
 }
@@ -59,4 +63,8 @@
     margin: 0px 8px;
     border-radius: 8px;
   }
+
+  thead {
+    display: table-header-group;
+  }  
 }
