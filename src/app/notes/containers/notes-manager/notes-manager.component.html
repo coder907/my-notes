@@ -8,13 +8,13 @@
   >
   </app-post>
 
-  <app-static-list
-    class="notes-manager-list"
+  <app-list
+    [listDefinition]="listDefinition"
+    [columnDefinitions]="columnDefinitions"
     [items]="noteService.notes$ | async"
     [editedItem]="noteService.editedNote$ | async"
     noItemsLabel="No notes to display."
     (startEditing)="noteService.startEditing($event)"
-    appFixHeader
   >
-  </app-static-list>
+  </app-list>
 </div>
