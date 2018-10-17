@@ -11,7 +11,8 @@ import {
 import { ListComponent } from './components/list/list.component';
 import { PostComponent } from './components/post/post.component';
 import { DblClickOrPressDirective } from '../directives/dblclickorpress.directive';
-
+import { HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
+import { HammerConfig } from '../../config/hammer';
 
 
 @NgModule({
@@ -27,6 +28,10 @@ import { DblClickOrPressDirective } from '../directives/dblclickorpress.directiv
     PostComponent,
     DblClickOrPressDirective,
   ],
+  providers: [{
+    provide: HAMMER_GESTURE_CONFIG,
+    useClass: HammerConfig
+  }],
   exports: [
     ListComponent,
     PostComponent,

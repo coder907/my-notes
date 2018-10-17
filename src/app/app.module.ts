@@ -7,8 +7,6 @@ import { EffectsModule } from '@ngrx/effects';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
-import { HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
-import { HammerConfig } from '../config/hammer';
 
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
@@ -37,11 +35,6 @@ import { metaReducers } from './store';
   declarations: [
     AppComponent,
   ],
-
-  providers: [{
-    provide: HAMMER_GESTURE_CONFIG,
-    useClass: HammerConfig
-  }],
 
   bootstrap: [AppComponent]
 })
