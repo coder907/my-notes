@@ -13,8 +13,6 @@ import { HammerConfig } from '../config/hammer';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-// import { reducers } from './core/store';
-// import { metaReducers } from './core/store';
 import { reducers } from './store';
 
 
@@ -27,7 +25,6 @@ import { reducers } from './store';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AngularFirestoreModule.enablePersistence(),
-    // StoreModule.forRoot(reducers, {metaReducers: metaReducers}),
     StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument({
       name: 'My Notes DevTools',

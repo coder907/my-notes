@@ -9,10 +9,6 @@ import { map } from 'rxjs/operators';
 
 import { AngularFireAuth } from 'angularfire2/auth';
 import { User } from 'firebase';
-// import { Store } from '@ngrx/store';
-
-// import * as fromCoreStore from '../../core/store';
-// import { SignOutAction } from '../../core/store/auth';
 
 
 
@@ -27,7 +23,6 @@ export class AuthService {
   constructor(
     private __router: Router,
     private __angularFireAuth: AngularFireAuth,
-    // private __store: Store<fromCoreStore.State>
   ) {
     this.__user$ = this.__angularFireAuth.authState;
   }
@@ -65,9 +60,8 @@ export class AuthService {
     this.__router.navigate(['']);
   }
 
-  // signOut() {
-  //   this.__angularFireAuth.auth.signOut();
-  //   this.__store.dispatch(new SignOutAction());
-  //   this.redirectToSignInPage();
-  // }
+  signOut() {
+    this.__angularFireAuth.auth.signOut();
+    this.redirectToSignInPage();
+  }
 }
