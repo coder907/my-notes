@@ -34,7 +34,7 @@
       mat-row
       *matRowDef="let row; columns: displayedColumns;"
       [class.selected]="row.id === editedItem?.id"
-      (click)="startEditing.emit(row.id)"
+      (appDblClickOrPress)="startEditing.emit(row.id)"
     >
     </tr>
 
