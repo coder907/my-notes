@@ -1,8 +1,8 @@
 ## Description
 
-See a [Live Preview](https://my-notes-17a1e.firebaseapp.com/).
+See a [Live Preview](https://coder907.github.io/my-notes/).
 
-See [Requirements Specification Draft](requirements-specification-draft.md) for a short overview.
+See [Requirements Specification](requirements-specification.md) for a short overview.
 
 See [Technical Specification](technical-specification.md) for details.
 
