@@ -1,0 +1,25 @@
+@import '~@angular/material/theming';
+
+@mixin menu-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+
+  .menu-header {
+    background-color: mat-color($primary);
+    color: mat-color($accent, 100);
+  }
+}
+
+.menu-header {
+  height: 64px;
+  line-height: 64px;
+  padding-left: 8px;
+  font-size: 2em;
+}
+
+@media screen and (min-width: 768px) {
+  .menu-header {
+    padding-left: 8px;
+    font-size: 2.25em;
+  }
+}

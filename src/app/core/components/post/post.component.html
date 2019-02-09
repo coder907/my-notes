@@ -1,0 +1,50 @@
+<div
+  class="post-container"
+>
+  <textarea
+    #textElement
+    matInput
+    class="post-textarea mat-elevation-z8"
+    value="{{ item?.text }}"
+    [placeholder]="placeholder"
+    (keyup.esc)="onTextElementKeyUpEsc();"
+    *ngIf="multiline"
+  >
+  </textarea>
+
+  <input
+    #textElement
+    matInput
+    class="post-input mat-elevation-z8"
+    [class.post-input-singleline] = "!multiline"
+    value="{{ item?.text }}"
+    [placeholder]="placeholder"
+    autocomplete="off"
+    (keyup.esc)="onTextElementKeyUpEsc();"
+    *ngIf="!multiline"
+  />
+
+  <div class="post-button-container">
+    <button
+      type="button"
+      mat-raised-button
+      class="post-button post-button-post mat-elevation-z8"
+      [class.post-button-singleline] = "!multiline"
+      color="primary"
+      (click)="onPostClick()"
+    >
+      Post
+    </button>
+
+    <button
+      type="button"
+      mat-raised-button
+      class="post-button mat-elevation-z8"
+      [class.post-button-singleline] = "!multiline"
+      color="accent"
+      (click)="onClearClick()"
+    >
+      Clear
+    </button>
+  </div>
+</div>
