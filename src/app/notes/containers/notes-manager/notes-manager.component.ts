@@ -25,12 +25,12 @@ export class NotesManagerComponent implements OnInit, OnDestroy  {
 
   listDefinition: ListDefinition;
   columnDefinitions: ColumnDefinition[];
-  
+
   isHandsetSubscription: Subscription;
 
   constructor(
-    public noteService: NoteService,
-    public guiService: GuiService,
+    public readonly noteService: NoteService,
+    public readonly guiService: GuiService,
   ) {
     this.isHandsetSubscription = guiService.isHandset$.subscribe(
       (breakpointState) => {

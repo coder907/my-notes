@@ -14,11 +14,11 @@ import { MenuComponent } from './containers/menu/menu.component';
     CommonModule,
     CoreRoutingModule,
     CoreMaterialModule,
-    CoreComponentsModule,
+    CoreComponentsModule
   ],
   declarations: [
     MainComponent,
-    MenuComponent,
+    MenuComponent
   ],
 })
 export class CoreModule {}

@@ -7,6 +7,4 @@ import { Component } from '@angular/core';
   templateUrl: './settings-manager.component.html',
   styleUrls: ['./settings-manager.component.scss'],
 })
-export class SettingsManagerComponent  {
-
-}
+export class SettingsManagerComponent { }

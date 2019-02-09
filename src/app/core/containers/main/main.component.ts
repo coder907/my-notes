@@ -36,11 +36,11 @@ export class MainComponent implements OnInit {
   private sidenav: MatSidenav;
 
   constructor(
-    public guiService: GuiService,
-    public authService: AuthService,
-    public noteService: NoteService,
-    private router: Router,
-    private snackBar: MatSnackBar,
+    public readonly guiService: GuiService,
+    public readonly authService: AuthService,
+    public readonly noteService: NoteService,
+    private readonly router: Router,
+    private readonly snackBar: MatSnackBar,
   ) { }
 
   ngOnInit() {

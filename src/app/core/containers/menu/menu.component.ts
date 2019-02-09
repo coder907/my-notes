@@ -20,8 +20,8 @@ import { GuiService } from '../../services/gui.service';
 export class MenuComponent  {
 
   constructor(
-    public guiService: GuiService,
-    private router: Router,
+    public readonly guiService: GuiService,
+    private readonly router: Router,
   ) {}
 
   async navigate(link: string) {

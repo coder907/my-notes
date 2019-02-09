@@ -43,34 +43,19 @@ import { UpdateNoteFailAction } from '../store/actions/update-note-fail.action';
 export class NoteEffects {
 
   constructor(
-    private actions: Actions,
-    private dataService: DataService,
+    private readonly actions: Actions,
+    private readonly dataService: DataService,
   ) { }
 
   @Effect({ dispatch: false })
-  init$: Observable<any> = defer(() => of(null)).pipe(
+  readonly init$: Observable<any> = defer(() => of(null)).pipe(
     tap(() => {
       console.log('NoteEffects: init$');
     })
   );
 
-  // @Effect()
-  // load$: Observable<Action> = this.actions.pipe(
-  //   ofType(NoteActionTypes.AddNoteRequest),
-
-  //   concatMap((action: LoadNotesRequestAction) =>
-  //     from(
-  //       this.dataService.notes.limit(20).toArray()
-  //     )
-  //   ),
-
-  //   map(notes => new LoadNotesSuccessAction(notes)),
-
-  //   catchError(error => of(new LoadNotesFailAction(error)))
-  // );
-
   @Effect()
-  load$: Observable<Action> = this.actions.pipe(
+  readonly load$: Observable<Action> = this.actions.pipe(
     ofType(NoteActionTypes.LoadNotesRequest),
 
     concatMap(async (action: LoadNotesRequestAction) => {
@@ -84,7 +69,7 @@ export class NoteEffects {
   );
 
   @Effect()
-  add$: Observable<Action> = this.actions.pipe(
+  readonly add$: Observable<Action> = this.actions.pipe(
     ofType(NoteActionTypes.AddNoteRequest),
 
     concatMap(async (action: AddNoteRequestAction) => {
@@ -105,7 +90,7 @@ export class NoteEffects {
   );
 
   @Effect()
-  update$: Observable<Action> = this.actions.pipe(
+  readonly update$: Observable<Action> = this.actions.pipe(
     ofType(NoteActionTypes.UpdateNoteRequest),
 
     concatMap(async (action: UpdateNoteRequestAction) => {
@@ -125,7 +110,7 @@ export class NoteEffects {
   );
 
   @Effect()
-  remove$: Observable<Action> = this.actions.pipe(
+  readonly remove$: Observable<Action> = this.actions.pipe(
     ofType(NoteActionTypes.RemoveNoteRequest),
 
     concatMap(async (action: RemoveNoteRequestAction) => {

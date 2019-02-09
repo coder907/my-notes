@@ -31,7 +31,7 @@ export class NoteService {
   private editedNoteValue$: Observable<Note>;
 
   constructor(
-    private store: Store<NotesState>
+    private readonly store: Store<NotesState>
   ) {}
 
   startSync(): void {

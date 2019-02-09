@@ -21,7 +21,7 @@ export class SignInComponent implements OnDestroy {
   private userSubscription: Subscription;
 
   constructor(
-    private authService: AuthService,
+    private readonly authService: AuthService,
   ) {
     this.userSubscription = this.authService.user$.subscribe(
       (user) => {

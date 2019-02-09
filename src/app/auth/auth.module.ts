@@ -9,10 +9,10 @@ import { SignInComponent } from './components/sign-in/sign-in.component';
 @NgModule({
   imports: [
     CommonModule,
-    AuthRoutingModule,
+    AuthRoutingModule
   ],
   declarations: [
-    SignInComponent,
+    SignInComponent
   ],
 })
 export class AuthModule {}

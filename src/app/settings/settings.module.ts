@@ -9,10 +9,10 @@ import { SettingsManagerComponent } from './containers/settings-manager/settings
 @NgModule({
   imports: [
     CommonModule,
-    SettingsRoutingModule,
+    SettingsRoutingModule
   ],
   declarations: [
-    SettingsManagerComponent,
+    SettingsManagerComponent
   ],
 })
-export class SettingsModule {}
+export class SettingsModule { }

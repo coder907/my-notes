@@ -12,6 +12,7 @@ import { SignOutAction } from '../store/actions/sign-out.action';
 import { User } from '../models/user';
 
 
+
 @Injectable({
   providedIn: 'root',
 })
@@ -20,8 +21,8 @@ export class AuthService {
   private readonly userValue$ = new BehaviorSubject<User>(null);
 
   constructor(
-    private router: Router,
-    private store: Store<AppState>,
+    private readonly router: Router,
+    private readonly store: Store<AppState>,
   ) {
     const user = {
       signedIn: true,

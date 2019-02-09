@@ -16,8 +16,8 @@ export class AuthGuardService implements CanActivate {
   private canActivate$: Observable<boolean>;
 
   constructor(
-    private authService: AuthService,
-  ) {}
+    private readonly authService: AuthService,
+  ) { }
 
   canActivate(): Observable<boolean> {
     if (!this.canActivate$) {

@@ -21,7 +21,7 @@ import { metaReducers } from './core/store';
     BrowserAnimationsModule,
     AppRoutingModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
-    StoreModule.forRoot(reducers, {metaReducers}),
+    StoreModule.forRoot(reducers, { metaReducers }),
     StoreDevtoolsModule.instrument({
       name: 'My Notes DevTools',
       maxAge: 10
@@ -35,4 +35,4 @@ import { metaReducers } from './core/store';
 
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

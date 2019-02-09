@@ -20,13 +20,13 @@ import { Observable } from 'rxjs';
 })
 export class GuiService {
 
-  private isHandsetValue$: Observable<BreakpointState> = this.breakpointObserver.observe(Breakpoints.Handset);
+  private readonly isHandsetValue$: Observable<BreakpointState> = this.breakpointObserver.observe(Breakpoints.Handset);
 
   private sidenav: MatSidenav;
   private snackBar: MatSnackBar;
 
   constructor(
-    private breakpointObserver: BreakpointObserver,
+    private readonly breakpointObserver: BreakpointObserver,
   ) {}
 
   get isHandset$(): Observable<BreakpointState> {

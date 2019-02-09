@@ -7,6 +7,7 @@ import {
   Input,
   Output,
   ViewChild,
+  ElementRef,
 } from '@angular/core';
 
 
@@ -35,7 +36,7 @@ export class PostComponent implements OnChanges  {
   clear = new EventEmitter();
 
   @ViewChild('textElement')
-  private textElement;
+  private textElement: ElementRef;
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.item.currentValue && (changes.item.currentValue !== changes.item.previousValue)) {
