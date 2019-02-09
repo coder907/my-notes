@@ -1,0 +1,83 @@
+{
+  "configVersion": 1,
+  "index": "https://coder907.github.io/my-notes/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "urls": [
+        "https://coder907.github.io/my-notes/1.a7b1f2afa055c64dda58.js",
+        "https://coder907.github.io/my-notes/6.cd74cb9c6c934e7a8931.js",
+        "https://coder907.github.io/my-notes/7.da99e4045daa8e852497.js",
+        "https://coder907.github.io/my-notes/8.12712df0ee51ae06f387.js",
+        "https://coder907.github.io/my-notes/9.feb67a41d7d1c13c5214.js",
+        "https://coder907.github.io/my-notes/es2015-polyfills.849c547c82d0a6567fb9.js",
+        "https://coder907.github.io/my-notes/index.html",
+        "https://coder907.github.io/my-notes/main.b39f1584d89dd9fc7d03.js",
+        "https://coder907.github.io/my-notes/polyfills.ca948757f51b36d0d532.js",
+        "https://coder907.github.io/my-notes/runtime.6fe09e389a63ceeb2011.js",
+        "https://coder907.github.io/my-notes/styles.d5ddf7f509127363b9cc.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "urls": [
+        "https://coder907.github.io/my-notes/assets/favicon.png",
+        "https://coder907.github.io/my-notes/assets/icons/icon-128x128.png",
+        "https://coder907.github.io/my-notes/assets/icons/icon-144x144.png",
+        "https://coder907.github.io/my-notes/assets/icons/icon-152x152.png",
+        "https://coder907.github.io/my-notes/assets/icons/icon-192x192.png",
+        "https://coder907.github.io/my-notes/assets/icons/icon-384x384.png",
+        "https://coder907.github.io/my-notes/assets/icons/icon-512x512.png",
+        "https://coder907.github.io/my-notes/assets/icons/icon-72x72.png",
+        "https://coder907.github.io/my-notes/assets/icons/icon-96x96.png"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "https://coder907.github.io/my-notes/1.a7b1f2afa055c64dda58.js": "d569440b95dfb580ac25dc3f53a7da0523f55174",
+    "https://coder907.github.io/my-notes/6.cd74cb9c6c934e7a8931.js": "3073be33675b6d5326855efbdee6fc9434414af5",
+    "https://coder907.github.io/my-notes/7.da99e4045daa8e852497.js": "5aba92a1ca4defbf0f64c8c8f90f638bbbe02041",
+    "https://coder907.github.io/my-notes/8.12712df0ee51ae06f387.js": "359c47ed6e881f03622a0c32c85bcc2bf25e34a3",
+    "https://coder907.github.io/my-notes/9.feb67a41d7d1c13c5214.js": "b7129d6ecb0d71a9a2743419d5e066c7e4abf116",
+    "https://coder907.github.io/my-notes/assets/favicon.png": "b45b94ba986b7437ca59b218cf74d670f69e553a",
+    "https://coder907.github.io/my-notes/assets/icons/icon-128x128.png": "dae3b6ed49bdaf4327b92531d4b5b4a5d30c7532",
+    "https://coder907.github.io/my-notes/assets/icons/icon-144x144.png": "b0bd89982e08f9bd2b642928f5391915b74799a7",
+    "https://coder907.github.io/my-notes/assets/icons/icon-152x152.png": "7479a9477815dfd9668d60f8b3b2fba709b91310",
+    "https://coder907.github.io/my-notes/assets/icons/icon-192x192.png": "1abd80d431a237a853ce38147d8c63752f10933b",
+    "https://coder907.github.io/my-notes/assets/icons/icon-384x384.png": "329749cd6393768d3131ed6304c136b1ca05f2fd",
+    "https://coder907.github.io/my-notes/assets/icons/icon-512x512.png": "559d9c4318b45a1f2b10596bbb4c960fe521dbcc",
+    "https://coder907.github.io/my-notes/assets/icons/icon-72x72.png": "c457e56089a36952cd67156f9996bc4ce54a5ed9",
+    "https://coder907.github.io/my-notes/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
+    "https://coder907.github.io/my-notes/es2015-polyfills.849c547c82d0a6567fb9.js": "3fca5fd34abe6f46ce67ba6ef3e9642c882c1d95",
+    "https://coder907.github.io/my-notes/index.html": "e1a303879cac73ddb994e96b106d7e2c66ae4e19",
+    "https://coder907.github.io/my-notes/main.b39f1584d89dd9fc7d03.js": "f84679f3c82ed12009c5cd027f9d21ddd434c378",
+    "https://coder907.github.io/my-notes/polyfills.ca948757f51b36d0d532.js": "ef448ddee57ecea8f1f0157e9e684b2c871e2e39",
+    "https://coder907.github.io/my-notes/runtime.6fe09e389a63ceeb2011.js": "136532477f5aff8c4f973ac90cba90264d854011",
+    "https://coder907.github.io/my-notes/styles.d5ddf7f509127363b9cc.css": "1b9a8d932c2c3676ef35edf175745bed450ff480"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ]
+}
