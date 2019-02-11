@@ -2,8 +2,8 @@
   <mat-sidenav
     #sidenav
     class="main-sidenav"
-    [mode]="(guiService.isHandset$ | async)?.matches ? 'over' : 'side'"
-    [opened]="!((guiService.isHandset$ | async)?.matches)"
+    [mode]="(guiService.isHandset$ | async) ? 'over' : 'side'"
+    [opened]="!(guiService.isHandset$ | async)"
   >
     <app-menu>
     </app-menu>
@@ -14,7 +14,7 @@
       <button
         mat-icon-button
         (click)="sidenav.toggle()"
-        *ngIf="(guiService.isHandset$ | async)?.matches"
+        *ngIf="guiService.isHandset$ | async"
       >
         <mat-icon>menu</mat-icon>
       </button>

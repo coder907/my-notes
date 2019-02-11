@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import {
   BreakpointObserver,
   Breakpoints,
-  BreakpointState
 } from '@angular/cdk/layout';
 
 import {
@@ -11,7 +10,8 @@ import {
   MatSnackBar
 } from '@angular/material';
 
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 
 
@@ -20,16 +20,22 @@ import { Observable } from 'rxjs';
 })
 export class GuiService {
 
-  private readonly isHandsetValue$: Observable<BreakpointState> = this.breakpointObserver.observe(Breakpoints.Handset);
+  private isHandsetValue$: Observable<boolean>;
 
   private sidenav: MatSidenav;
   private snackBar: MatSnackBar;
 
   constructor(
     private readonly breakpointObserver: BreakpointObserver,
-  ) {}
+  ) { }
 
-  get isHandset$(): Observable<BreakpointState> {
+  get isHandset$(): Observable<boolean> {
+    if (!this.isHandsetValue$) {
+      this.isHandsetValue$ = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
+        map(state => state.matches)
+      );
+    }
+
     return this.isHandsetValue$;
   }
 
@@ -47,14 +53,14 @@ export class GuiService {
     }
   }
 
-  showNotification(message: string)  {
+  showNotification(message: string) {
     this.snackBar.open(message, 'DISMISS', {
       duration: 0,
       verticalPosition: 'top',
     });
   }
 
-  showQuickNotification(message: string)  {
+  showQuickNotification(message: string) {
     this.snackBar.open(message, undefined, {
       duration: 2000,
       verticalPosition: 'top',

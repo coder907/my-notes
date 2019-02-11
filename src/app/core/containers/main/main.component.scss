@@ -5,12 +5,17 @@
 
   .main-sidenav {
     background-color: mat-color($primary, 100);
+    
   }
 }
 
 .main-container {
   width: 100vw;
   height: 100vh;
+}
+
+.main-sidenav {
+  border-right: 0 !important;
 }
 
 .main-toolbar-spacer {

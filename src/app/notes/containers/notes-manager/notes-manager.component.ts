@@ -19,7 +19,7 @@ import { ListDefinition } from 'src/app/core/components/list/models/list-definit
   selector: 'app-notes-manager',
   templateUrl: './notes-manager.component.html',
   styleUrls: ['./notes-manager.component.scss'],
-  // changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NotesManagerComponent implements OnInit, OnDestroy  {
 
@@ -33,9 +33,7 @@ export class NotesManagerComponent implements OnInit, OnDestroy  {
     public readonly guiService: GuiService,
   ) {
     this.isHandsetSubscription = guiService.isHandset$.subscribe(
-      (breakpointState) => {
-        const isHandset = breakpointState.matches;
-
+      (isHandset) => {
         this.updateListDefinition(isHandset);
         this.updateColumnDefinitions(isHandset);
       }
