@@ -21,8 +21,7 @@ import {
   catchError,
 } from 'rxjs/operators';
 
-import { DataService } from 'src/app/core/services/data.service';
-import { Note } from '../models/note';
+import { DataService } from 'src/app/core/services/data/data.service';
 import { NoteActionTypes } from '../store/actions';
 import { LoadNotesRequestAction } from '../store/actions/load-notes-request.action';
 import { LoadNotesSuccessAction } from '../store/actions/load-notes-success.action';
@@ -58,9 +57,8 @@ export class NoteEffects {
   readonly load$: Observable<Action> = this.actions.pipe(
     ofType(NoteActionTypes.LoadNotesRequest),
 
-    concatMap(async (action: LoadNotesRequestAction) => {
-      const notes = await this.dataService.notes.limit(20).toArray();
-      return notes;
+    concatMap((action: LoadNotesRequestAction) => {
+      return this.dataService.loadNotes();
     }),
 
     map(notes => new LoadNotesSuccessAction(notes)),
@@ -72,16 +70,8 @@ export class NoteEffects {
   readonly add$: Observable<Action> = this.actions.pipe(
     ofType(NoteActionTypes.AddNoteRequest),
 
-    concatMap(async (action: AddNoteRequestAction) => {
-      const note: any = {
-        createdTs: action.createdTs,
-        text: action.text,
-      };
-
-      const id = await this.dataService.notes.add(note as Note);
-      note.id = id;
-
-      return note as Note;
+    concatMap((action: AddNoteRequestAction) => {
+      return this.dataService.addNote(action.text);
     }),
 
     map(note => new AddNoteSuccessAction(note)),
@@ -94,14 +84,12 @@ export class NoteEffects {
     ofType(NoteActionTypes.UpdateNoteRequest),
 
     concatMap(async (action: UpdateNoteRequestAction) => {
-      const note: Partial<Note> = {
+      await this.dataService.updateNote(action.id, action.text);
+
+      return {
+        id: action.id,
         text: action.text,
       };
-
-      const count = await this.dataService.notes.update(action.id, note);
-      note.id = action.id;
-
-      return note;
     }),
 
     map(note => new UpdateNoteSuccessAction(note.id, note.text)),
@@ -114,7 +102,7 @@ export class NoteEffects {
     ofType(NoteActionTypes.RemoveNoteRequest),
 
     concatMap(async (action: RemoveNoteRequestAction) => {
-      await this.dataService.notes.delete(action.id);
+      await this.dataService.deleteNote(action.id);
       return action.id;
     }),
 

@@ -32,7 +32,7 @@ export class NoteService {
 
   constructor(
     private readonly store: Store<NotesState>
-  ) {}
+  ) { }
 
   startSync(): void {
     this.store.dispatch(new LoadNotesRequestAction());
@@ -50,7 +50,7 @@ export class NoteService {
   }
 
   addNote(text: string): void {
-    this.store.dispatch(new AddNoteRequestAction(Date.now(), text));
+    this.store.dispatch(new AddNoteRequestAction(text));
   }
 
   updateNote(id: number, text: string): void {

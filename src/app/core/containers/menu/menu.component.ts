@@ -27,7 +27,7 @@ export class MenuComponent  {
   async navigate(link: string) {
     this.router.navigate([link]);
 
-    const isHandset = (await this.guiService.isHandset$.pipe(take(1)).toPromise()).matches;
+    const isHandset = await this.guiService.isHandset$.pipe(take(1)).toPromise();
 
     if (isHandset) {
       this.guiService.closeSidenav();
