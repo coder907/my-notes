@@ -77,7 +77,7 @@ export class NotesManagerComponent implements OnInit, OnDestroy  {
     this.columnDefinitions = columnDefinitions;
   }
 
-  post(text: string) {
+  save(text: string) {
     this.noteService.addOrUpdateNote(text);
   }
 

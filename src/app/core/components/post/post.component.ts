@@ -24,13 +24,10 @@ export class PostComponent implements OnChanges  {
   item: {text: string};
 
   @Input()
-  multiline: boolean;
-
-  @Input()
   placeholder: string;
 
   @Output()
-  post = new EventEmitter();
+  save = new EventEmitter();
 
   @Output()
   clear = new EventEmitter();
@@ -44,8 +41,8 @@ export class PostComponent implements OnChanges  {
     }
   }
 
-  onPostClick() {
-    this.post.emit(this.textElementValue());
+  onSaveClick() {
+    this.save.emit(this.textElementValue());
     this.onClear();
   }
 

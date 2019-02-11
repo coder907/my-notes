@@ -1,9 +1,8 @@
 <div class="notes-manager-container">
   <app-post
-    [multiline]="true"
     placeholder="Enter a new note"
     [item]="noteService.editedNote$ | async"
-    (post)="post($event)"
+    (save)="save($event)"
     (clear)="noteService.stopEditing()"
   >
   </app-post>
