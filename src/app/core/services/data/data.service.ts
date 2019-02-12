@@ -12,10 +12,10 @@ import { Note } from '../../../notes/models/note';
 })
 export class DataService extends DataServiceBase {
 
-  private readonly dbService = new Db();
+  private readonly db = new Db();
 
   public async loadNotes(): Promise<Note[]> {
-    const notes = await this.dbService.notes.limit(20).toArray();
+    const notes = await this.db.notes.limit(20).toArray();
     return notes;
   }
 
@@ -25,7 +25,7 @@ export class DataService extends DataServiceBase {
       text,
     };
 
-    const id = await this.dbService.notes.add(note as Note);
+    const id = await this.db.notes.add(note as Note);
     note.id = id;
 
     return note as Note;
@@ -36,10 +36,10 @@ export class DataService extends DataServiceBase {
       text,
     };
 
-    await this.dbService.notes.update(id, note);
+    await this.db.notes.update(id, note);
   }
 
   public async deleteNote(id: number): Promise<void> {
-    await this.dbService.notes.delete(id);
+    await this.db.notes.delete(id);
   }
 }

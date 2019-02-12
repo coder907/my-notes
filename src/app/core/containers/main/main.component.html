@@ -1,7 +1,7 @@
 <mat-sidenav-container class="main-container">
   <mat-sidenav
     #sidenav
-    class="main-sidenav"
+    class="main-sidenav mat-elevation-z4"
     [mode]="(guiService.isHandset$ | async) ? 'over' : 'side'"
     [opened]="!(guiService.isHandset$ | async)"
   >

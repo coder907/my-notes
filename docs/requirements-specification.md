@@ -1,44 +1,41 @@
 # Requirements Specification Draft
 
+## Description
 
-## Definitions
-
-### General
+A simple application for personal note management.
 
 ## Purpose
 
-The Application facilitates personal note management.
-
-
+Build a responsive web application using TypeScript, Angular, Material, NGRX and Indexed DB.
 
 ## Features
 
 ### Notes Management
- - Add a note
- - Edit a note
- - Remove a note
+ - Add a note [DONE]
+ - Edit a note [DONE]
+ - Remove a note [DONE]
 
 ### Notes List
-  - Display
+  - Display [DONE]
   - Sort
   - Search
   - Paginate
 
 ### Styles
- - Material
- - Day theme
- - Night theme
+ - Material [DONE]
+ - Day theme [DONE]
+ - Night theme [DONE]
 
 ### Languages
- - English
+ - English [DONE]
  - Slovenian
 
 ### Storage
- - Indexed DB
+ - Indexed DB [DONE]
 
 ### Navigation
- - Menu
- - Notes management
+ - Menu [DONE]
+ - Notes management [DONE]
  - Settings
  - Log out (if password)
 
@@ -48,16 +45,19 @@ The Application facilitates personal note management.
  - Password
 
 ### Sign In
-  - None
+  - None [DONE]
   - Password (optional)
+
+### About
+ - About dialog
 
 
 
 ## Supported browsers
- - Modern desktop and mobile web browsers
+ - Modern desktop and mobile web browsers [DONE]
 
 
 
 ## Supported resolutions
- - Mobile
- - Desktop
+ - Mobile [DONE]
+ - Desktop [DONE]

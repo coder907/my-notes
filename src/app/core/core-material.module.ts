@@ -7,7 +7,7 @@ import {
   MatSidenavModule,
   MatListModule,
   MatMenuModule,
-  MatSnackBarModule,
+  MatSnackBarModule
 } from '@angular/material';
 
 

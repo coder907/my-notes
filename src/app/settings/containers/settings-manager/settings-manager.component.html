@@ -1,3 +1,39 @@
-<h1 class="settings-label">
-  Settings
-</h1>
+<div class="settings-page">
+
+  <div class="settings-container mat-elevation-z4">
+    <div>
+      <span class="settings-label-text">Language</span>
+      <mat-form-field>
+        <mat-select [formControl]="language">
+          <mat-option value="en">English</mat-option>
+          <mat-option value="sl">Slovenian</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <label class="settings-label">
+        <span class="settings-label-text">Day Theme</span>
+        <div class="settings-control-container">
+          <mat-slide-toggle [formControl]="isDayTheme"></mat-slide-toggle>
+        </div>
+      </label>
+    </div>
+
+    <div>
+      <label class="settings-label">
+        <span class="settings-label-text">Password Protection</span>
+        <div class="settings-control-container">
+          <mat-slide-toggle [formControl]="hasPassword"></mat-slide-toggle>
+        </div>
+      </label>
+    </div>
+  </div>
+
+  <!-- <pre>
+      Name: {{ language.value }}
+      Day Theme: {{ isDayTheme.value }}
+      Password Protection: {{ hasPassword.value }}
+  </pre> -->
+
+</div>
