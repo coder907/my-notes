@@ -31,7 +31,8 @@ Build a responsive web application using TypeScript, Angular, Material, NGRX and
  - Slovenian
 
 ### Storage
- - Indexed DB [DONE]
+ - Indexed DB (data) [DONE]
+ - Local Storage (settings)
 
 ### Navigation
  - Menu [DONE]

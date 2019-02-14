@@ -17,11 +17,15 @@
 </head>
 
 <body>
-  <div class="night-theme">
+  <div id="theme-container">
     <div class="mat-app-background">
       <app-root></app-root>
     </div>
   </div>
+  <script>
+    const theme = localStorage.getItem('theme');
+    document.getElementById('theme-container').className = theme || 'day-theme';
+  </script>
   <noscript>Please enable JavaScript to continue using this application.</noscript>
 </body>
 

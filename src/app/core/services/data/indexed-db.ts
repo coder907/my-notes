@@ -4,7 +4,7 @@ import { Note } from 'src/app/notes/models/note';
 
 
 
-export class Db extends Dexie {
+export class IndexedDb extends Dexie {
 
   readonly notes: Dexie.Table<Note, number>;
 

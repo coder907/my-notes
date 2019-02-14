@@ -11,7 +11,10 @@ import {
 
 
 
-export function reducer(state: NotesState = initialState, action: NoteAction): NotesState {
+export function reducer(
+  state: NotesState = initialState,
+  action: NoteAction
+): NotesState {
   switch (action.type) {
     case NoteActionTypes.LoadNotesSuccess:
       return adapter.addMany(action.notes, state);

@@ -1,5 +1,9 @@
-import { Component } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import {
+  Component,
+  ChangeDetectionStrategy,
+} from '@angular/core';
+
+import { SettingsService } from '../../services/settings.service';
 
 
 
@@ -7,10 +11,12 @@ import { FormControl } from '@angular/forms';
   selector: 'app-settings-manager',
   templateUrl: './settings-manager.component.html',
   styleUrls: ['./settings-manager.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SettingsManagerComponent {
 
-  language = new FormControl('en');
-  isDayTheme = new FormControl(false);
-  hasPassword = new FormControl(false);
+  constructor(
+    public readonly settingsService: SettingsService,
+  ) { }
+
 }

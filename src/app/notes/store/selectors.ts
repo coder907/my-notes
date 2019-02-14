@@ -10,9 +10,9 @@ import {
 
 
 
-export const getEditedId = (state: NotesState) => state.editedId;
-
 export const getNoteState = createFeatureSelector<NotesState>('notes');
+
+export const getEditedId = (state: NotesState) => state.editedId;
 
 export const getEditedNoteId = createSelector(
   getNoteState,

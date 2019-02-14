@@ -1,43 +1,15 @@
 @import '~@angular/material/theming';
 
-@mixin settings-theme($theme) {
+@mixin settings-manager-theme($theme) {
   $primary: map-get($theme, primary);
 
-  .settings-page {
+  .settings-manager-container {
     background-color: mat-color($primary, 100);
   }
-
-  .settings-container {
-    background-color: mat-color($primary, 200);
-  }
 }
 
-.settings-page {
+.settings-manager-container {
   width: 100%;
   height: calc(100vh - 64px);
-  text-align: center;
-}
-
-.settings-container {
-  display: inline-block;
-  text-align: left;
-  margin-top: 20px;
-  padding: 0px 20px;
-  border-radius: 8px;
-}
-
-.settings-label {
-  cursor: pointer;
-}
-
-.settings-label-text {
-  display: inline-block;
-  width: 200px;
-}
-
-.settings-control-container {
-  display: inline-block;
-  width: 200px;
-  padding-bottom: 24px;
   text-align: center;
 }

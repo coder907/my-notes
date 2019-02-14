@@ -1,7 +1,7 @@
 import {
   Component,
   OnDestroy,
-  ChangeDetectionStrategy,
+  // ChangeDetectionStrategy,
   OnInit,
 } from '@angular/core';
 

@@ -11,13 +11,11 @@ import {
 import {
   Observable,
   of,
-  defer,
 } from 'rxjs';
 
 import {
   map,
   concatMap,
-  tap,
   catchError,
 } from 'rxjs/operators';
 
@@ -45,13 +43,6 @@ export class NoteEffects {
     private readonly actions: Actions,
     private readonly dataService: DataService,
   ) { }
-
-  @Effect({ dispatch: false })
-  readonly init$: Observable<any> = defer(() => of(null)).pipe(
-    tap(() => {
-      console.log('NoteEffects: init$');
-    })
-  );
 
   @Effect()
   readonly load$: Observable<Action> = this.actions.pipe(
