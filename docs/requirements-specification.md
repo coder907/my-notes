@@ -2,18 +2,22 @@
 
 ## Description
 
-A simple application for personal note management.
+A simple note-taking application.
+
+
 
 ## Purpose
 
-Build a responsive web application using TypeScript, Angular, Material, NGRX and Indexed DB.
+Build a responsive web application using TypeScript, Angular, Material, RxJS and NGRX.
+
+
 
 ## Features
 
 ### Notes Management
- - Add a note [DONE]
- - Edit a note [DONE]
- - Remove a note [DONE]
+ - Add [DONE]
+ - Edit [DONE]
+ - Remove [DONE]
 
 ### Notes List
   - Display [DONE]
@@ -21,10 +25,20 @@ Build a responsive web application using TypeScript, Angular, Material, NGRX and
   - Search
   - Paginate
 
-### Styles
- - Material [DONE]
- - Day theme [DONE]
- - Night theme [DONE]
+### Navigation
+ - Menu [DONE]
+ - Notes management [DONE]
+ - Settings [DONE]
+ - Sign out
+
+### Settings
+ - Theme [DONE]
+ - Language
+ - Password
+
+### Themes
+ - Day [DONE]
+ - Night [DONE]
 
 ### Languages
  - English [DONE]
@@ -32,22 +46,11 @@ Build a responsive web application using TypeScript, Angular, Material, NGRX and
 
 ### Storage
  - Indexed DB (data) [DONE]
- - Local Storage (settings)
+ - Local Storage (settings) [DONE]
 
-### Navigation
- - Menu [DONE]
- - Notes management [DONE]
- - Settings
- - Log out (if password)
-
-### Settings
- - Theme
- - Language
- - Password
-
-### Sign In
+### Authentication
   - None [DONE]
-  - Password (optional)
+  - Optional password
 
 ### About
  - About dialog
