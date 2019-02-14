@@ -20,24 +20,36 @@ import {
 } from 'rxjs/operators';
 
 import { DataService } from 'src/app/core/services/data/data.service';
-import { NoteActionTypes } from '../store/actions';
-import { LoadNotesRequestAction } from '../store/actions/load-notes-request.action';
-import { LoadNotesSuccessAction } from '../store/actions/load-notes-success.action';
-import { LoadNotesFailAction } from '../store/actions/load-notes-fail.action';
-import { RemoveNoteRequestAction } from '../store/actions/remove-note-request.action';
-import { RemoveNoteSuccessAction } from '../store/actions/remove-note-success.action';
-import { RemoveNoteFailAction } from '../store/actions/remove-note-fail.action';
-import { AddNoteRequestAction } from '../store/actions/add-note-request.action';
-import { AddNoteSuccessAction } from '../store/actions/add-note-success.action';
-import { AddNoteFailAction } from '../store/actions/add-note-fail.action';
-import { UpdateNoteRequestAction } from '../store/actions/update-note-request.action';
-import { UpdateNoteSuccessAction } from '../store/actions/update-note-success.action';
-import { UpdateNoteFailAction } from '../store/actions/update-note-fail.action';
+import { NotesActionTypes } from '../store/actions';
+
+import {
+  LoadNotesRequestAction,
+  LoadNotesSuccessAction,
+  LoadNotesFailAction
+} from '../store/actions/load-notes';
+
+import {
+  AddNoteRequestAction,
+  AddNoteSuccessAction,
+  AddNoteFailAction
+} from '../store/actions/add-note';
+
+import {
+  UpdateNoteRequestAction,
+  UpdateNoteSuccessAction,
+  UpdateNoteFailAction
+} from '../store/actions/update-note';
+
+import {
+  RemoveNoteRequestAction,
+  RemoveNoteSuccessAction,
+  RemoveNoteFailAction
+} from '../store/actions/remove-note';
 
 
 
 @Injectable()
-export class NoteEffects {
+export class NotesEffects {
 
   constructor(
     private readonly actions: Actions,
@@ -46,7 +58,7 @@ export class NoteEffects {
 
   @Effect()
   readonly load$: Observable<Action> = this.actions.pipe(
-    ofType(NoteActionTypes.LoadNotesRequest),
+    ofType(NotesActionTypes.LoadNotesRequest),
 
     concatMap((action: LoadNotesRequestAction) => {
       return this.dataService.loadNotes();
@@ -59,7 +71,7 @@ export class NoteEffects {
 
   @Effect()
   readonly add$: Observable<Action> = this.actions.pipe(
-    ofType(NoteActionTypes.AddNoteRequest),
+    ofType(NotesActionTypes.AddNoteRequest),
 
     concatMap((action: AddNoteRequestAction) => {
       return this.dataService.addNote(action.text);
@@ -72,7 +84,7 @@ export class NoteEffects {
 
   @Effect()
   readonly update$: Observable<Action> = this.actions.pipe(
-    ofType(NoteActionTypes.UpdateNoteRequest),
+    ofType(NotesActionTypes.UpdateNoteRequest),
 
     concatMap(async (action: UpdateNoteRequestAction) => {
       await this.dataService.updateNote(action.id, action.text);
@@ -90,7 +102,7 @@ export class NoteEffects {
 
   @Effect()
   readonly remove$: Observable<Action> = this.actions.pipe(
-    ofType(NoteActionTypes.RemoveNoteRequest),
+    ofType(NotesActionTypes.RemoveNoteRequest),
 
     concatMap(async (action: RemoveNoteRequestAction) => {
       await this.dataService.deleteNote(action.id);

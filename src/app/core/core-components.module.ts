@@ -9,7 +9,6 @@ import {
 } from '@angular/material';
 
 import { ListComponent } from './components/list/list.component';
-import { EditComponent } from './components/edit/edit.component';
 import { DblClickOrPressDirective } from '../shared/directives/dblclick-or-press.directive';
 import { HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { HammerConfig } from '../../config/hammer';
@@ -25,7 +24,6 @@ import { HammerConfig } from '../../config/hammer';
   ],
   declarations: [
     ListComponent,
-    EditComponent,
     DblClickOrPressDirective
   ],
   providers: [{
@@ -34,7 +32,6 @@ import { HammerConfig } from '../../config/hammer';
   }],
   exports: [
     ListComponent,
-    EditComponent,
     DblClickOrPressDirective
   ]
 })

@@ -7,7 +7,7 @@ import {
 
 import { Subscription } from 'rxjs';
 
-import { NoteService } from '../../services/note.service';
+import { NotesService } from '../../services/notes.service';
 import { GuiService } from 'src/app/core/services/gui.service';
 import { ColumnDefinition } from '../../../core/components/list/models/column-definition';
 import { ColumnFormat } from '../../../core/components/list/models/column-format';
@@ -29,7 +29,7 @@ export class NotesManagerComponent implements OnInit, OnDestroy  {
   isHandsetSubscription: Subscription;
 
   constructor(
-    public readonly noteService: NoteService,
+    public readonly notesService: NotesService,
     public readonly guiService: GuiService,
   ) {
     this.isHandsetSubscription = guiService.isHandset$.subscribe(
@@ -76,20 +76,20 @@ export class NotesManagerComponent implements OnInit, OnDestroy  {
   }
 
   save(text: string) {
-    this.noteService.addOrUpdateNote(text);
+    this.notesService.addOrUpdateNote(text);
   }
 
   ngOnInit() {
-    this.noteService.startSync();
+    this.notesService.startSync();
   }
 
   ngOnDestroy() {
-    this.noteService.stopEditing();
+    this.notesService.stopEditing();
     this.unsubscribeAll();
   }
 
   unsubscribeAll() {
-    if (this.isHandsetSubscription !== null) {
+    if (this.isHandsetSubscription) {
       this.isHandsetSubscription.unsubscribe();
     }
   }

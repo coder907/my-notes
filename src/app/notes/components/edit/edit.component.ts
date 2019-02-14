@@ -1,6 +1,5 @@
 import {
   Component,
-  ChangeDetectionStrategy,
   OnChanges,
   SimpleChanges,
   EventEmitter,
@@ -8,6 +7,7 @@ import {
   Output,
   ViewChild,
   ElementRef,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 
 
@@ -36,7 +36,7 @@ export class EditComponent implements OnChanges  {
   private textElement: ElementRef;
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.item.currentValue && (changes.item.currentValue !== changes.item.previousValue)) {
+    if (changes.item) {
       this.textElementFocus();
     }
   }

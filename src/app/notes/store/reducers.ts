@@ -5,24 +5,24 @@ import {
 } from './state';
 
 import {
-  NoteAction,
-  NoteActionTypes,
+  NotesAction,
+  NotesActionTypes,
 } from './actions';
 
 
 
 export function reducer(
   state: NotesState = initialState,
-  action: NoteAction
+  action: NotesAction
 ): NotesState {
   switch (action.type) {
-    case NoteActionTypes.LoadNotesSuccess:
+    case NotesActionTypes.LoadNotesSuccess:
       return adapter.addMany(action.notes, state);
 
-    case NoteActionTypes.AddNoteSuccess:
+    case NotesActionTypes.AddNoteSuccess:
       return adapter.addOne(action.note, state);
 
-    case NoteActionTypes.UpdateNoteSuccess:
+    case NotesActionTypes.UpdateNoteSuccess:
       return adapter.updateOne({
           id: action.id,
           changes: {
@@ -32,16 +32,16 @@ export function reducer(
         state
       );
 
-    case NoteActionTypes.RemoveNoteSuccess:
+    case NotesActionTypes.RemoveNoteSuccess:
       return adapter.removeOne(action.id, state);
 
-    case NoteActionTypes.StartEditingNote:
+    case NotesActionTypes.StartEditingNote:
       return {
         ...state,
         editedId: action.id,
       };
 
-    case NoteActionTypes.StopEditingNote:
+    case NotesActionTypes.StopEditingNote:
       return {
         ...state,
         editedId: null,

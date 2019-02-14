@@ -11,12 +11,12 @@ import { take } from 'rxjs/operators';
 import { Note } from '../models/note';
 import { NotesState } from '../store/state';
 
-import { LoadNotesRequestAction } from '../store/actions/load-notes-request.action';
-import { AddNoteRequestAction } from '../store/actions/add-note-request.action';
-import { UpdateNoteRequestAction } from '../store/actions/update-note-request.action';
-import { RemoveNoteRequestAction } from '../store/actions/remove-note-request.action';
-import { StartEditingNoteAction } from '../store/actions/start-editing.action';
-import { StopEditingNoteAction } from '../store/actions/stop-editing.action';
+import { LoadNotesRequestAction } from '../store/actions/load-notes';
+import { AddNoteRequestAction } from '../store/actions/add-note';
+import { UpdateNoteRequestAction } from '../store/actions/update-note';
+import { RemoveNoteRequestAction } from '../store/actions/remove-note';
+import { StartEditingNoteAction } from '../store/actions/editing';
+import { StopEditingNoteAction } from '../store/actions/editing';
 
 import * as selectors from '../store/selectors';
 
@@ -25,7 +25,7 @@ import * as selectors from '../store/selectors';
 @Injectable({
   providedIn: 'root',
 })
-export class NoteService {
+export class NotesService {
 
   private notesValue$: Observable<Note[]>;
   private editedNoteValue$: Observable<Note>;

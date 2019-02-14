@@ -1,21 +1,35 @@
-import { LoadNotesRequestAction } from './load-notes-request.action';
-import { LoadNotesSuccessAction } from './load-notes-success.action';
-import { LoadNotesFailAction } from './load-notes-fail.action';
-import { AddNoteRequestAction } from './add-note-request.action';
-import { AddNoteSuccessAction } from './add-note-success.action';
-import { AddNoteFailAction } from './add-note-fail.action';
-import { UpdateNoteRequestAction } from './update-note-request.action';
-import { UpdateNoteSuccessAction } from './update-note-success.action';
-import { UpdateNoteFailAction } from './update-note-fail.action';
-import { RemoveNoteRequestAction } from './remove-note-request.action';
-import { RemoveNoteSuccessAction } from './remove-note-success.action';
-import { RemoveNoteFailAction } from './remove-note-fail.action';
-import { StartEditingNoteAction } from './start-editing.action';
-import { StopEditingNoteAction } from './stop-editing.action';
+import {
+  LoadNotesRequestAction,
+  LoadNotesSuccessAction,
+  LoadNotesFailAction
+} from './load-notes';
+
+import {
+  AddNoteRequestAction,
+  AddNoteSuccessAction,
+  AddNoteFailAction
+} from './add-note';
+
+import {
+  UpdateNoteRequestAction,
+  UpdateNoteSuccessAction,
+  UpdateNoteFailAction
+} from './update-note';
+
+import {
+  RemoveNoteRequestAction,
+  RemoveNoteSuccessAction,
+  RemoveNoteFailAction
+} from './remove-note';
+
+import {
+  StartEditingNoteAction,
+  StopEditingNoteAction
+} from './editing';
 
 
 
-export enum NoteActionTypes {
+export enum NotesActionTypes {
   LoadNotesRequest    = '[Note] LoadNotesRequest',
   LoadNotesSuccess    = '[Note] LoadNotesSuccess',
   LoadNotesFail       = '[Note] LoadNotesFail',
@@ -32,7 +46,7 @@ export enum NoteActionTypes {
   StopEditingNote     = '[Note] StopEditingNote',
 }
 
-export type NoteAction =
+export type NotesAction =
   LoadNotesRequestAction |
   LoadNotesSuccessAction |
   LoadNotesFailAction |

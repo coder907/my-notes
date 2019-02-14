@@ -3,9 +3,11 @@ import { CommonModule } from '@angular/common';
 import { EffectsModule } from '@ngrx/effects';
 
 import { NotesRoutingModule } from './notes-routing.module';
+import { NotesMaterialModule } from './notes-material.module';
 import { CoreComponentsModule } from '../core/core-components.module';
-import { NoteEffects } from './effects/note';
+import { NotesEffects } from './effects/notes';
 import { NotesManagerComponent } from './containers/notes-manager/notes-manager.component';
+import { EditComponent } from './components/edit/edit.component';
 
 
 
@@ -13,11 +15,13 @@ import { NotesManagerComponent } from './containers/notes-manager/notes-manager.
   imports: [
     CommonModule,
     NotesRoutingModule,
+    NotesMaterialModule,
     CoreComponentsModule,
-    EffectsModule.forFeature([NoteEffects])
+    EffectsModule.forFeature([NotesEffects])
   ],
   declarations: [
-    NotesManagerComponent
+    NotesManagerComponent,
+    EditComponent
   ],
 })
 export class NotesModule { }

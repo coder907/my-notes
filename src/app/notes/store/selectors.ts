@@ -10,13 +10,13 @@ import {
 
 
 
-export const getNoteState = createFeatureSelector<NotesState>('notes');
+const getNotesState = createFeatureSelector<NotesState>('notes');
 
-export const getEditedId = (state: NotesState) => state.editedId;
+const getEditedIdFn = (state: NotesState) => state.editedId;
 
-export const getEditedNoteId = createSelector(
-  getNoteState,
-  getEditedId
+const getEditedId = createSelector(
+  getNotesState,
+  getEditedIdFn
 );
 
 export const {
@@ -24,7 +24,7 @@ export const {
   selectEntities: getNoteEntities,
   selectAll: getAllNotes,
   selectTotal: getTotalNotes,
-} = adapter.getSelectors(getNoteState);
+} = adapter.getSelectors(getNotesState);
 
 export const getNote = (id: string) => createSelector(
   getNoteEntities,
@@ -35,7 +35,7 @@ export const getNote = (id: string) => createSelector(
 
 export const getEditedNote = createSelector(
   getNoteEntities,
-  getEditedNoteId,
+  getEditedId,
   (entities, editedId) => {
     return editedId && entities[editedId];
   }

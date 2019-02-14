@@ -16,7 +16,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { AuthService } from '../../../auth/services/auth-service';
-import { NoteService } from '../../../notes/services/note.service';
+import { NotesService } from '../../../notes/services/notes.service';
 import { GuiService } from '../../services/gui.service';
 
 
@@ -38,7 +38,7 @@ export class MainComponent implements OnInit {
   constructor(
     public readonly guiService: GuiService,
     public readonly authService: AuthService,
-    public readonly noteService: NoteService,
+    public readonly noteService: NotesService,
     private readonly router: Router,
     private readonly snackBar: MatSnackBar,
   ) { }
