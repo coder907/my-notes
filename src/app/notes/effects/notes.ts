@@ -19,7 +19,7 @@ import {
   catchError,
 } from 'rxjs/operators';
 
-import { DataService } from 'src/app/core/services/data/data.service';
+import { NotesDataService } from 'src/app/core/services/data/notes-data.service';
 import { NotesActionTypes } from '../store/actions';
 
 import {
@@ -53,7 +53,7 @@ export class NotesEffects {
 
   constructor(
     private readonly actions: Actions,
-    private readonly dataService: DataService,
+    private readonly notesDataService: NotesDataService,
   ) { }
 
   @Effect()
@@ -61,7 +61,7 @@ export class NotesEffects {
     ofType(NotesActionTypes.LoadNotesRequest),
 
     concatMap((action: LoadNotesRequestAction) => {
-      return this.dataService.loadNotes();
+      return this.notesDataService.loadNotes();
     }),
 
     map(notes => new LoadNotesSuccessAction(notes)),
@@ -74,7 +74,7 @@ export class NotesEffects {
     ofType(NotesActionTypes.AddNoteRequest),
 
     concatMap((action: AddNoteRequestAction) => {
-      return this.dataService.addNote(action.text);
+      return this.notesDataService.addNote(action.text);
     }),
 
     map(note => new AddNoteSuccessAction(note)),
@@ -87,7 +87,7 @@ export class NotesEffects {
     ofType(NotesActionTypes.UpdateNoteRequest),
 
     concatMap(async (action: UpdateNoteRequestAction) => {
-      await this.dataService.updateNote(action.id, action.text);
+      await this.notesDataService.updateNote(action.id, action.text);
 
       return {
         id: action.id,
@@ -105,7 +105,7 @@ export class NotesEffects {
     ofType(NotesActionTypes.RemoveNoteRequest),
 
     concatMap(async (action: RemoveNoteRequestAction) => {
-      await this.dataService.deleteNote(action.id);
+      await this.notesDataService.deleteNote(action.id);
       return action.id;
     }),
 

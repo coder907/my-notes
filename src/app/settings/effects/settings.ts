@@ -19,7 +19,7 @@ import {
   catchError,
 } from 'rxjs/operators';
 
-import { DataService } from 'src/app/core/services/data/data.service';
+import { SettingsDataService } from 'src/app/core/services/data/settings-data.service';
 import { SettingsActionTypes } from '../store/actions';
 
 import {
@@ -53,7 +53,7 @@ export class SettingsEffects {
 
   constructor(
     private readonly actions: Actions,
-    private readonly dataService: DataService,
+    private readonly settingsDataService: SettingsDataService,
   ) { }
 
   @Effect()
@@ -61,7 +61,7 @@ export class SettingsEffects {
     ofType(SettingsActionTypes.LoadSettingsRequest),
 
     concatMap(async (action: LoadSettingsRequestAction) => {
-      const settings = await this.dataService.loadSettings();
+      const settings = await this.settingsDataService.loadSettings();
       return new LoadSettingsSuccessAction(settings);
     }),
 
@@ -73,7 +73,7 @@ export class SettingsEffects {
     ofType(SettingsActionTypes.SetLanguageRequest),
 
     concatMap(async (action: SetLanguageRequestAction) => {
-      await this.dataService.setLanguage(action.language);
+      await this.settingsDataService.setLanguage(action.language);
       return new SetLanguageSuccessAction(action.language);
     }),
 
@@ -85,7 +85,7 @@ export class SettingsEffects {
     ofType(SettingsActionTypes.SetIsDayThemeRequest),
 
     concatMap(async (action: SetIsDayThemeRequestAction) => {
-      await this.dataService.setIsDayTheme(action.isDayTheme);
+      await this.settingsDataService.setIsDayTheme(action.isDayTheme);
       return new SetIsDayThemeSuccessAction(action.isDayTheme);
     }),
 
@@ -97,7 +97,7 @@ export class SettingsEffects {
     ofType(SettingsActionTypes.SetHasPasswordRequest),
 
     concatMap(async (action: SetHasPasswordRequestAction) => {
-      await this.dataService.setHasPassword(action.hasPassword);
+      await this.settingsDataService.setHasPassword(action.hasPassword);
       return new SetHasPasswordSuccessAction(action.hasPassword);
     }),
 
