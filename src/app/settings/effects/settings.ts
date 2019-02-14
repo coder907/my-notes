@@ -14,12 +14,10 @@ import {
 } from 'rxjs';
 
 import {
-  map,
   concatMap,
   catchError,
 } from 'rxjs/operators';
 
-import { SettingsDataService } from 'src/app/core/services/data/settings-data.service';
 import { SettingsActionTypes } from '../store/actions';
 
 import {
@@ -46,6 +44,9 @@ import {
   SetHasPasswordFailAction
 } from '../store/actions/set-has-password';
 
+import { SettingsDataService } from 'src/app/core/services/data/settings-data.service';
+import { GuiService } from 'src/app/core/services/gui.service';
+
 
 
 @Injectable()
@@ -54,6 +55,7 @@ export class SettingsEffects {
   constructor(
     private readonly actions: Actions,
     private readonly settingsDataService: SettingsDataService,
+    private readonly guiService: GuiService,
   ) { }
 
   @Effect()
@@ -74,6 +76,7 @@ export class SettingsEffects {
 
     concatMap(async (action: SetLanguageRequestAction) => {
       await this.settingsDataService.setLanguage(action.language);
+      this.guiService.showNotYetImplemented();
       return new SetLanguageSuccessAction(action.language);
     }),
 
@@ -85,8 +88,10 @@ export class SettingsEffects {
     ofType(SettingsActionTypes.SetIsDayThemeRequest),
 
     concatMap(async (action: SetIsDayThemeRequestAction) => {
-      await this.settingsDataService.setIsDayTheme(action.isDayTheme);
-      return new SetIsDayThemeSuccessAction(action.isDayTheme);
+      const isDayTheme = action.isDayTheme;
+      await this.settingsDataService.setIsDayTheme(isDayTheme);
+      this.guiService.setIsDayTheme(isDayTheme);
+      return new SetIsDayThemeSuccessAction(isDayTheme);
     }),
 
     catchError(error => of(new SetIsDayThemeFailAction(error)))
@@ -98,6 +103,7 @@ export class SettingsEffects {
 
     concatMap(async (action: SetHasPasswordRequestAction) => {
       await this.settingsDataService.setHasPassword(action.hasPassword);
+      this.guiService.showNotYetImplemented();
       return new SetHasPasswordSuccessAction(action.hasPassword);
     }),
 

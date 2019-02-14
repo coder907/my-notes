@@ -12,7 +12,7 @@ import { AuthActionTypes } from '../../auth/store/actions';
 
 
 export interface AppState {
-  notes: NotesState;
+  notes: NotesState; // Has to be in root because toolbar needs access
 }
 
 export const reducers: ActionReducerMap<AppState> = {

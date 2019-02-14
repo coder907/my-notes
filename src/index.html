@@ -23,8 +23,10 @@
     </div>
   </div>
   <script>
-    const theme = localStorage.getItem('theme');
-    document.getElementById('theme-container').className = theme || 'night-theme';
+    let isDayTheme = localStorage.getItem('isDayTheme');
+    isDayTheme = isDayTheme != null ? JSON.parse(isDayTheme) : true;
+    const theme = isDayTheme ? 'day-theme' : 'night-theme';
+    document.getElementById('theme-container').className = theme;
   </script>
   <noscript>Please enable JavaScript to continue using this application.</noscript>
 </body>

@@ -10,7 +10,7 @@ import {
   MatSnackBar
 } from '@angular/material';
 
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 
@@ -68,6 +68,11 @@ export class GuiService {
   }
 
   showNotYetImplemented() {
-    this.showQuickNotification('Not yet implemented.');
+    this.showQuickNotification('The feature is not implemented yet.');
+  }
+
+  setIsDayTheme(isDayTheme: boolean) {
+    const theme = isDayTheme ? 'day-theme' : 'night-theme';
+    document.getElementById('theme-container').className = theme;
   }
 }

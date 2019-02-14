@@ -10,7 +10,6 @@ import { NotesManagerComponent } from './containers/notes-manager/notes-manager.
 import { EditComponent } from './components/edit/edit.component';
 
 
-
 @NgModule({
   imports: [
     CommonModule,
