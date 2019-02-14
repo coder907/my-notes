@@ -1,21 +1,21 @@
 <div
-  class="post-container"
+  class="edit-container"
 >
   <textarea
     #textElement
     matInput
-    class="post-textarea mat-elevation-z4"
+    class="edit-textarea mat-elevation-z4"
     value="{{ item?.text }}"
     [placeholder]="placeholder"
     (keyup.esc)="onTextElementKeyUpEsc();"
   >
   </textarea>
 
-  <div class="post-button-container">
+  <div class="edit-button-container">
     <button
       type="button"
       mat-raised-button
-      class="post-button post-button-save mat-elevation-z4"
+      class="edit-button edit-button-save mat-elevation-z4"
       color="primary"
       (click)="onSaveClick()"
     >
@@ -25,7 +25,7 @@
     <button
       type="button"
       mat-raised-button
-      class="post-button mat-elevation-z4"
+      class="edit-button mat-elevation-z4"
       color="accent"
       (click)="onClearClick()"
     >

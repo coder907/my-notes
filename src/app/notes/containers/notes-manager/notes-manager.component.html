@@ -1,11 +1,11 @@
 <div class="notes-manager-container">
-  <app-post
+  <app-edit
     placeholder="Enter a new note"
     [item]="noteService.editedNote$ | async"
     (save)="save($event)"
     (clear)="noteService.stopEditing()"
   >
-  </app-post>
+  </app-edit>
 
   <app-list
     [listDefinition]="listDefinition"

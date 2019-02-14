@@ -1,9 +1,9 @@
-.post-container {
+.edit-container {
   margin: 4px;
   text-align: center;
 }
 
-.post-textarea {
+.edit-textarea {
   width: 100%;
   min-width: 200px;
   height: 20vh;
@@ -12,13 +12,13 @@
   border-radius: 4px;
 }
 
-.post-button-container {
+.edit-button-container {
   display: flex;
   margin: 0;
   width: 100%;
 }
 
-.post-button {
+.edit-button {
   flex: 1 1 auto;
   height: 7vh;
   min-width: 50px;
@@ -26,32 +26,32 @@
   border-radius: 4px;
 }
 
-.post-button-save {
+.edit-button-save {
   margin-right: 4px;
 }
 
 @media screen and (min-width: 768px) {
-  .post-container {
+  .edit-container {
     margin: 8px;
     display: flex;
   }
 
-  .post-textarea {
+  .edit-textarea {
     width: 60%;
     border-radius: 8px;
   }
 
-  .post-button-container {
+  .edit-button-container {
     width: 40%;
   }
 
-  .post-button {
+  .edit-button {
     height: auto;
     font-size: 3.0em;
     border-radius: 8px;
   }
 
-  .post-button-save {
+  .edit-button-save {
     margin-right: 8px;
     margin-left: 8px;
   }

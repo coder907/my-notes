@@ -13,12 +13,12 @@ import {
 
 
 @Component({
-  selector: 'app-post',
-  templateUrl: './post.component.html',
-  styleUrls: ['./post.component.scss'],
+  selector: 'app-edit',
+  templateUrl: './edit.component.html',
+  styleUrls: ['./edit.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PostComponent implements OnChanges  {
+export class EditComponent implements OnChanges  {
 
   @Input()
   item: {text: string};
