@@ -25,7 +25,7 @@ export class MenuComponent {
   navigate(link: string) {
     this.router.navigate([link]);
 
-    if (this.guiService.isHandset) {
+    if (!this.guiService.isWidescreen) {
       this.guiService.closeSidenav();
     }
   }

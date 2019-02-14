@@ -5,10 +5,6 @@
   $accent: map-get($theme, accent);
   $warn: map-get($theme, warn);
 
-  .list-container {
-    background-color: mat-color($primary, 100);
-  }
-
   tr:nth-child(odd) {
     background-color: mat-color($primary, 200);
   }

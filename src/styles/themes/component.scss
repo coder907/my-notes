@@ -1,6 +1,5 @@
 @import '../../app/auth/components/sign-in/sign-in.component.scss';
 @import '../../app/core/containers/main/main.component.scss';
-@import '../../app/core/containers/menu/menu.component.scss';
 @import '../../app/core/components/list/list.component.scss';
 @import '../../app/settings/containers/settings-manager/settings-manager.component.scss';
 @import '../../app/settings/components/settings/settings.component.scss';
@@ -8,7 +7,6 @@
 @mixin component-themes($theme) {
   @include sign-in-theme($theme);
   @include main-theme($theme);
-  @include menu-theme($theme);
   @include list-theme($theme);
   @include settings-manager-theme($theme);
   @include settings-theme($theme);

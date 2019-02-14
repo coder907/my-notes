@@ -2,14 +2,37 @@
 
 @mixin settings-manager-theme($theme) {
   $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
 
   .settings-manager-container {
-    background-color: mat-color($primary, 100);
+    // background-color: mat-color($accent, 100)s
+  }
+
+  .settings-manager-background-image {
+    color: mat-color($primary, 100);
   }
 }
 
 .settings-manager-container {
-  width: 100%;
   height: calc(100vh - 64px);
   text-align: center;
+}
+
+.settings-manager-component {
+  position: relative;
+  z-index: 2;
+}
+
+.settings-manager-background-image {
+  width: 75vmin;
+  font-size: 75vmin;
+}
+
+.settings-manager-background-image-container {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
 }

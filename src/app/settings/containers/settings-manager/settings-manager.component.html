@@ -1,5 +1,6 @@
 <div class="settings-manager-container">
   <app-settings
+    class="settings-manager-component"
     [language]="settingsService.language$ | async"
     [isDayTheme]="settingsService.isDayTheme$ | async"
     [hasPassword]="settingsService.hasPassword$ | async"
@@ -9,9 +10,7 @@
     (init)="settingsService.loadSettings()"
   ></app-settings>
 
-  <!-- <pre>
-      language: {{ settingsService.language$ | async }}
-      isDayTheme: {{ settingsService.isDayTheme$ | async }}
-      hasPassword: {{ settingsService.hasPassword$ | async }}
-  </pre> -->
+  <div class="settings-manager-background-image-container">
+    <mat-icon class="settings-manager-background-image">settings</mat-icon>
+  </div>
 </div>
