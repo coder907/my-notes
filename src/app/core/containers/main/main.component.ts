@@ -47,14 +47,7 @@ export class MainComponent implements OnInit {
     this.guiService.init(this.sidenav, this.snackBar);
 
     this.isRemoveButtonVisible$ = this.noteService.editedNote$.pipe(
-      map((editedNote) => {
-        if (editedNote) {
-          return true;
-
-        } else {
-          return false;
-        }
-      })
+      map(editedNote => !!editedNote)
     );
   }
 

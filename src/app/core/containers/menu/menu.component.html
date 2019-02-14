@@ -1,6 +1,6 @@
 <div
   class="menu-header"
-  *ngIf="!(guiService.isHandset$ | async)"
+  *ngIf="guiService.isWidescreen$ | async"
 >
   My Notes
 </div>

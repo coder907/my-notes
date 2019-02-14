@@ -1,8 +1,9 @@
 import {
   Component,
   OnDestroy,
-  // ChangeDetectionStrategy,
+  ChangeDetectionStrategy,
   OnInit,
+  ChangeDetectorRef,
 } from '@angular/core';
 
 import { Subscription } from 'rxjs';
@@ -19,7 +20,7 @@ import { ListDefinition } from 'src/app/core/components/list/models/list-definit
   selector: 'app-notes-manager',
   templateUrl: './notes-manager.component.html',
   styleUrls: ['./notes-manager.component.scss'],
-  // changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NotesManagerComponent implements OnInit, OnDestroy  {
 
@@ -31,26 +32,31 @@ export class NotesManagerComponent implements OnInit, OnDestroy  {
   constructor(
     public readonly notesService: NotesService,
     public readonly guiService: GuiService,
+    changeDetector: ChangeDetectorRef,
   ) {
     this.isHandsetSubscription = guiService.isHandset$.subscribe(
       (isHandset) => {
         this.updateListDefinition(isHandset);
         this.updateColumnDefinitions(isHandset);
+        changeDetector.markForCheck();
       }
     );
   }
 
   updateListDefinition(isHandset: boolean) {
     let height: string;
+    let hideHeader = false;
 
     if (isHandset) {
       height = 'calc(73vh - 74px)';
+      hideHeader = true;
     } else {
       height = 'calc(80vh - 88px)';
     }
 
     this.listDefinition = {
       height,
+      hideHeader,
     };
   }
 
@@ -62,7 +68,7 @@ export class NotesManagerComponent implements OnInit, OnDestroy  {
         name: 'createdTs',
         description: 'Created',
         format: ColumnFormat.Datetime,
-        width: '15%',
+        width: '25%',
       });
     }
 
@@ -80,7 +86,7 @@ export class NotesManagerComponent implements OnInit, OnDestroy  {
   }
 
   ngOnInit() {
-    this.notesService.startSync();
+    this.notesService.loadNotes();
   }
 
   ngOnDestroy() {

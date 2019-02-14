@@ -2,8 +2,8 @@
   <mat-sidenav
     #sidenav
     class="main-sidenav mat-elevation-z4"
-    [mode]="(guiService.isHandset$ | async) ? 'over' : 'side'"
-    [opened]="!(guiService.isHandset$ | async)"
+    [mode]="(guiService.isWidescreen$ | async) ? 'side' : 'over'"
+    [opened]="guiService.isWidescreen"
   >
     <app-menu>
     </app-menu>
@@ -14,7 +14,7 @@
       <button
         mat-icon-button
         (click)="sidenav.toggle()"
-        *ngIf="guiService.isHandset$ | async"
+        *ngIf="!(guiService.isWidescreen$ | async)"
       >
         <mat-icon>menu</mat-icon>
       </button>

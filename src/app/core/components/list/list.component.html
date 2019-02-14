@@ -28,12 +28,13 @@
     <tr
       mat-header-row
       *matHeaderRowDef="displayedColumns; sticky: true"
+      [class.list-hide-header]="listDefinition?.hideHeader"
     >
     </tr>
     <tr 
       mat-row
       *matRowDef="let row; columns: displayedColumns;"
-      [class.selected]="row.id === editedItem?.id"
+      [class.list-row-selected]="row.id === editedItem?.id"
       (appDblClickOrPress)="startEditing.emit(row.id)"
     >
     </tr>

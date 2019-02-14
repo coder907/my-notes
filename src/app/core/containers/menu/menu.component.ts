@@ -5,8 +5,6 @@ import {
 
 import { Router } from '@angular/router';
 
-import { take } from 'rxjs/operators';
-
 import { GuiService } from '../../services/gui.service';
 
 
@@ -17,19 +15,17 @@ import { GuiService } from '../../services/gui.service';
   styleUrls: ['./menu.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MenuComponent  {
+export class MenuComponent {
 
   constructor(
     public readonly guiService: GuiService,
     private readonly router: Router,
-  ) {}
+  ) { }
 
-  async navigate(link: string) {
+  navigate(link: string) {
     this.router.navigate([link]);
 
-    const isHandset = await this.guiService.isHandset$.pipe(take(1)).toPromise();
-
-    if (isHandset) {
+    if (this.guiService.isHandset) {
       this.guiService.closeSidenav();
     }
   }

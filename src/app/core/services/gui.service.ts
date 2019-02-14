@@ -20,7 +20,11 @@ import { map } from 'rxjs/operators';
 })
 export class GuiService {
 
+  private readonly handsetBreakpoints = [Breakpoints.XSmall];
+  private readonly widescreenBreakpoints = [Breakpoints.Medium, Breakpoints.Large, Breakpoints.XLarge];
+
   private isHandsetValue$: Observable<boolean>;
+  private isWidescreeValue$: Observable<boolean>;
 
   private sidenav: MatSidenav;
   private snackBar: MatSnackBar;
@@ -29,14 +33,36 @@ export class GuiService {
     private readonly breakpointObserver: BreakpointObserver,
   ) { }
 
+  get isHandset(): boolean {
+    return this.breakpointObserver.isMatched(this.handsetBreakpoints);
+  }
+
   get isHandset$(): Observable<boolean> {
     if (!this.isHandsetValue$) {
-      this.isHandsetValue$ = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
-        map(state => state.matches)
-      );
+      this.isHandsetValue$ = this.breakpointObserver
+        .observe(this.handsetBreakpoints)
+        .pipe(
+          map(state => state.matches)
+        );
     }
 
     return this.isHandsetValue$;
+  }
+
+  get isWidescreen(): boolean {
+    return this.breakpointObserver.isMatched(this.widescreenBreakpoints);
+  }
+
+  get isWidescreen$(): Observable<boolean> {
+    if (!this.isWidescreeValue$) {
+      this.isWidescreeValue$ = this.breakpointObserver
+        .observe(this.widescreenBreakpoints)
+        .pipe(
+          map(state => state.matches)
+        );
+    }
+
+    return this.isWidescreeValue$;
   }
 
   init(
@@ -68,7 +94,7 @@ export class GuiService {
   }
 
   showNotYetImplemented() {
-    this.showQuickNotification('The feature is not implemented yet.');
+    this.showQuickNotification('This feature is not implemented yet.');
   }
 
   setIsDayTheme(isDayTheme: boolean) {

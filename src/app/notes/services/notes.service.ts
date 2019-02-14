@@ -34,7 +34,7 @@ export class NotesService {
     private readonly store: Store<NotesState>
   ) { }
 
-  startSync(): void {
+  loadNotes(): void {
     this.store.dispatch(new LoadNotesRequestAction());
   }
 

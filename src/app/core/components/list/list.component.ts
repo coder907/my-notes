@@ -49,17 +49,15 @@ export class ListComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    const columnDefinitions = changes.columnDefinitions;
-
-    if (  columnDefinitions &&
-         (columnDefinitions.currentValue !== columnDefinitions.previousValue)
-    ) {
+    if (changes.columnDefinitions) {
       this.updateDisplayedColumns();
     }
   }
 
   updateDisplayedColumns() {
-    this.displayedColumns = this.columnDefinitions.map(columnDefinition => columnDefinition.name);
+    this.displayedColumns = this.columnDefinitions.map(
+      columnDefinition => columnDefinition.name
+    );
   }
 
   formatData(item: object, columnDefinition: ColumnDefinition) {

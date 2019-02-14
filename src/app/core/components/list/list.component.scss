@@ -21,7 +21,7 @@
     background-color: mat-color($warn, 200);
   }
 
-  tr.selected {
+  tr.list-row-selected {
     background-color: mat-color($warn, 300);
   }
 
@@ -42,7 +42,7 @@
   width: 100%;
 }
 
-thead {
+.list-hide-header {
   display: none;
 }
 
@@ -63,8 +63,4 @@ thead {
     margin: 0px 8px;
     border-radius: 8px;
   }
-
-  thead {
-    display: table-header-group;
-  }  
 }
