@@ -22,12 +22,27 @@
 
 .settings-label-text {
   display: inline-block;
-  width: 200px;
+  min-width: 200px;
+  font-size: 0.9em;
 }
 
 .settings-control-container {
   display: inline-block;
   width: 200px;
-  padding-bottom: 24px;
+  margin-bottom: 24px;
   text-align: center;
+}
+
+@media screen and (max-width: 399px) {
+  .settings-label-text {
+    display: block;
+  }
+
+  .settings-container-field {
+    margin-top: 8px;
+  }
+
+  .settings-label-text-slide-toggle {
+    margin-bottom: 8px;
+  }
 }
