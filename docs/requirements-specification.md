@@ -8,7 +8,7 @@ A simple note-taking application.
 
 ## Purpose
 
-Build a responsive web application using TypeScript, Angular, Material, RxJS and NGRX.
+Build a responsive web application using TypeScript, Angular, Material, RxJS and NgRx.
 
 
 

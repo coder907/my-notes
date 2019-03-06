@@ -44,7 +44,7 @@ import {
   SetHasPasswordFailAction
 } from '../store/actions/set-has-password';
 
-import { SettingsDataService } from 'src/app/core/services/data/settings-data.service';
+import { SettingsDataService } from 'src/app/settings/services/settings-data.service';
 import { GuiService } from 'src/app/core/services/gui.service';
 
 

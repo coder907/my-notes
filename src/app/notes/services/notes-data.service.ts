@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 
-import { IndexedDb } from './indexed-db';
+import { IndexedDb } from '../../settings/services/indexed-db';
 
-import { Note } from '../../../notes/models/note';
+import { Note } from '../models/note';
 
 
 
