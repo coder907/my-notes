@@ -19,7 +19,7 @@ import {
   catchError,
 } from 'rxjs/operators';
 
-import { NotesDataService } from 'src/app/notes/services/notes-data.service';
+import { NotesDataService } from 'src/app/notes/services/data/notes-data.service';
 import { NotesActionTypes } from '../store/actions';
 
 import {

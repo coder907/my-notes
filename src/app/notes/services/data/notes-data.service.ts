@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 
-import { IndexedDb } from '../../settings/services/indexed-db';
+import { NotesDbService } from './notes-db.service';
 
-import { Note } from '../models/note';
+import { Note } from '../../models/note';
 
 
 
@@ -11,7 +11,7 @@ import { Note } from '../models/note';
 })
 export class NotesDataService {
 
-  private readonly db = new IndexedDb();
+  private readonly db = new NotesDbService();
 
   public async loadNotes(): Promise<Note[]> {
     const notes = await this.db.notes.limit(20).toArray();
