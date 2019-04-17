@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 
-import { NotesActionTypes } from '.';
+import { NotesActionTypes } from '../actions';
 import { Note } from '../../models/note';
 
 

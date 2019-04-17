@@ -10,8 +10,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { reducers } from './core/store';
-import { metaReducers } from './core/store';
+import { reducers } from './core/redux';
+import { metaReducers } from './core/redux';
 
 
 

@@ -18,31 +18,31 @@ import {
   catchError,
 } from 'rxjs/operators';
 
-import { SettingsActionTypes } from '../store/actions';
+import { SettingsActionTypes } from '../redux/actions';
 
 import {
   LoadSettingsRequestAction,
   LoadSettingsSuccessAction,
   LoadSettingsFailAction
-} from '../store/actions/load-settings';
+} from '../redux/actions/load-settings';
 
 import {
   SetLanguageRequestAction,
   SetLanguageSuccessAction,
   SetLanguageFailAction
-} from '../store/actions/set-language';
+} from '../redux/actions/set-language';
 
 import {
   SetIsDayThemeRequestAction,
   SetIsDayThemeSuccessAction,
   SetIsDayThemeFailAction
-} from '../store/actions/set-is-day-theme';
+} from '../redux/actions/set-is-day-theme';
 
 import {
   SetHasPasswordRequestAction,
   SetHasPasswordSuccessAction,
   SetHasPasswordFailAction
-} from '../store/actions/set-has-password';
+} from '../redux/actions/set-has-password';
 
 import { SettingsDataService } from 'src/app/settings/services/data/settings-data.service';
 import { GuiService } from 'src/app/core/services/gui.service';

@@ -19,35 +19,35 @@ import {
   catchError,
 } from 'rxjs/operators';
 
-import { NotesServiceBackendBase } from '../services/backend/notes-service-backend-base';
-import { NotesServiceBackend } from '../services/backend/notes-service-backend';
-import { NotesServiceBackendMock } from '../services/backend/notes-service-backend-mock';
+import { NotesServiceBackendBase } from '../../services/backend/notes-service-backend-base';
+import { NotesServiceBackend } from '../../services/backend/notes-service-backend';
+// import { NotesServiceBackendMock } from '../../services/backend/notes-service-backend-mock';
 
-import { NotesActionTypes } from '../store/actions';
+import { NotesActionTypes } from '../actions';
 
 import {
   LoadNotesRequestAction,
   LoadNotesSuccessAction,
   LoadNotesFailAction
-} from '../store/actions/load-notes';
+} from '../actions/load-notes';
 
 import {
   AddNoteRequestAction,
   AddNoteSuccessAction,
   AddNoteFailAction
-} from '../store/actions/add-note';
+} from '../actions/add-note';
 
 import {
   UpdateNoteRequestAction,
   UpdateNoteSuccessAction,
   UpdateNoteFailAction
-} from '../store/actions/update-note';
+} from '../actions/update-note';
 
 import {
   RemoveNoteRequestAction,
   RemoveNoteSuccessAction,
   RemoveNoteFailAction
-} from '../store/actions/remove-note';
+} from '../actions/remove-note';
 
 
 
@@ -58,8 +58,8 @@ export class NotesEffects {
 
   constructor(
     private readonly actions: Actions,
-    // notesServiceBackend: NotesServiceBackend,
-    notesServiceBackend: NotesServiceBackendMock,
+    notesServiceBackend: NotesServiceBackend,
+    // notesServiceBackend: NotesServiceBackendMock,
   ) {
     this.notesServiceBackend = notesServiceBackend;
   }

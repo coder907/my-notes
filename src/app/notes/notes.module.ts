@@ -5,7 +5,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { NotesRoutingModule } from './notes-routing.module';
 import { NotesMaterialModule } from './notes-material.module';
 import { CoreComponentsModule } from '../core/core-components.module';
-import { NotesEffects } from './effects/notes';
+import { NotesEffects } from './redux/effects/notes';
 import { NotesManagerComponent } from './containers/notes-manager/notes-manager.component';
 import { EditComponent } from './components/edit/edit.component';
 

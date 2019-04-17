@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 
-import { SettingsActionTypes } from '.';
+import { SettingsActionTypes } from '../actions';
 
 
 

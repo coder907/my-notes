@@ -9,16 +9,16 @@ import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 
 import { Note } from '../models/note';
-import { NotesState } from '../store/state';
+import { NotesState } from '../redux/state';
 
-import { LoadNotesRequestAction } from '../store/actions/load-notes';
-import { AddNoteRequestAction } from '../store/actions/add-note';
-import { UpdateNoteRequestAction } from '../store/actions/update-note';
-import { RemoveNoteRequestAction } from '../store/actions/remove-note';
-import { StartEditingNoteAction } from '../store/actions/editing';
-import { StopEditingNoteAction } from '../store/actions/editing';
+import { LoadNotesRequestAction } from '../redux/actions/load-notes';
+import { AddNoteRequestAction } from '../redux/actions/add-note';
+import { UpdateNoteRequestAction } from '../redux/actions/update-note';
+import { RemoveNoteRequestAction } from '../redux/actions/remove-note';
+import { StartEditingNoteAction } from '../redux/actions/editing';
+import { StopEditingNoteAction } from '../redux/actions/editing';
 
-import * as selectors from '../store/selectors';
+import * as selectors from '../redux/selectors';
 
 
 

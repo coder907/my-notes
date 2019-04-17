@@ -7,8 +7,8 @@ import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { Store } from '@ngrx/store';
 
-import { AppState } from '../../core/store';
-import { SignOutAction } from '../store/actions/sign-out.action';
+import { AppState } from '../../core/redux';
+import { SignOutAction } from '../redux/actions/sign-out.action';
 import { User } from '../models/user';
 
 

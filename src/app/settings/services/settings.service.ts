@@ -8,11 +8,11 @@ import {
 import { Observable } from 'rxjs';
 
 import { Settings } from '../models/settings';
-import * as selectors from '../store/selectors';
-import { LoadSettingsRequestAction } from '../store/actions/load-settings';
-import { SetLanguageRequestAction } from '../store/actions/set-language';
-import { SetIsDayThemeRequestAction } from '../store/actions/set-is-day-theme';
-import { SetHasPasswordRequestAction } from '../store/actions/set-has-password';
+import * as selectors from '../redux/selectors';
+import { LoadSettingsRequestAction } from '../redux/actions/load-settings';
+import { SetLanguageRequestAction } from '../redux/actions/set-language';
+import { SetIsDayThemeRequestAction } from '../redux/actions/set-is-day-theme';
+import { SetHasPasswordRequestAction } from '../redux/actions/set-has-password';
 
 
 

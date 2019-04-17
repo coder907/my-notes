@@ -5,9 +5,9 @@ import {
 } from '@ngrx/store';
 
 import { environment } from 'src/environments/environment';
-import { NotesState } from '../../notes/store/state';
-import { reducer as notesReducer } from '../../notes/store/reducers';
-import { AuthActionTypes } from '../../auth/store/actions';
+import { NotesState } from '../../notes/redux/state';
+import { reducer as notesReducer } from '../../notes/redux/reducers';
+import { AuthActionTypes } from '../../auth/redux/actions';
 
 
 

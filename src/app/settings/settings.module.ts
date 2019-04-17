@@ -9,7 +9,7 @@ import { SettingsMaterialModule } from './settings-material.module';
 import { SettingsManagerComponent } from './containers/settings-manager/settings-manager.component';
 import { SettingsEffects } from './effects/settings';
 import { SettingsComponent } from './components/settings/settings.component';
-import { reducer } from './store/reducers';
+import { reducer } from './redux/reducers';
 
 
 
