@@ -15,7 +15,7 @@ import {
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { AuthService } from '../../../auth/services/auth-service';
+import { AuthService } from '../../../auth/services/auth.service';
 import { NotesService } from '../../../notes/services/notes.service';
 import { GuiService } from '../../services/gui.service';
 

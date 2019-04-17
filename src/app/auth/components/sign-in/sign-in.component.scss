@@ -6,13 +6,42 @@
   .sign-in-container {
     background-color: mat-color($primary, 200);
   }
+
+  .sign-in-box {
+    background-color: mat-color($primary, 100);
+    box-shadow: 3px 3px 3px mat-color($primary, 400);
+  }
 }
 
-.sign-in-container {
-  width: 100vw;
-  height: 100vh;
+.sign-in-box {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.sign-in-credentials-not-valid {
+  animation: shake 0.75s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+.sign-in-hidden {
+  display: none;
+}
+
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
 }

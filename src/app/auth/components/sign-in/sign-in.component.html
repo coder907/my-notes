@@ -1,2 +1,41 @@
-<div class="sign-in-container">
+<mat-spinner *ngIf="isAuthenticating">
+</mat-spinner>
+
+<div
+  class="sign-in-box"
+  [class.sign-in-credentials-not-valid] = "authNotValidSignal"
+  [class.sign-in-hidden]="isAuthenticating"
+>
+  <mat-form-field>
+    <input 
+      #userName
+      matInput
+      name="userName"
+      type="text"
+      placeholder="Username"
+      autocomplete="off"
+      (keyup.enter)="onSignIn()"
+    >
+  </mat-form-field>
+  
+  <mat-form-field>
+    <input 
+      #password
+      matInput
+      name="password"
+      type="password"
+      placeholder="Password"
+      autocomplete="off"
+      (keyup.enter)="onSignIn()"
+    >
+  </mat-form-field>
+
+  <button
+    mat-button
+    name="signIn"
+    type="button"
+    (click)="onSignIn()"
+  >
+    Sign In
+  </button>
 </div>

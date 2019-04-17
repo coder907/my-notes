@@ -1,0 +1,18 @@
+@import '~@angular/material/theming';
+
+@mixin auth-page-theme($theme) {
+  $primary: map-get($theme, primary);
+
+  .auth-page-container {
+    background-color: mat-color($primary, 200);
+  }
+}
+
+.auth-page-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}

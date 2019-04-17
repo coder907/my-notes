@@ -5,14 +5,14 @@ import {
   RouterModule
 } from '@angular/router';
 
-import { SignInComponent } from './components/sign-in/sign-in.component';
+import { AuthPageComponent } from './containers/auth-page/auth-page.component';
 
 
 
 const routes: Routes = [
   {
     path: '',
-    component: SignInComponent
+    component: AuthPageComponent
   }
 ];
 

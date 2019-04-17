@@ -1,10 +1,11 @@
 import {
   Component,
-  ChangeDetectionStrategy,
+  ChangeDetectionStrategy
 } from '@angular/core';
 
 import { Router } from '@angular/router';
 
+import { AuthService } from 'src/app/auth/services/auth.service';
 import { GuiService } from '../../services/gui.service';
 
 
@@ -18,6 +19,7 @@ import { GuiService } from '../../services/gui.service';
 export class MenuComponent {
 
   constructor(
+    public readonly authService: AuthService,
     public readonly guiService: GuiService,
     private readonly router: Router,
   ) { }

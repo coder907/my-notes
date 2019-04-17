@@ -1,12 +1,14 @@
 import {
   Component,
-  OnDestroy,
   ChangeDetectionStrategy,
+  Input,
+  Output,
+  EventEmitter,
+  ViewChild,
+  ElementRef,
 } from '@angular/core';
 
-import { Subscription } from 'rxjs';
-
-import { AuthService } from '../../services/auth-service';
+import { Credentials } from '../../models/credentials';
 
 
 
@@ -16,25 +18,27 @@ import { AuthService } from '../../services/auth-service';
   styleUrls: ['./sign-in.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SignInComponent implements OnDestroy {
+export class SignInComponent {
 
-  private userSubscription: Subscription;
+  @Input()
+  isAuthenticating: boolean;
 
-  constructor(
-    private readonly authService: AuthService,
-  ) {
-    this.userSubscription = this.authService.user$.subscribe(
-      (user) => {
-        if (user) {
-          this.authService.redirectToMainPage();
-        }
-      }
-    );
-  }
+  @Input()
+  authNotValidSignal: boolean;
 
-  ngOnDestroy() {
-    if (this.userSubscription) {
-      this.userSubscription.unsubscribe();
-    }
+  @Output()
+  signIn = new EventEmitter<Credentials>();
+
+  @ViewChild('userName')
+  private readonly userName: ElementRef;
+
+  @ViewChild('password')
+  private readonly password: ElementRef;
+
+  onSignIn() {
+    this.signIn.emit({
+      userName: this.userName.nativeElement.value.trim(),
+      password: this.password.nativeElement.value.trim()
+    });
   }
 }

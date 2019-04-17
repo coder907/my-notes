@@ -1,6 +1,6 @@
 ## Description
 
-See a [Live Preview](https://coder907.github.io/my-notes/).
+See a [Live Preview](https://coder907.github.io/my-notes/). Use the following credentials: 'user' and 'test'.
 
 See [Requirements Specification](requirements-specification.md) for a short overview.
 

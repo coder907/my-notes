@@ -20,4 +20,14 @@
     </span>
   </mat-list-item>
 
+  <mat-list-item (click)="authService.signOut()">
+    <mat-icon matListIcon>exit_to_app</mat-icon>
+    <span matLine>
+      Sign Out
+    </span>
+    <span matLine>
+      Sign out of application.
+    </span>
+  </mat-list-item>  
+
 </mat-nav-list>

@@ -1,0 +1,10 @@
+<div class="auth-page-container">
+
+  <app-sign-in
+    [isAuthenticating]="authService.isAuthenticating$ | async"
+    [authNotValidSignal]="authService.authNotValidSignal$ | async"
+    (signIn)="authService.signIn($event.userName, $event.password)"
+  >
+  </app-sign-in>
+
+</div>
