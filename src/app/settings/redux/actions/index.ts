@@ -17,26 +17,26 @@ import {
 } from './set-is-day-theme';
 
 import {
-  SetHasPasswordRequestAction,
-  SetHasPasswordSuccessAction,
-  SetHasPasswordFailAction
-} from './set-has-password';
+  SetRequiresPasswordRequestAction,
+  SetRequiresPasswordSuccessAction,
+  SetRequiresPasswordFailAction
+} from './set-requires-password';
 
 
 
 export enum SettingsActionTypes {
-  LoadSettingsRequest   = '[Settings] LoadSettingsRequest',
-  LoadSettingsSuccess   = '[Settings] LoadSettingsSuccess',
-  LoadSettingsFail      = '[Settings] LoadSettingsFail',
-  SetLanguageRequest    = '[Settings] SetLanguageRequest',
-  SetLanguageSuccess    = '[Settings] SetLanguageSuccess',
-  SetLanguageFail       = '[Settings] SetLanguageFail',
-  SetIsDayThemeRequest  = '[Settings] SetIsDayThemeRequest',
-  SetIsDayThemeSuccess  = '[Settings] SetIsDayThemeSuccess',
-  SetIsDayThemeFail     = '[Settings] SetIsDayThemeFail',
-  SetHasPasswordRequest = '[Settings] SetHasPasswordRequest',
-  SetHasPasswordSuccess = '[Settings] SetHasPasswordSuccess',
-  SetHasPasswordFail    = '[Settings] SetHasPasswordFail',
+  LoadSettingsRequest         = '[Settings] LoadSettingsRequest',
+  LoadSettingsSuccess         = '[Settings] LoadSettingsSuccess',
+  LoadSettingsFail            = '[Settings] LoadSettingsFail',
+  SetLanguageRequest          = '[Settings] SetLanguageRequest',
+  SetLanguageSuccess          = '[Settings] SetLanguageSuccess',
+  SetLanguageFail             = '[Settings] SetLanguageFail',
+  SetIsDayThemeRequest        = '[Settings] SetIsDayThemeRequest',
+  SetIsDayThemeSuccess        = '[Settings] SetIsDayThemeSuccess',
+  SetIsDayThemeFail           = '[Settings] SetIsDayThemeFail',
+  SetRequiresPasswordRequest  = '[Settings] SetRequiresPasswordRequest',
+  SetRequiresPasswordSuccess  = '[Settings] SetRequiresPasswordSuccess',
+  SetRequiresPasswordFail     = '[Settings] SetRequiresPasswordFail',
 }
 
 export type SettingsAction =
@@ -49,7 +49,7 @@ export type SettingsAction =
   SetIsDayThemeRequestAction |
   SetIsDayThemeSuccessAction |
   SetIsDayThemeFailAction |
-  SetHasPasswordRequestAction |
-  SetHasPasswordSuccessAction |
-  SetHasPasswordFailAction
+  SetRequiresPasswordRequestAction |
+  SetRequiresPasswordSuccessAction |
+  SetRequiresPasswordFailAction
 ;

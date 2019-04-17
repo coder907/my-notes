@@ -11,17 +11,17 @@ export class SettingsDataService {
 
   private readonly languageKey = 'language';
   private readonly isDayThemeKey = 'isDayTheme';
-  private readonly hasPasswordKey = 'hasPassword';
+  private readonly requiresPasswordKey = 'requiresPassword';
 
   public async loadSettings(): Promise<Settings> {
     const language = localStorage.getItem(this.languageKey);
     const isDayTheme = localStorage.getItem(this.isDayThemeKey);
-    const hasPassword = localStorage.getItem(this.hasPasswordKey);
+    const requiresPassword = localStorage.getItem(this.requiresPasswordKey);
 
     const settings: Settings = {
       language: language || 'en',
       isDayTheme: isDayTheme != null ? JSON.parse(isDayTheme) : true,
-      hasPassword: hasPassword != null ? JSON.parse(hasPassword) : false,
+      requiresPassword: requiresPassword != null ? JSON.parse(requiresPassword) : true,
     };
 
     return settings;
@@ -35,7 +35,7 @@ export class SettingsDataService {
     localStorage.setItem(this.isDayThemeKey, isDayTheme.toString());
   }
 
-  public async setHasPassword(hasPassword: boolean): Promise<void> {
-    localStorage.setItem(this.hasPasswordKey, hasPassword.toString());
+  public async setRequiresPassword(requiresPassword: boolean): Promise<void> {
+    localStorage.setItem(this.requiresPasswordKey, requiresPassword.toString());
   }
 }

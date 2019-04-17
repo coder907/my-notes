@@ -31,7 +31,7 @@ export class SettingsComponent implements OnInit, OnChanges, OnDestroy {
   isDayTheme: boolean;
 
   @Input()
-  hasPassword: boolean;
+  requiresPassword: boolean;
 
   @Output()
   languageChanged = new EventEmitter<string>();
@@ -40,23 +40,23 @@ export class SettingsComponent implements OnInit, OnChanges, OnDestroy {
   isDayThemeChanged = new EventEmitter<boolean>();
 
   @Output()
-  hasPasswordChanged = new EventEmitter<boolean>();
+  requiresPasswordChanged = new EventEmitter<boolean>();
 
   @Output()
   init = new EventEmitter();
 
   languageControl = new FormControl();
   isDayThemeControl = new FormControl();
-  hasPasswordControl = new FormControl();
+  requiresPasswordControl = new FormControl();
 
   languageSubscription: Subscription;
   isDayThemeSubscription: Subscription;
-  hasPasswordSubscription: Subscription;
+  requiresPasswordSubscription: Subscription;
 
   ngOnInit() {
     this.languageSubscription = this.languageControl.valueChanges.subscribe(this.languageControlChanged.bind(this));
     this.isDayThemeSubscription = this.isDayThemeControl.valueChanges.subscribe(this.isDayThemeControlChanged.bind(this));
-    this.hasPasswordSubscription = this.hasPasswordControl.valueChanges.subscribe(this.hasPasswordControlChanged.bind(this));
+    this.requiresPasswordSubscription = this.requiresPasswordControl.valueChanges.subscribe(this.requiresPasswordControlChanged.bind(this));
 
     this.init.emit();
   }
@@ -78,9 +78,9 @@ export class SettingsComponent implements OnInit, OnChanges, OnDestroy {
       );
     }
 
-    if (changes.hasPassword) {
-      this.hasPasswordControl.setValue(
-        changes.hasPassword.currentValue, {
+    if (changes.requiresPassword) {
+      this.requiresPasswordControl.setValue(
+        changes.requiresPassword.currentValue, {
           emitEvent: false,
         }
       );
@@ -94,8 +94,8 @@ export class SettingsComponent implements OnInit, OnChanges, OnDestroy {
     if (this.isDayThemeSubscription) {
       this.isDayThemeSubscription.unsubscribe();
     }
-    if (this.hasPasswordSubscription) {
-      this.hasPasswordSubscription.unsubscribe();
+    if (this.requiresPasswordSubscription) {
+      this.requiresPasswordSubscription.unsubscribe();
     }
   }
 
@@ -107,7 +107,7 @@ export class SettingsComponent implements OnInit, OnChanges, OnDestroy {
     this.isDayThemeChanged.emit(newValue);
   }
 
-  hasPasswordControlChanged(newValue: boolean) {
-    this.hasPasswordChanged.emit(newValue);
+  requiresPasswordControlChanged(newValue: boolean) {
+    this.requiresPasswordChanged.emit(newValue);
   }
 }

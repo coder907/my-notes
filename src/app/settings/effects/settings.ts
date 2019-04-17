@@ -39,10 +39,10 @@ import {
 } from '../redux/actions/set-is-day-theme';
 
 import {
-  SetHasPasswordRequestAction,
-  SetHasPasswordSuccessAction,
-  SetHasPasswordFailAction
-} from '../redux/actions/set-has-password';
+  SetRequiresPasswordRequestAction,
+  SetRequiresPasswordSuccessAction,
+  SetRequiresPasswordFailAction
+} from '../redux/actions/set-requires-password';
 
 import { SettingsDataService } from 'src/app/settings/services/data/settings-data.service';
 import { GuiService } from 'src/app/core/services/gui.service';
@@ -98,15 +98,15 @@ export class SettingsEffects {
   );
 
   @Effect()
-  readonly setHasPassword$: Observable<Action> = this.actions.pipe(
-    ofType(SettingsActionTypes.SetHasPasswordRequest),
+  readonly setRequiresPassword$: Observable<Action> = this.actions.pipe(
+    ofType(SettingsActionTypes.SetRequiresPasswordRequest),
 
-    concatMap(async (action: SetHasPasswordRequestAction) => {
-      await this.settingsDataService.setHasPassword(action.hasPassword);
+    concatMap(async (action: SetRequiresPasswordRequestAction) => {
+      await this.settingsDataService.setRequiresPassword(action.requiresPassword);
       this.guiService.showNotYetImplemented();
-      return new SetHasPasswordSuccessAction(action.hasPassword);
+      return new SetRequiresPasswordSuccessAction(action.requiresPassword);
     }),
 
-    catchError(error => of(new SetHasPasswordFailAction(error)))
+    catchError(error => of(new SetRequiresPasswordFailAction(error)))
   );
 }

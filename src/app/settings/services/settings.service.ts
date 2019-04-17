@@ -12,7 +12,7 @@ import * as selectors from '../redux/selectors';
 import { LoadSettingsRequestAction } from '../redux/actions/load-settings';
 import { SetLanguageRequestAction } from '../redux/actions/set-language';
 import { SetIsDayThemeRequestAction } from '../redux/actions/set-is-day-theme';
-import { SetHasPasswordRequestAction } from '../redux/actions/set-has-password';
+import { SetRequiresPasswordRequestAction } from '../redux/actions/set-requires-password';
 
 
 
@@ -23,7 +23,7 @@ export class SettingsService {
 
   private languageValue$: Observable<string>;
   private isDayThemeValue$: Observable<boolean>;
-  private hasPasswordValue$: Observable<boolean>;
+  private requiresPasswordValue$: Observable<boolean>;
 
   constructor(
     private readonly store: Store<Settings>,
@@ -45,12 +45,12 @@ export class SettingsService {
     return this.isDayThemeValue$;
   }
 
-  get hasPassword$(): Observable<boolean> {
-    if (!this.hasPasswordValue$) {
-      this.hasPasswordValue$ = this.store.pipe(select(selectors.hasPassword));
+  get requiresPassword$(): Observable<boolean> {
+    if (!this.requiresPasswordValue$) {
+      this.requiresPasswordValue$ = this.store.pipe(select(selectors.requiresPassword));
     }
 
-    return this.hasPasswordValue$;
+    return this.requiresPasswordValue$;
   }
 
   loadSettings() {
@@ -65,7 +65,7 @@ export class SettingsService {
     this.store.dispatch(new SetIsDayThemeRequestAction(isDayTheme));
   }
 
-  setHasPassword(hasPassword: boolean) {
-    this.store.dispatch(new SetHasPasswordRequestAction(hasPassword));
+  setRequiresPassword(requiresPassword: boolean) {
+    this.store.dispatch(new SetRequiresPasswordRequestAction(requiresPassword));
   }
 }

@@ -31,10 +31,10 @@ export function reducer(
         isDayTheme: action.isDayTheme,
       };
 
-    case SettingsActionTypes.SetHasPasswordSuccess:
+    case SettingsActionTypes.SetRequiresPasswordSuccess:
       return {
         ...state,
-        hasPassword: action.hasPassword,
+        requiresPassword: action.requiresPassword,
       };
 
     default:

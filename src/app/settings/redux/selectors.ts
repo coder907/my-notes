@@ -23,9 +23,9 @@ export const isDayTheme = createSelector(
   isDayThemeFn
 );
 
-const hasPasswordFn = (state: Settings) => state.hasPassword;
+const requiresPasswordFn = (state: Settings) => state.requiresPassword;
 
-export const hasPassword = createSelector(
+export const requiresPassword = createSelector(
   getSettings,
-  hasPasswordFn
+  requiresPasswordFn
 );

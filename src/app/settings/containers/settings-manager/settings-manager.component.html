@@ -3,10 +3,10 @@
     class="settings-manager-component"
     [language]="settingsService.language$ | async"
     [isDayTheme]="settingsService.isDayTheme$ | async"
-    [hasPassword]="settingsService.hasPassword$ | async"
+    [requiresPassword]="settingsService.requiresPassword$ | async"
     (languageChanged)="settingsService.setLanguage($event)"
     (isDayThemeChanged)="settingsService.setIsDayTheme($event)"
-    (hasPasswordChanged)="settingsService.setHasPassword($event)"
+    (requiresPasswordChanged)="settingsService.setRequiresPassword($event)"
     (init)="settingsService.loadSettings()"
   ></app-settings>
 
