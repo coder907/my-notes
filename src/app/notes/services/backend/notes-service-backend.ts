@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
+import { NotesServiceBackendBase } from './notes-service-backend-base';
 import { NotesDbService } from './notes-db.service';
-
 import { Note } from '../../models/note';
 
 
@@ -9,16 +9,16 @@ import { Note } from '../../models/note';
 @Injectable({
   providedIn: 'root',
 })
-export class NotesDataService {
+export class NotesServiceBackend extends NotesServiceBackendBase {
 
   private readonly db = new NotesDbService();
 
-  public async loadNotes(): Promise<Note[]> {
+  async loadNotes(): Promise<Note[]> {
     const notes = await this.db.notes.limit(20).toArray();
     return notes;
   }
 
-  public async addNote(text: string): Promise<Note> {
+  async addNote(text: string): Promise<Note> {
     const note: any = {
       createdTs: Date.now(),
       text,
@@ -30,7 +30,7 @@ export class NotesDataService {
     return note as Note;
   }
 
-  public async updateNote(id: number, text: string): Promise<void> {
+  async updateNote(id: number, text: string): Promise<void> {
     const note: Partial<Note> = {
       text,
     };
@@ -38,7 +38,7 @@ export class NotesDataService {
     await this.db.notes.update(id, note);
   }
 
-  public async deleteNote(id: number): Promise<void> {
+  async deleteNote(id: number): Promise<void> {
     await this.db.notes.delete(id);
   }
 }

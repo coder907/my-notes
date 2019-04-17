@@ -19,7 +19,10 @@ import {
   catchError,
 } from 'rxjs/operators';
 
-import { NotesDataService } from 'src/app/notes/services/data/notes-data.service';
+import { NotesServiceBackendBase } from '../services/backend/notes-service-backend-base';
+import { NotesServiceBackend } from '../services/backend/notes-service-backend';
+import { NotesServiceBackendMock } from '../services/backend/notes-service-backend-mock';
+
 import { NotesActionTypes } from '../store/actions';
 
 import {
@@ -51,17 +54,22 @@ import {
 @Injectable()
 export class NotesEffects {
 
+  private readonly notesServiceBackend: NotesServiceBackendBase;
+
   constructor(
     private readonly actions: Actions,
-    private readonly notesDataService: NotesDataService,
-  ) { }
+    // notesServiceBackend: NotesServiceBackend,
+    notesServiceBackend: NotesServiceBackendMock,
+  ) {
+    this.notesServiceBackend = notesServiceBackend;
+  }
 
   @Effect()
   readonly load$: Observable<Action> = this.actions.pipe(
     ofType(NotesActionTypes.LoadNotesRequest),
 
     concatMap((action: LoadNotesRequestAction) => {
-      return this.notesDataService.loadNotes();
+      return this.notesServiceBackend.loadNotes();
     }),
 
     map(notes => new LoadNotesSuccessAction(notes)),
@@ -74,7 +82,7 @@ export class NotesEffects {
     ofType(NotesActionTypes.AddNoteRequest),
 
     concatMap((action: AddNoteRequestAction) => {
-      return this.notesDataService.addNote(action.text);
+      return this.notesServiceBackend.addNote(action.text);
     }),
 
     map(note => new AddNoteSuccessAction(note)),
@@ -87,7 +95,7 @@ export class NotesEffects {
     ofType(NotesActionTypes.UpdateNoteRequest),
 
     concatMap(async (action: UpdateNoteRequestAction) => {
-      await this.notesDataService.updateNote(action.id, action.text);
+      await this.notesServiceBackend.updateNote(action.id, action.text);
 
       return {
         id: action.id,
@@ -105,7 +113,7 @@ export class NotesEffects {
     ofType(NotesActionTypes.RemoveNoteRequest),
 
     concatMap(async (action: RemoveNoteRequestAction) => {
-      await this.notesDataService.deleteNote(action.id);
+      await this.notesServiceBackend.deleteNote(action.id);
       return action.id;
     }),
 
