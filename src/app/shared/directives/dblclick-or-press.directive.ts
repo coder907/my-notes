@@ -5,7 +5,7 @@ import {
   Output,
 } from '@angular/core';
 
-import { DetectionUtil } from '../utils/detection-util';
+import * as detectionUtil from '../utils/detection-util';
 
 
 
@@ -19,14 +19,14 @@ export class DblClickOrPressDirective {
 
   @HostListener('dblclick')
   onDblClick() {
-    if (!DetectionUtil.supportsTouch()) {
+    if (!detectionUtil.supportsTouch()) {
       this.appDblClickOrPress.emit();
     }
   }
 
   @HostListener('press')
   onPress() {
-    if (DetectionUtil.supportsTouch()) {
+    if (detectionUtil.supportsTouch()) {
       this.appDblClickOrPress.emit();
     }
   }

@@ -1,6 +1,3 @@
-export const DetectionUtil = {
-
-  supportsTouch: (): boolean => {
-    return !!('ontouchstart' in window || navigator.msMaxTouchPoints);
-  }
-};
+export function supportsTouch(): boolean {
+  return !!('ontouchstart' in window || navigator.msMaxTouchPoints);
+}
