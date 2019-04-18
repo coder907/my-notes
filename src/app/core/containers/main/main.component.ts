@@ -60,6 +60,6 @@ export class MainComponent implements OnInit {
   }
 
   showAbout() {
-    this.guiService.showNotification('Updated: 18.4.2019 1:55');
+    this.guiService.showNotification('Updated: 18.4.2019 22:03');
   }
 }
