@@ -22,7 +22,7 @@ import { ColumnFormat } from './models/column-format';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
-export class ListComponent implements OnInit, OnChanges {
+export class ListComponent<T extends { id: number | string; }> implements OnInit, OnChanges {
 
   @Input()
   listDefinition: ListDefinition;
@@ -30,11 +30,14 @@ export class ListComponent implements OnInit, OnChanges {
   @Input()
   columnDefinitions: ColumnDefinition[];
 
+  /**
+   * T must extend object and have an 'id' property of type number or string.
+   */
   @Input()
-  items: object[];
+  items: T[];
 
   @Input()
-  editedItem: object;
+  editedItem: T;
 
   @Input()
   noItemsLabel = 'No items to display.';
@@ -60,7 +63,7 @@ export class ListComponent implements OnInit, OnChanges {
     );
   }
 
-  formatData(item: object, columnDefinition: ColumnDefinition) {
+  formatData(item: T, columnDefinition: ColumnDefinition) {
     const value = item[columnDefinition.name];
 
     if (columnDefinition.format === ColumnFormat.Enum) {
