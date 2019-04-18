@@ -10,7 +10,7 @@ A simple note-taking application.
 
 Build a responsive web application using TypeScript, Angular, Material, RxJS and NgRx.
 
-*Showcase good design patterns and development practices, and maintainable codebase.*
+*Showcase good software design patterns and development practices, and maintainable codebase.*
 
 
 
