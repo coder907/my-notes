@@ -10,7 +10,7 @@ import { User } from '../../models/user';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthServiceBackendMock extends AuthServiceBackendBase {
+export class AuthServiceBackend extends AuthServiceBackendBase {
 
   get user$(): Observable<User> {
     return null;

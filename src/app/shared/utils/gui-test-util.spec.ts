@@ -1,4 +1,7 @@
-import { Component, DebugElement } from '@angular/core';
+import {
+  Component,
+  DebugElement
+} from '@angular/core';
 
 import {
   TestBed,
