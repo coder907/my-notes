@@ -29,12 +29,12 @@ Build a responsive web application using TypeScript, Angular, Material, RxJS and
  - Menu [DONE]
  - Notes management [DONE]
  - Settings [DONE]
- - Sign out
+ - Sign out [DONE]
 
 ### Settings
  - Theme [DONE]
  - Language
- - Password
+ - Requires password
 
 ### Themes
  - Day [DONE]
@@ -50,7 +50,7 @@ Build a responsive web application using TypeScript, Angular, Material, RxJS and
 
 ### Authentication
   - None [DONE]
-  - Optional password
+  - Username and password [DONE]
 
 ### About
  - About dialog
