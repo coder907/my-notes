@@ -20,8 +20,8 @@ import {
 } from 'rxjs/operators';
 
 import { NotesServiceBackendBase } from '../../services/backend/notes-service-backend-base';
-import { NotesServiceBackend } from '../../services/backend/notes-service-backend';
 // import { NotesServiceBackendMock } from '../../services/backend/notes-service-backend-mock';
+import { NotesServiceBackend } from '../../services/backend/notes-service-backend';
 
 import { NotesActionTypes } from '../actions';
 
@@ -58,8 +58,8 @@ export class NotesEffects {
 
   constructor(
     private readonly actions: Actions,
-    notesServiceBackend: NotesServiceBackend,
     // notesServiceBackend: NotesServiceBackendMock,
+    notesServiceBackend: NotesServiceBackend,
   ) {
     this.notesServiceBackend = notesServiceBackend;
   }

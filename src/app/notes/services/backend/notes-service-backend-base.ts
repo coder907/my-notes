@@ -1,12 +1,7 @@
-import { Injectable } from '@angular/core';
-
 import { Note } from '../../models/note';
 
 
 
-@Injectable({
-  providedIn: 'root',
-})
 export abstract class NotesServiceBackendBase {
 
   abstract async loadNotes(): Promise<Note[]>;

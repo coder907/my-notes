@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 
+import { SettingsServiceBackendBase } from './settings-service-backend-base';
 import { Settings } from 'src/app/settings/models/settings';
 
 
@@ -7,13 +8,13 @@ import { Settings } from 'src/app/settings/models/settings';
 @Injectable({
   providedIn: 'root',
 })
-export class SettingsDataService {
+export class SettingsServiceBackend extends SettingsServiceBackendBase {
 
   private readonly languageKey = 'language';
   private readonly isDayThemeKey = 'isDayTheme';
   private readonly requiresPasswordKey = 'requiresPassword';
 
-  public async loadSettings(): Promise<Settings> {
+  async loadSettings(): Promise<Settings> {
     const language = localStorage.getItem(this.languageKey);
     const isDayTheme = localStorage.getItem(this.isDayThemeKey);
     const requiresPassword = localStorage.getItem(this.requiresPasswordKey);
@@ -27,15 +28,15 @@ export class SettingsDataService {
     return settings;
   }
 
-  public async setLanguage(language: string): Promise<void> {
+  async setLanguage(language: string): Promise<void> {
     localStorage.setItem(this.languageKey, language);
   }
 
-  public async setIsDayTheme(isDayTheme: boolean): Promise<void> {
+  async setIsDayTheme(isDayTheme: boolean): Promise<void> {
     localStorage.setItem(this.isDayThemeKey, isDayTheme.toString());
   }
 
-  public async setRequiresPassword(requiresPassword: boolean): Promise<void> {
+  async setRequiresPassword(requiresPassword: boolean): Promise<void> {
     localStorage.setItem(this.requiresPasswordKey, requiresPassword.toString());
   }
 }

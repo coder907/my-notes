@@ -44,26 +44,34 @@ import {
   SetRequiresPasswordFailAction
 } from '../actions/set-requires-password';
 
-import { SettingsDataService } from 'src/app/settings/services/data/settings-data.service';
 import { GuiService } from 'src/app/core/services/gui.service';
+
+import { SettingsServiceBackendBase } from '../../services/backend/settings-service-backend-base';
+// import { SettingsServiceBackendMock } from '../../services/backend/settings-service-backend-mock';
+import { SettingsServiceBackend } from '../../services/backend/settings-service-backend';
 
 
 
 @Injectable()
 export class SettingsEffects {
 
+  private readonly settingsServiceBackend: SettingsServiceBackendBase;
+
   constructor(
     private readonly actions: Actions,
-    private readonly settingsDataService: SettingsDataService,
     private readonly guiService: GuiService,
-  ) { }
+    // settingsServiceBackend: SettingsServiceBackendMock,
+    settingsServiceBackend: SettingsServiceBackend,
+  ) {
+    this.settingsServiceBackend = settingsServiceBackend;
+  }
 
   @Effect()
   readonly loadSettings$: Observable<Action> = this.actions.pipe(
     ofType(SettingsActionTypes.LoadSettingsRequest),
 
     concatMap(async (action: LoadSettingsRequestAction) => {
-      const settings = await this.settingsDataService.loadSettings();
+      const settings = await this.settingsServiceBackend.loadSettings();
       return new LoadSettingsSuccessAction(settings);
     }),
 
@@ -75,7 +83,7 @@ export class SettingsEffects {
     ofType(SettingsActionTypes.SetLanguageRequest),
 
     concatMap(async (action: SetLanguageRequestAction) => {
-      await this.settingsDataService.setLanguage(action.language);
+      await this.settingsServiceBackend.setLanguage(action.language);
       this.guiService.showNotYetImplemented();
       return new SetLanguageSuccessAction(action.language);
     }),
@@ -89,7 +97,7 @@ export class SettingsEffects {
 
     concatMap(async (action: SetIsDayThemeRequestAction) => {
       const isDayTheme = action.isDayTheme;
-      await this.settingsDataService.setIsDayTheme(isDayTheme);
+      await this.settingsServiceBackend.setIsDayTheme(isDayTheme);
       this.guiService.setIsDayTheme(isDayTheme);
       return new SetIsDayThemeSuccessAction(isDayTheme);
     }),
@@ -102,7 +110,7 @@ export class SettingsEffects {
     ofType(SettingsActionTypes.SetRequiresPasswordRequest),
 
     concatMap(async (action: SetRequiresPasswordRequestAction) => {
-      await this.settingsDataService.setRequiresPassword(action.requiresPassword);
+      await this.settingsServiceBackend.setRequiresPassword(action.requiresPassword);
       this.guiService.showNotYetImplemented();
       return new SetRequiresPasswordSuccessAction(action.requiresPassword);
     }),

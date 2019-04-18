@@ -20,12 +20,12 @@ import { metaReducers } from './core/redux';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
-    StoreModule.forRoot(reducers, { metaReducers }),
-    StoreDevtoolsModule.instrument({
-      name: 'My Notes DevTools',
-      maxAge: 10
+    ServiceWorkerModule.register(
+      'ngsw-worker.js', {
+        enabled: environment.production
     }),
+    StoreModule.forRoot(reducers, { metaReducers }),
+    StoreDevtoolsModule.instrument({ name: 'My Notes DevTools' }),
     EffectsModule.forRoot([]),
   ],
 
