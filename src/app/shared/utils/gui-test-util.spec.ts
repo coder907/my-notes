@@ -17,6 +17,7 @@ import * as guiTestUtil from './gui-test-util';
     <div
       id="container"
       (click)="onClick()"
+      (dblclick)="onDblClick()"
     >
       Test
       <input
@@ -30,6 +31,9 @@ import * as guiTestUtil from './gui-test-util';
 export class TestComponent {
 
   onClick() {
+  }
+
+  onDblClick() {
   }
 
   onKeyUp() {
@@ -83,6 +87,22 @@ describe('Gui test util', () => {
     spyOn(component, 'onClick');
     guiTestUtil.click(container);
     expect(component.onClick).toHaveBeenCalled();
+  });
+
+  it(methodName(guiTestUtil, guiTestUtil.dblclick) + ' works (DebugElement).', () => {
+    const container = guiTestUtil.query(fixture.debugElement, 'div[id="container"]') as DebugElement;
+
+    spyOn(component, 'onDblClick');
+    guiTestUtil.dblclick(container);
+    expect(component.onDblClick).toHaveBeenCalled();
+  });
+
+  it(methodName(guiTestUtil, guiTestUtil.dblclick) + ' works (HTMLElement).', () => {
+    const container = guiTestUtil.query(fixture.nativeElement, 'div[id="container"]') as HTMLElement;
+
+    spyOn(component, 'onDblClick');
+    guiTestUtil.dblclick(container);
+    expect(component.onDblClick).toHaveBeenCalled();
   });
 
   it(methodName(guiTestUtil, guiTestUtil.keyup) + ' works (DebugElement).', () => {
