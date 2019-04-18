@@ -39,6 +39,27 @@ export function click(element: DebugElement | HTMLElement) {
 }
 
 /**
+ * Dispatches dblclick event on an element.
+ *
+ * @param element An element to dispatch the event on.
+ */
+export function dblclick(element: DebugElement | HTMLElement) {
+  const eventName = 'dblclick';
+
+  if (element instanceof DebugElement) {
+    element.triggerEventHandler(eventName, { button: 0 });
+
+  } else if (element instanceof HTMLElement) {
+    const event: any = document.createEvent('MouseEvent');
+    // https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/initMouseEvent
+    event.initMouseEvent(eventName, true, true, window, 2, undefined, undefined, 1, 1);
+    element.dispatchEvent(event);
+  } else {
+    throw new Error('Element must be DebugElement or HTMLElement.');
+  }
+}
+
+/**
  * Dispatches keyup event on an element.
  *
  * @param element An element to dispatch the event on.
