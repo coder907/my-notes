@@ -16,7 +16,9 @@ export function reducer(
   action: NotesAction
 ): NotesState {
   switch (action.type) {
-    case NotesActionTypes.LoadNotesSuccess:
+    case NotesActionTypes.SyncNotesSnapshot:
+      // return adapter.addMany(action.notes, state);
+      state = adapter.removeAll(state);
       return adapter.addMany(action.notes, state);
 
     case NotesActionTypes.AddNoteSuccess:
@@ -24,11 +26,11 @@ export function reducer(
 
     case NotesActionTypes.UpdateNoteSuccess:
       return adapter.updateOne({
-          id: action.id,
-          changes: {
-            text: action.text,
-          }
-        },
+        id: action.id,
+        changes: {
+          text: action.text,
+        }
+      },
         state
       );
 

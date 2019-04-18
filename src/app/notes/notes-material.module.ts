@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 
 import {
-  MatButtonModule,
+  MatButtonModule
 } from '@angular/material';
 
 

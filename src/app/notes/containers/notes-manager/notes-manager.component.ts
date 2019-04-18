@@ -69,6 +69,7 @@ export class NotesManagerComponent implements OnInit, OnDestroy  {
         description: 'Created',
         format: ColumnFormat.Datetime,
         width: '25%',
+        sort: 'desc',
       });
     }
 
@@ -86,7 +87,7 @@ export class NotesManagerComponent implements OnInit, OnDestroy  {
   }
 
   ngOnInit() {
-    this.notesService.loadNotes();
+    this.notesService.syncNotes();
   }
 
   ngOnDestroy() {

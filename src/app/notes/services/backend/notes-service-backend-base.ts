@@ -1,10 +1,12 @@
+import { Observable } from 'rxjs';
+
 import { Note } from '../../models/note';
 
 
 
 export abstract class NotesServiceBackendBase {
 
-  abstract async loadNotes(): Promise<Note[]>;
+  abstract syncNotes(): Observable<Note[]>;
 
   abstract async addNote(text: string): Promise<Note>;
 

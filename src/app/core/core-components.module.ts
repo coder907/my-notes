@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import {
   MatInputModule,
   MatButtonModule,
+  MatIconModule,
   MatTableModule,
   MatSortModule,
 } from '@angular/material';
@@ -14,11 +15,13 @@ import { HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { HammerConfig } from '../../config/hammer';
 
 
+
 @NgModule({
   imports: [
     CommonModule,
     MatInputModule,
     MatButtonModule,
+    MatIconModule,
     MatTableModule,
     MatSortModule
   ],

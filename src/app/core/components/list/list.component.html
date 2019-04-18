@@ -16,7 +16,14 @@
         mat-header-cell
         *matHeaderCellDef
         [style.width]="columnDefinition.width"
-      > {{columnDefinition.description}} </th>
+      > {{columnDefinition.description}} 
+        <mat-icon
+          class="list-icon-hidden"
+          [class.list-icon-sort-descending]="columnDefinition.sort === 'desc'"
+        >
+          arrow_downward
+        </mat-icon>
+      </th>
 
       <td
         mat-cell

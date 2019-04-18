@@ -16,6 +16,7 @@ import {
 import {
   map,
   concatMap,
+  switchMap,
   catchError,
 } from 'rxjs/operators';
 
@@ -26,10 +27,10 @@ import { NotesServiceBackend } from '../../services/backend/notes-service-backen
 import { NotesActionTypes } from '../actions';
 
 import {
-  LoadNotesRequestAction,
-  LoadNotesSuccessAction,
-  LoadNotesFailAction
-} from '../actions/load-notes';
+  SyncNotesRequestAction,
+  SyncNotesSnapshotAction,
+  SyncNotesFailAction
+} from '../actions/sync-notes';
 
 import {
   AddNoteRequestAction,
@@ -65,16 +66,16 @@ export class NotesEffects {
   }
 
   @Effect()
-  readonly load$: Observable<Action> = this.actions.pipe(
-    ofType(NotesActionTypes.LoadNotesRequest),
+  readonly sync$: Observable<Action> = this.actions.pipe(
+    ofType(NotesActionTypes.SyncNotesRequest),
 
-    concatMap((action: LoadNotesRequestAction) => {
-      return this.notesServiceBackend.loadNotes();
+    switchMap((action: SyncNotesRequestAction) => {
+      return this.notesServiceBackend.syncNotes();
     }),
 
-    map(notes => new LoadNotesSuccessAction(notes)),
+    map(notes => new SyncNotesSnapshotAction(notes)),
 
-    catchError(error => of(new LoadNotesFailAction(error)))
+    catchError(error => of(new SyncNotesFailAction(error)))
   );
 
   @Effect()

@@ -38,6 +38,16 @@
   width: 100%;
 }
 
+.list-icon-hidden {
+  display: none;
+}
+
+.list-icon-sort-descending {
+  display: inline;
+  position: relative;
+  top: 4px;
+}
+
 .list-hide-header {
   display: none;
 }

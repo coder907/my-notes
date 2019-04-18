@@ -1,8 +1,8 @@
 import {
-  LoadNotesRequestAction,
-  LoadNotesSuccessAction,
-  LoadNotesFailAction
-} from './load-notes';
+  SyncNotesRequestAction,
+  SyncNotesSnapshotAction,
+  SyncNotesFailAction
+} from './sync-notes';
 
 import {
   AddNoteRequestAction,
@@ -30,9 +30,9 @@ import {
 
 
 export enum NotesActionTypes {
-  LoadNotesRequest    = '[Note] LoadNotesRequest',
-  LoadNotesSuccess    = '[Note] LoadNotesSuccess',
-  LoadNotesFail       = '[Note] LoadNotesFail',
+  SyncNotesRequest    = '[Note] SyncNotesRequest',
+  SyncNotesSnapshot   = '[Note] SyncNotesSnapshot',
+  SyncNotesFail       = '[Note] SyncNotesFail',
   AddNoteRequest      = '[Note] AddNoteRequest',
   AddNoteSuccess      = '[Note] AddNoteSuccess',
   AddNoteFail         = '[Note] AddNoteFail',
@@ -47,9 +47,9 @@ export enum NotesActionTypes {
 }
 
 export type NotesAction =
-  LoadNotesRequestAction |
-  LoadNotesSuccessAction |
-  LoadNotesFailAction |
+  SyncNotesRequestAction |
+  SyncNotesSnapshotAction |
+  SyncNotesFailAction |
   AddNoteRequestAction |
   AddNoteSuccessAction |
   AddNoteFailAction |

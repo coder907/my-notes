@@ -8,4 +8,5 @@ export interface ColumnDefinition {
   format: ColumnFormat;
   enum?: object;
   width?: string;
+  sort?: string;
 }

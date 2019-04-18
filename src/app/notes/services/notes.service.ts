@@ -11,7 +11,7 @@ import { take } from 'rxjs/operators';
 import { Note } from '../models/note';
 import { NotesState } from '../redux/state';
 
-import { LoadNotesRequestAction } from '../redux/actions/load-notes';
+import { SyncNotesRequestAction } from '../redux/actions/sync-notes';
 import { AddNoteRequestAction } from '../redux/actions/add-note';
 import { UpdateNoteRequestAction } from '../redux/actions/update-note';
 import { RemoveNoteRequestAction } from '../redux/actions/remove-note';
@@ -34,10 +34,6 @@ export class NotesService {
     private readonly store: Store<NotesState>
   ) { }
 
-  loadNotes(): void {
-    this.store.dispatch(new LoadNotesRequestAction());
-  }
-
   get notes$(): Observable<Note[]> {
     if (!this.notesValue$) {
       this.notesValue$ = this.store.pipe(select(selectors.getAllNotes));
@@ -45,19 +41,23 @@ export class NotesService {
     return this.notesValue$;
   }
 
+  syncNotes(): void {
+    this.store.dispatch(new SyncNotesRequestAction());
+  }
+
   getNote(id: string): Observable<Note> {
     return this.store.pipe(select(selectors.getNote(id)));
   }
 
-  addNote(text: string): void {
+  addNote(text: string) {
     this.store.dispatch(new AddNoteRequestAction(text));
   }
 
-  updateNote(id: number, text: string): void {
+  updateNote(id: number, text: string) {
     this.store.dispatch(new UpdateNoteRequestAction(id, text));
   }
 
-  removeNote(id: number): void {
+  removeNote(id: number) {
     this.store.dispatch(new RemoveNoteRequestAction(id));
   }
 
