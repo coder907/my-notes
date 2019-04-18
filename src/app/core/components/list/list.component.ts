@@ -67,13 +67,23 @@ export class ListComponent<T extends { id: number | string; }> implements OnInit
     const value = item[columnDefinition.name];
 
     if (columnDefinition.format === ColumnFormat.Enum) {
-      return columnDefinition.enum[value];
+      return this.formatEnum(value, columnDefinition);
 
     } else if (columnDefinition.format === ColumnFormat.Datetime) {
-      return new Date(value).toLocaleString();
+      return this.formatDatetime(value);
 
     } else {
       return value;
     }
+  }
+
+  formatEnum(value: any, columnDefinition: ColumnDefinition): string {
+    return columnDefinition.enum[value];
+  }
+
+  formatDatetime(value: any): string {
+    return new Date(value).toLocaleString(undefined, {
+      hour12: false,
+    });
   }
 }
