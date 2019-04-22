@@ -1,1 +1,3 @@
-![Architecture](architecture.png)
+## Architecture Chart
+
+![Architecture Chart](architecture.png)
