@@ -9,7 +9,7 @@ import {
 import { Subscription } from 'rxjs';
 
 import { NotesService } from '../../services/notes.service';
-import { GuiService } from 'src/app/core/services/gui.service';
+import { GuiService } from 'src/app/core/services/utility/gui.service';
 import { ColumnDefinition } from '../../../core/components/list/models/column-definition';
 import { ColumnFormat } from '../../../core/components/list/models/column-format';
 import { ListDefinition } from 'src/app/core/components/list/models/list-definition';

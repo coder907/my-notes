@@ -6,7 +6,7 @@ import {
 import { Router } from '@angular/router';
 
 import { AuthService } from 'src/app/auth/services/auth.service';
-import { GuiService } from '../../services/gui.service';
+import { GuiService } from '../../services/utility/gui.service';
 
 
 

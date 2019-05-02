@@ -44,7 +44,7 @@ import {
   SetRequiresPasswordFailAction
 } from '../actions/set-requires-password';
 
-import { GuiService } from 'src/app/core/services/gui.service';
+import { GuiService } from 'src/app/core/services/utility/gui.service';
 
 import { SettingsServiceBackendBase } from '../../services/backend/settings-service-backend-base';
 // import { SettingsServiceBackendMock } from '../../services/backend/settings-service-backend-mock';
