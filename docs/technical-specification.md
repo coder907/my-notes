@@ -18,9 +18,9 @@ A larger component may make use of one or more smaller components.
 
 "Containers" or "smart components" implement a part of application logic. A container glues together sub-containers and components and provides them with data. It usually also listens to and handles their events.
 
-In a simple scenario without state management framework and no abstraction layers, a container may do all (external) data access and storage itself, but that's not a recommended practice. Almost always, at least data access logic should be [abstracted away to a backend service](##backend-services).
+In a simple scenario without state management framework and no abstraction layers, a container may do all (external) data access and storage itself, but that's not a recommended practice. Almost always, at least data access logic should be [abstracted away to a backend service](#backend-services).
 
-A container should not be too difficult to unit-test (using mocked sub-containers and components). It also serves as a good entry point for integration tests. Inherent specificity makes a container less likely to be reused, but we should always look to refactor (parts of) it to reusable components and keep its code to a minimum.
+A container serves as a good entry point for integration tests. Inherent specificity makes a container less likely to be reused, but we should always look to refactor (parts of) it to reusable components and keep its code to a minimum.
 
 Typically, we have a root container that hosts several page containers, which in turn may include one or more sub-containers.
 
