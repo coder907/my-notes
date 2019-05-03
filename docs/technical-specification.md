@@ -36,7 +36,7 @@ Frontend services are not to be confused with utility services.
 
 Throughout this document, term "Redux" pertains to a state management pattern, not to a specific implementation, [NgRx](https://ngrx.io/) in this application. Redux is not suitable for simple (much less stateless) applications, and certainly not for every complex application. Its usability greatly depends on the use case, while it introduces some complexity that may not pay off immediately. However, in data-driven applications, its benefits often outweigh costs.
 
-Much has been written about Redux and there are tons of material available online on the subject ([including original implementation](https://redux.js)), so I will just focus on concepts that are important for the architecture under discussion.
+Much has been written about Redux and there are tons of material available online on the subject ([including original implementation](https://redux.js.org/)), so I will just focus on concepts that are important for the architecture under discussion.
 
 *To try and sum up in one sentence, application data is held in [store](#store), accessed using [selectors](#selectors), mutated in [reducers](#reducers), with updates requested using [actions](#actions) via [dispatchers](#dispatchers), and side effects handled by [effects](#effects).*
 
